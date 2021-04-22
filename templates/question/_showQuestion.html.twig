@@ -1,0 +1,115 @@
+        <link href="/css/alert.css" rel='stylesheet' type='text/css' />
+
+<div class="container-fluid pt-5">
+<br><br>
+
+
+    <div class="alert alert-success" role="alert" style="display: none">
+       <strong> BRAAAAAVO</strong> , la réponse est correcte :D
+    </div>
+    <div class="alert alert-danger" role="alert" style="display: none" >
+       <strong> OOOOPS</strong> la réponse est fause :(
+    </div>
+    <div class="ee">
+     <h4 class="pt-5">{{ question.question }}</h4>
+    <hr>
+    <form method="post">
+    
+        <div class="form-group">
+        <div class="option-input radio">
+            <input type="radio" class="form-control" checked name="response" id="option1" value="{{ question.option1 }}"  >
+            <label for="label-option-1">{{ question.option1 }}</label>
+
+            <input type="radio" class="form-control" name="response" id="option2" value="{{ question.option2 }}" >
+            <label for="label-option-2">{{ question.option2 }}</label>
+
+            <input type="radio" class="form-control" name="response" id="option3" value="{{ question.option3 }}" >
+            <label for="label-option-3">{{ question.option3 }}</label>
+
+            <input type="radio" class="form-control" name="response" id="option4" value="{{ question.option4 }}" >
+            <label for="label-option-4">{{ question.option4 }}</label>
+            <input name="question" id="question" value="{{ question.questionId }}" type="hidden">
+            
+            </div>
+            <br><br>
+            <button class="btn btn-primary btn-lg btn-block" id="submit-form" type="submit">Valider</button>
+                        <br>
+
+            <a class="btn btn-secondary btn-lg btn-block"  id="next-question" href="{{ path('getQuestion', {'quiz' : quiz.quizId}) }}">Autre question</a>
+        </div>
+                    <br><br>
+            <br><br>
+            <br><br>
+            <br><br>
+            <br><br>
+            <br><br>
+            <br><br>
+
+
+    </form>
+</div>
+</div>
+<script
+        src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"></script>
+<script>
+    $("#submit-form").on('click',function (e) {
+        e.preventDefault()
+        console.log('oak')
+        let radios = document.getElementsByName("response")
+                console.log(radios)
+
+        let response = null
+        for (var i = 0, length = radios.length; i < length; i++) {
+            if (radios[i].checked) {
+                let response = radios[i].value;
+                
+                break;
+            }
+        }
+        console.log(response)
+
+        
+        
+            console.log(response)
+            let form = $('form')
+            console.log('ok')
+            $.ajax({
+                url: '/question_validate',
+                method: 'POST',
+                data: form.serialize(),
+                success: function (data) {
+                    if (data.success) {
+                        console.log(data.isTrue)
+                        let isTrue = data.isTrue
+                        if (isTrue) {
+                            $('.alert-success').css('display', 'block')
+                        } else {
+                            $('.alert-danger').css('display', 'block')
+                        }
+                    }
+                }
+            })
+        
+
+    })
+    $("#next-question").on('click',function (e) {
+        e.preventDefault()
+        console.log('here')
+        var url = document.getElementById('next-question').getAttribute("href")
+        $.ajax({
+            url : url,
+            method: 'POST',
+            success: function (data) {
+                if (data.success) {
+                $("div.container-fluid").replaceWith(data.html)
+                }
+            }
+        })
+
+    })
+
+
+
+</script>

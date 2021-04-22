@@ -1,0 +1,88 @@
+
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="main-w3pvt mian-content-wthree text-center" id="listQuiz">
+        <div class="container">
+            <div id="sa" class="style-banner mx-auto">
+                <h3 class="text-wh font-weight-bold"><span>Liste des Quizs</span></h3>
+                
+                <p class="mt-3 text-li" id="join">Consulter ou supprimer les quizs disponibles dans notre site</p>
+                <<br>
+
+                <form method="post" action="{{ path('rechQuiz') }}" >
+                    <input type="Text" class="form-control" name ='search'><input type="submit"   placeholder="Rechercher par Title..." Value="rechercher">
+
+  
+
+                <table class="myOtherTable">
+                    <thead>
+                    <tr>
+                        <th>Nom du quiz</th>
+                        <th>Type</th>
+                        <th>Consulter</th>
+                        <th>Supprimer</th>
+
+                    </tr>
+                    </thead>
+                    <tbody id ="myTable">
+                    {% for quiz in lstQuiz %}
+                                        <tbody id ="myTable">
+
+                        <tr>
+                            <td>{{ quiz.title }}</td>
+                            <td>{{ quiz.isamericain }}</td>
+
+                            <td>
+                                <a href={{ path ('questionsbyquizT',{'quizId' : quiz.quizid}) }}> C </a>
+
+                            </td>
+                            <td>
+
+                                <a href={{ path ('delete',{'id' : quiz.quizid}) }}> X </a>
+                            </td>
+
+
+
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td> Quiz introuvables !</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                  <br><br>
+
+            </div>
+        </div>
+    </div>
+
+<script>
+       jQuery(document).ready(function(){
+            $('#search').keyup(function(){
+                search_table($(this).val());
+            });
+            function search_table(value){
+                $('#sa tbody').each(function(){
+                    var found = 'false';
+                    $(this).each(function(){
+                        if($(this).text().toLowerCase().indexOf(value.toLowerCase()) >= 0)
+                        {
+                            found = 'true';
+                        }
+                    });
+                    if(found == 'true')
+                    {
+                        $(this).show();
+                    }
+                    else
+                    {
+                        $(this).hide();
+                    }
+                });
+            }
+        });
+    </script>
+{% endblock %}
+
