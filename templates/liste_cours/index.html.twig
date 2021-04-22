@@ -1,0 +1,97 @@
+{% extends 'base.html.twig' %}
+
+
+
+{% block body %}
+    <body>
+    <header>
+        <div class="container">
+            <div class="header d-lg-flex justify-content-between align-items-center py-2 px-sm-2 px-1">
+
+                <div id="logo">
+                    <h1><a href="#listCours">KIDZY</a></h1>
+                </div>
+                <div class="nav_w3ls ml-lg-5">
+                    <nav>
+                        <label for="drop" class="toggle">Menu</label>
+                        <input type="checkbox" id="drop" />
+                        <ul class="menu">
+                            <li><a href="#listCours">Liste des cours</a></li>
+                            <li><a href="{{ path ('redirection_contes')}}">Liste des contes</a></li>
+                            <li><a href="{{ path ('redirection_inv_cours')}}">Inventaire cours</a></li>
+                            <li><a href="{{ path ('redirection_inv_contes')}}">Inventaire contes</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-w3pvt mian-content-wthree" id="listCours">
+        <div class="container">
+            <div class="style-banner mx-auto">
+                <h3 class="text-wh font-weight-bold text-center"><span>Liste des cours</span></h3>
+                <p class="mt-3 text-li text-center" id="join">Consulter la liste des cours existants dans notre site</p>
+                <table class="myOtherTable">
+                    <thead>
+                    <tr>
+                        <th style="width: 20px">Nom du cours</th>
+                        <th>Type du cours</th>
+                        <th>Description du cours</th>
+                        <th>Prix du cours</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% if lstCours is defined %}
+                    {% for cours in lstCours %}
+                        <tr>
+                            <td>{{ cours.nom }}</td>
+                            <td>{{ cours.type }}</td>
+                            <td>{{ cours.description }}</td>
+                            <td>{{ cours.prix }}</td>
+                            <td>
+                                <a href="{{ path ('ajouterCours',{'idc':cours.idc}) }}">Ajouter</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td>Aucun cours n'a été trouvé !</td>
+                        </tr>
+                    {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <footer class="py-5">
+        <div class="container py-xl-4 py-lg-3">
+            <div class="row footer-grids">
+                <div class="col-lg-2 col-6 footer-grid">
+                    <h3 class="mb-sm-4 mb-3">Navigation</h3>
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="#listCours">Liste des cours</a>
+                        </li>
+                        <li>
+                            <a href="{{ path ('redirection_contes')}}">Liste des contes</a>
+                        </li>
+                        <li>
+                            <a href="{{ path ('redirection_inv_cours')}}">Inventaire cours</a>
+                        </li>
+                        <li>
+                            <a href="{{ path ('redirection_inv_contes')}}">Inventaire contes</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <a href="#listCours" class="move-top text-center">
+        <span class="fa fa-angle-double-up" aria-hidden="true"></span>
+    </a>
+
+    </body>
+{% endblock %}
