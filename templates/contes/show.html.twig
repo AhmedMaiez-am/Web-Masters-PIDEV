@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contes{% endblock %}
+
+{% block body %}
+<div class="main-w3pvt mian-content-wthree text-center" id="home">
+    <div class="container">
+        <div class="style-banner mx-auto">
+
+                        <h1><FONT color="white">Contes</FONT></h1>
+
+    <table class="table table-bordered">
+        <tbody>
+            <!--<tr>
+                <th>Idconte</th>
+                <td>{{ conte.idconte }}</td>
+            </tr>
+            <tr>-->
+            <th><FONT color="green">Titre</FONT></th>
+            <td class="font-weight-bold">{{ conte.titre }}</td>
+            </tr>
+            <tr>
+                <th><FONT color="green">Auteur</FONT></th>
+                <td class="font-weight-bold">{{ conte.auteur }}</td>
+            </tr>
+            <tr>
+                <th><FONT color="green">Contes</th>
+               <!-- <td>{{ conte.contes }}</td>-->
+                <td><iframe src="http://127.0.0.1:8000{{ asset( '/uploads/cours/'~conte.contes) }}" width="100%" height="500px">
+                    </iframe></td>
+
+            </tr>
+        </tbody>
+    </table>
+
+                        <a href="{{ path('contes_index') }}"><button>back to list</button></a>
+
+    <a href="{{ path('contes_edit', {'idconte': conte.idconte}) }}"><button>edit</button></a>
+
+    {{ include('contes/_delete_form.html.twig') }}
+                    </div>
+    </div>
+</div>
+    </div>
+</div>
+
+{% endblock %}

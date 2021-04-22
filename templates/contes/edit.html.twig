@@ -1,0 +1,21 @@
+{% extends 'base2.html.twig' %}
+
+{% block title %}Edit Contes{% endblock %}
+
+{% block body %}
+<!--<div class="main-w3pvt mian-content-wthree text-center" id="home">
+    <div class="container">
+        <div class="style-banner mx-auto">-->
+
+        <h1>Edit Contes</h1>
+
+    {{ include('contes/_form.html.twig', {'button_label': 'Update'}) }}
+
+            <a href="{{ path('contes_index') }}"><button>back to list</button></a>
+
+    {{ include('contes/_delete_form.html.twig') }}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,126 @@
+{% extends 'base2.html.twig' %}
+
+{% block body %}
+    <!-- banner -->
+    <!--<div class="main-w3pvt mian-content-wthree text-center" id="home">
+        <div class="container">
+            <div class="style-banner mx-auto">-->
+    <div class="container">
+                <!-- form -->
+                <div class="home-form-w3ls mt-5">
+                    <form action="#" method="GET">
+                        <div class="row">
+                            <h1><FONT color="green">les Cours</FONT></h1>
+                                <div>
+                                <!--<button type="submit" class="btn btn-success" onclick="location.href='code.php'">export</button>-->
+                                     <a href="{{ path('export') }}"  class="btn btn-primary btn-lg active" role="button" aria-pressed="true">exporter les cours </a></button>
+                                </div>
+                            <input type="text" id="search" class="form-control" placeholder="Search">
+
+
+
+                            <table class="table table-bordered" style="border: 3px solid black " id="t"  >
+
+                                <thead>
+                                <tr>
+
+                                 <!--   <th>Idc</th> -->
+                                    <th><h4> <FONT color="green">Nom</FONT></h4></th>
+                                    <th><h4> <FONT color="green">Type</FONT></h4></th>
+                                    <th><h4><FONT color="green">Description</FONT></h4></th>
+                                    <!--<th><h4><FONT color="green">Cours</FONT></h4></th>-->
+                                    <th><h4><FONT color="green">Prix</FONT></h4></th>
+                                    <th><h4><FONT color="green">actions</FONT></h4></th>
+                                </tr>
+                                </thead>
+                                <tbody id="all">
+                                {% for cour in cours %}
+                                    <tr>
+                                        <!--<td>{{ cour.idc }}</td>-->
+                                        <td><FONT color="black">{{ cour.nom }}</FONT></td>
+                                        <td><FONT color="black">{{ cour.type }}</FONT></td>
+                                        <td><FONT color="black">{{ cour.description }}</FONT></td>
+                                        <!--<td><FONT color="white">{{ cour.cours }}</FONT></td></td-->
+                                        <td><FONT color="black">{{ cour.prix }}</FONT></td>
+                                        <td>
+                                            <a href="{{ path('cours_show', {'idc': cour.idc})}}"  class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Consulter</a>
+                                            <a href="{{ path('cours_edit', {'idc': cour.idc}) }}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">edit</a>
+
+                                        </td>
+
+                                    </tr>
+                                {% else %}
+                                    <tr>
+                                        <td colspan="7">no records found</td>
+                                    </tr>
+
+                                {% endfor %}
+                                </tbody>
+                                <tbody id="search">
+                                </tbody>
+                            </table>
+
+
+                            <a href="{{ path('cours_new') }}"  class="btn btn-primary btn-lg active" role="button" aria-pressed="true">ajouter un cours </a>
+
+                        </div>
+
+
+                    </form>
+                </div>
+                <!-- //form -->
+            </div>
+        </div>
+    </div>
+    <!-- //banner -->
+    <script src="{{ asset('https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js')}}">
+    </script>
+    <script>
+        $( document ).ready(function() {
+            $("#search").keyup(function(e){
+                /* La variable value va prendre la valeur insérer dans le champ de texte
+                afin d’effectuer la recherche */
+                var value = $(this).val();
+                /* Ajax est lancé lors du remplissage du champ texte dont l’id est
+                « search » pour faire la recherche */
+                $.ajax({
+                    /* l’url est une chaine de caractères contenant l’adresse où la requête est
+                    envoyée */
+                    url : "{{ path('searchStudentx') }}",
+                    /* La méthode utilisée pour transférer les données est GET */
+                    type : 'GET',
+                    /*Ici search value va prendre la chaine entrée par un utilisateur dans la
+                    zone de recherche et sera placée après l’url */
+                    data: {
+                        'searchValue' : value
+                    },
+                    /*Cette fonction permet de vider le contenu du tableau pour recevoir le
+                    nouveau contenu*/
+                    success : function(re){
+                        if(re){
+                            $('#t tbody#search').empty();
+                            $.each(JSON.parse(re), function(i,obj) {
+                                $('#t tbody#all').hide();
+                                $('#t tbody#search').append('<tr><td>'+obj.idc+'</td> <td>'+obj.nom+'</td> <td> '+obj.type +' </td> <td> '+obj.description+' </td><td> '+obj.prix+' </td> <td>' +
+                                    '<a href="/cours/'+obj.idc+'">consulter</a> </br>' +
+                                    '<a href="/cours/'+obj.idc+"/edit/"+'">modifier</a></td> </tr>')
+                            });
+                        }
+                        else
+                        {
+                            $('#t tbody#all').show();
+                            $('#t tbody#search').empty();
+                            $('#t tbody#search').fadeIn('fast');
+                        }
+                    },
+                });
+                return false;
+            });
+        });
+    </script>
+
+{% endblock %}
+
+
+{% block javascripts %}
+{% endblock%}

@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <h1>Cours</h1>
+<div class="main-w3pvt mian-content-wthree text-center" id="home">
+    <div class="container">
+        <div class="style-banner mx-auto">
+
+                       <h1><FONT color="white">Cours index</FONT></h1>
+
+    <table class="table table-bordered">
+        <tbody>
+          <!--  <tr>
+                <th>Idc</th>
+                <td>{{ cour.idc }}</td>
+            </tr>-->
+            <tr>
+                <th ><FONT color="green">Nom</FONT></th>
+                <td class="font-weight-bold" ><FONT color="black">{{ cour.nom }}</FONT></td>
+            </tr>
+            <tr>
+                <th><FONT color="green">Type</FONT></th>
+                <td class="font-weight-bold"><FONT color="black">{{ cour.type }}</FONT></td>
+            </tr>
+            <tr>
+                <th><<FONT color="green">Description</FONT></th>
+                <td class="font-weight-bold"><FONT color="black">{{ cour.description }}</FONT></td>
+            </tr>
+            <tr>
+                <th><FONT color="green">Cours</FONT></th>
+                <!--<td>{{ cour.cours }}</td>-->
+               <!--<td><a href="{{ asset('uploads/cours/ ') }}" class="btn-success">afficher</a> </td>-->
+                <td><iframe src="http://127.0.0.1:8000{{ asset( '/uploads/cours/'~cour.cours) }}" width="100%" height="500px">
+                    </iframe></td>
+            </tr>
+            <tr>
+                <th><FONT color="green">Prix</FONT></th>
+                <td class="font-weight-bold"> <FONT color="black">{{ cour.prix }}</FONT></td>
+            </tr>
+        </tbody>
+    </table>
+
+            <a href="{{ path('cours_index') }}"><button>back to list</button></a>
+
+    <a href="{{ path('cours_edit', {'idc': cour.idc}) }}"> <button>edit</button></a>
+
+    {{ include('cours/_delete_form.html.twig') }}
+
+        </div>
+    </div>
+</div>
+{% endblock %}

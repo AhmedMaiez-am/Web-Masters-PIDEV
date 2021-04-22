@@ -1,0 +1,23 @@
+{% extends 'base2.html.twig' %}
+
+{% block body %}
+<!--<div class="main-w3pvt mian-content-wthree text-center" id="home">-->
+   <!-- <div class="container">-->
+        <!--<div class="style-banner mx-auto">-->
+
+        <h1> Create new Cours</h1>
+
+<br>
+    <br>
+<center>
+    {{ include('cours/_form.html.twig') }}
+
+    <a href="{{ path('cours_index') }}"><button>back to list </button></a>
+</center>
+<br>
+    <br>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
