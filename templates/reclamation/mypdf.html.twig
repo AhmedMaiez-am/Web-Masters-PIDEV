@@ -1,0 +1,104 @@
+<ul>
+    <li><a class="active" href="#home">Home</a></li>
+    <li><a href="#news">News</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#about">About</a></li>
+</ul>
+<h1 >Liste des reclamations</h1>
+<table id="customers">
+    <thead>
+    <tr>
+
+        <th>NOM</th>
+        <th>PRENOM</th>
+        <th>Email</th>
+        <th>Reclamation</th>
+
+
+
+    </tr>
+    </thead>
+    <tbody>
+
+
+    {% for reclamation in reclamation %}
+        <tr>
+
+            <td>{{reclamation.nom}}</td>
+            <td>{{reclamation.prenom}}</td>
+            <td>{{reclamation.mail}}</td>
+            <td>{{reclamation.reclamation}}</td>
+
+
+
+
+
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+
+
+    </a>
+</div>
+
+<br><br>
+
+<style>
+    h1{
+        position: center;
+        color : #2cd9df;
+    }
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #701962;
+    }
+
+    li {
+        float: left;
+    }
+
+    li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
+
+    li a:hover:not(.active) {
+        background-color: #111;
+    }
+
+    .active {
+        background-color: #4c6daf;
+    }
+    #customers {
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    #customers td, #customers th {
+        border: 1px solid #ddd;
+        padding: 8px;
+
+    }
+
+    #customers tr:nth-child(even){background-color: #f2f2f2;}
+
+    #customers tr:hover {background-color: #ddd;}
+
+    #customers th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: #701962;
+        color: #2cd9df;
+    }
+
+</style>

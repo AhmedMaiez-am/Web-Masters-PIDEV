@@ -1,0 +1,40 @@
+{% for rec in reclamation %}
+
+    <tr>
+
+        <td>
+            {{ rec.nom }}
+        </td>
+        <td>
+            {{ rec.prenom }}
+        </td>
+
+        <td >
+            {{ rec.mail }}
+        </td>
+
+        <td style="height: 100px;width: 1000px;">
+            {{ rec.reclamation }}
+        </td>
+
+        <td>
+            <button type="button" class="btn_apt btn">
+
+                 <a href="{{ path('modifier',{'id': rec.id}) }}">
+                    Modifier
+                </a>
+
+            </button>
+        </td>
+        <td>
+            <button type="button" class="btn_apt btn">
+
+                <a href="{{ path('supprimerfront',{'id':rec.id}) }}">
+                    Supprimer
+                </a>
+
+            </button>
+        </td>
+    </tr>
+
+{% endfor %}
