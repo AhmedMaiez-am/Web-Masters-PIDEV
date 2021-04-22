@@ -1,0 +1,191 @@
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE HTML>
+<html lang="zxx">
+
+<head>
+    <title>My School Education Category Bootstrap Responsive website Template | Login :: w3layouts</title>
+    <!-- Meta tag Keywords -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8" />
+    <meta name="keywords" content="My School Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+    <script>
+        addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+    <!-- //Meta tag Keywords -->
+
+    <!-- Custom-Files -->
+    <link href="temp/css/bootstrap.css" rel='stylesheet' type='text/css' />
+    <!-- Bootstrap-CSS -->
+    <link href="temp/css/style.css" rel='stylesheet' type='text/css' />
+    <!-- Style-CSS -->
+    <link href="temp/css/font-awesome.min.css" rel="stylesheet">
+    <!-- Font-Awesome-Icons-CSS -->
+    <!-- //Custom-Files -->
+
+    <!-- Web-Fonts -->
+    <link href="//fonts.googleapis.com/css?family=Lora:400,400i,700,700i&amp;subset=cyrillic,cyrillic-ext,latin-ext,vietnamese"
+          rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Dosis:200,300,400,500,600,700,800&amp;subset=latin-ext" rel="stylesheet">
+    <!-- //Web-Fonts -->
+</head>
+
+<body>
+<!-- header -->
+<header>
+    <div class="container">
+        <div class="header d-lg-flex justify-content-between align-items-center py-2 px-sm-2 px-1">
+            <!-- logo -->
+            <div id="logo">
+                <h1><a href="index.html">My School</a></h1>
+            </div>
+            <!-- //logo -->
+            <!-- nav -->
+            <div class="nav_w3ls ml-lg-5">
+                <nav>
+                    <label for="drop" class="toggle">Menu</label>
+                    <input type="checkbox" id="drop" />
+                    <ul class="menu">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html">About</a></li>
+                        <li><a href="index.html">Join Now</a></li>
+                        <li>
+                            <!-- First Tier Drop Down -->
+                            <label for="drop-2" class="toggle toogle-2">Pages <span class="fa fa-angle-down"
+                                                                                    aria-hidden="true"></span>
+                            </label>
+                            <a href="#">Pages <span class="fa fa-angle-down" aria-hidden="true"></span></a>
+                            <input type="checkbox" id="drop-2" />
+                            <ul>
+                                <li><a href="index.html" class="drop-text">Events</a></li>
+                                <li><a href="index.html" class="drop-text">What We Do?</a></li>
+                                <li><a href="index.html" class="drop-text">Popular Courses</a></li>
+                                <li><a href="index.html" class="drop-text">Statistics</a></li>
+                                <li><a href="index.html" class="drop-text">Gallery</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="index.html">Contact</a></li>
+                        <li><a href="login.html">Login</a></li>
+                        <li><a href="register.html">Register</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <!-- //nav -->
+        </div>
+    </div>
+</header>
+<!-- //header -->
+
+<!-- inner banner -->
+<div class="inner-banner-w3ls py-5" id="home">
+    <div class="container py-xl-5 py-lg-3">
+        <!-- login  -->
+        <div class="modal-body my-3 pt-2">
+            <h3 class="title-w3 mb-5 text-center text-wh font-weight-bold">Login Now</h3>
+            {{form_start(f,{'attr':{'novalidate' : 'novalidate'}})}}
+            <div class="m-portlet__body">
+
+
+                <div class="form-group m-form__group row">
+
+                    {{ form_label(f.emailp, 'MAIL', {'label_attr': {'class': 'col-2 col-form-label'}}) }}
+                    <div class="col-10">
+                        {{ form_widget(f.emailp, {'attr': {'class': 'form-control m-input'}},{'attr':{'novalidate' : 'novalidate'}}) }}
+                        {{ form_errors(f.emailp) }}
+                    </div>
+                </div>
+
+
+                <div class="form-group m-form__group row">
+                    {{ form_label(f.nomp, 'CIN', {'label_attr': {'class': 'col-2 col-form-label'}}) }}
+                    <div class="col-10">
+                        {{ form_widget(f.nomp,{'attr': {'class': 'form-control m-input'}}, {'attr': {'class': 'form-control m-input'}}) }}
+                        {{ form_errors(f.nomp) }}
+                    </div>
+                </div>
+
+
+                <div class="form-group m-form__group row">
+
+                    {{ form_label(f.prenomp, 'NOM', {'label_attr': {'class': 'col-2 col-form-label'}}) }}
+                    <div class="col-10">
+                        {{ form_widget(f.prenomp, {'attr': {'class': 'form-control m-input'}},{'attr': {'class': 'form-control m-input'}}) }}
+                        {{ form_errors(f.prenomp) }}
+                    </div>
+                </div>
+                <div class="form-group m-form__group row">
+
+                    {{ form_label(f.telp, 'Prenom', {'label_attr': {'class': 'col-2 col-form-label'}}) }}
+                    <div class="col-10">
+                        {{ form_widget(f.telp,{'attr': {'class': 'form-control m-input'}}, {'attr': {'class': 'form-control m-input'}}) }}
+                        {{ form_errors(f.telp) }}
+                    </div>
+                </div>
+                <div class="form-group m-form__group row">
+
+                    {{ form_label(f.passwordp, 'EMAIL', {'label_attr': {'class': 'col-2 col-form-label'}}) }}
+                    <div class="col-10">
+
+                        {{ form_widget(f.passwordp,{'attr': {'class': 'form-control m-input'}}, {'attr': {'class': 'form-control m-input'}}) }}
+                        {{ form_errors(f.passwordp) }}
+                    </div>
+                    <div class="form-group m-form__group row">
+
+                        {{ form_label(f.numcarte, 'Image', {'label_attr': {'class': 'col-2 col-form-label'}}) }}
+                        <div class="col-10">
+                            <br>
+                            {{ form_widget(f.numcarte,{'attr': {'class': 'form-control m-input'}}, {'attr': {'class': 'form-control m-input'}}) }}
+                            {{ form_errors(f.numcarte) }}
+                        </div>
+                        <div class="form-group m-form__group row">
+
+                            {{ form_label(f.passcarte, 'Pass', {'label_attr': {'class': 'col-2 col-form-label'}}) }}
+                            <div class="col-10">
+                                <br> <br>
+                                {{ form_widget(f.passcarte,{'attr': {'class': 'form-control m-input'}}, {'attr': {'class': 'form-control m-input'}}) }}
+                                {{ form_errors(f.passcarte) }}
+                            </div>
+
+                        </div>
+
+                        <div class="form-group m-form__group row">
+
+                            {{ form_label(f.portefeuille, 'Votre CV', {'label_attr': {'class': 'col-2 col-form-label'}}) }}
+                            <br>
+                            <div class="col-10">
+                                <br>
+                                {{ form_widget(f.portefeuille,{'attr': {'class': 'form-control m-input'}}, {'attr': {'class': 'form-control m-input'}}) }}
+                                {{ form_errors(f.portefeuille) }}
+                            </div>
+
+                        </div>
+
+                    </div>
+                    {{ form_end(f) }}
+                    </div>
+
+                </div>
+
+
+            </div>
+        <!-- //login -->
+    </div>
+</div>
+<!-- //inner banner -->
+
+<!-- footer -->
+
+
+</body>
+
+</html>

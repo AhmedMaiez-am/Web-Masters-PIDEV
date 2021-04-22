@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+
+<body>
+<div id="sa" class="home-form-w3ls mt-5">
+    <br> <br> <br>
+
+    <h2 align="Center">La Liste Des Parents</h2>
+
+    <input id="search" class="form-control" type="text" name="search" placeholder="Rechercher par Nom..." aria-label="Search">
+    <script src="{{ asset('distAdmin/js/jquery.min.js') }}"></script>
+
+    <table bgcolor="#deb887" , border="3" , align="center" ,  style="width:80%"  >
+        <thead>
+                    <tr>
+                           <th> Email  </th>
+                            <th> Nom </th>
+                            <th> Prenom  </th>
+                            <th> Telephone  </th>
+                            <th> password  </th>
+                            <th> numcarte  </th>
+                            <th> portefeuille  </th>
+                        <th> Code </th>
+                        <th> Block </th>
+                             <th> Mise à jour </th>
+                        <th> Supprimer </th>
+                        <th> Bloquer </th>
+                        <th> Débloquer </th>
+                      </tr>
+        </thead>
+
+        <tbody id ="myTable">
+                        {% for c in user %}
+        <tbody id ="myTable">
+        <tr>
+                        <td>{{ c.emailp }}</td>
+                        <td>{{ c.nomp }}</td>
+                        <td>{{ c.prenomp }}</td>
+                        <td>{{ c.telp }}</td>
+                        <td>{{ c.passwordp}}</td>
+                        <td>{{ c.numcarte }}</td>
+                        <td>{{ c.portefeuille }}</td>
+                        <td>{{ c.codep }}</td>
+                        <td>{{ c.block}}</td>
+
+
+                        <td> <a href={{ path ('pere',{'id' : c.idp}) }}> update</a></td>
+                        <td> <a href={{ path ('dp',{'id1' : c.idp}) }}> Supprimer</a></td>
+                           <td> <a href={{ path ('Bloquer',{'id' : c.idp}) }}> Bloquer </a></td>
+                           <td> <a href={{ path ('DBloquer',{'id' : c.idp}) }}> Débloquer </a></td>
+        </tr>
+                       {% endfor %}
+        </tbody>
+
+                  </table>
+</div>
+    <script>
+        $(document).ready(function(){
+            $('#search').keyup(function(){
+                search_table($(this).val());
+            });
+            function search_table(value){
+                $('#sa tbody').each(function(){
+                    var found = 'false';
+                    $(this).each(function(){
+                        if($(this).text().toLowerCase().indexOf(value.toLowerCase()) >= 0)
+                        {
+                            found = 'true';
+                        }
+                    });
+                    if(found == 'true')
+                    {
+                        $(this).show();
+                    }
+                    else
+                    {
+                        $(this).hide();
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+            <!-- //form -->
+{% endblock %}

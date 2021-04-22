@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+
+
+    <div class="home-form-w3ls mt-5">
+    <br> <br> <br>
+
+    <h2 align="Center">La Liste Des Enfants </h2>
+
+    <div class="ml-shopbar__filter">
+
+            <label class="ml-shopbar__filterLabel" for="ml-shopbar__select1"></label>
+            <form method="post" action="{{ path('triEnfant') }}" align="center">
+                <label>
+                    <select name="tri">
+                        <option value="">veuillez Choisir</option>
+                        <option value="nom">Nom</option>
+                        <option value="prenom">Prenom</option>
+                        <option value="age">Age</option>
+
+                    </select>
+                </label>
+                <input type="submit" class="btn btn-primary btn-bottom" value="Trier" />
+
+
+        </form>
+    </div>
+
+    <table bgcolor="#deb887" , border="3" , align="center" ,  style="width:80%"  >
+        <tr>
+            <th> NOM  </th>
+            <th> Prenom </th>
+            <th> Point  </th>
+            <th> Age  </th>
+            <th> Parent  </th>
+            <th> Password  </th>
+            <th> image  </th>
+
+            <th> Mise à jour </th>
+            <th> Supprimer </th>
+
+        </tr>
+        <tr {% for c in user %}>
+
+            <td>{{ c.nomenfant}}</td>
+            <td>{{ c.prenomenfant }}</td>
+            <td>{{ c.nbrPoint }}</td>
+            <td>{{ c.age }}</td>
+            <td>{{ c.idparent}}</td>
+            <td>{{ c.password}}</td>
+            <td><img src="{{ asset('uploads/images/' ~ c.image)  }}"  WIDTH=70
+                     HEIGHT=70></td>
+
+
+            <td> <a href={{ path ('upenfant',{'iden' : c.ide}) }}> update</a></td>
+            <td> <a href={{ path ('enfant',{'iden' : c.ide}) }}> Supprimer</a></td>
+
+        </tr {% endfor %}>
+
+    </table>
+
+    <!-- //form -->
+{% endblock %}

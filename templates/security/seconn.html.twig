@@ -1,0 +1,20 @@
+<form method ="Post" action="{{ path('connec') }}">
+    <input type="text" placeholder="Entrez une valeur ici" id="in">
+
+    <input type="text" name="se connecter">
+    <input type="submit">
+    {% for c in user %}
+    {{ c.login }}
+    {%  endfor %}
+    <script>
+        function getValue() {
+            // Sélectionner l'élément input et récupérer sa valeur
+            var input = document.getElementById("in").value;
+            // Afficher la valeur
+            alert(input);
+
+
+        }
+        </script>
+
+</form>
