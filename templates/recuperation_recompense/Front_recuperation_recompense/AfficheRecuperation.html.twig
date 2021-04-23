@@ -1,0 +1,26 @@
+{% extends 'baseFront.html.twig' %}
+
+{% block tabRec %}
+<table border="1" align="center" bgcolor="ffffcc">
+
+    <tr>
+        <th scope="row">nomRec</th>
+        <th scope="row">nbr Point</th>
+        <th scope="row"> nomEnfant</th>
+        <th scope="row"> emailParent</th>
+
+
+    </tr>
+    {% for Recuperation in Recuperations %}
+        <tr>
+            <td> {{ Recuperation.nomrec }}</td>
+            <td> {{ Recuperation.nbrPoint }}</td>
+            <td>{{ Recuperation.nomEnf }}</td>
+            <td>{{ Recuperation.emailP }}</td>
+
+
+        </tr>
+
+    {% endfor %}
+</table>
+{% endblock %}
