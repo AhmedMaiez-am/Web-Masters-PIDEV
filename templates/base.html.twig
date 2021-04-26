@@ -24,21 +24,21 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             window.scrollTo(0, 1);
         }
     </script>
-    <script src="//code.jquery.com/jquery.js"></script>
-    <script src="{{ asset('bundles/mercuryseriesflashy/js/flashy.js') }}"></script>
-    {{ include('@MercurySeriesFlashy/flashy.html.twig') }}
-    {% for message in app.flashes('mercuryseries_flashy_notification') %}
-        <script id="flashy-template" type="text/template">
-            <div class="flashy flashy--{{ message.type }}">
-                <i class="material-icons">speaker_notes</i>
-                <a class="flashy__body" href="#" target="_blank"></a>
-            </div>
-        </script>
+{#    <script src="//code.jquery.com/jquery.js"></script>#}
+{#    <script src="{{ asset('bundles/mercuryseriesflashy/js/flashy.js') }}"></script>#}
+{#    {{ include('@MercurySeriesFlashy/flashy.html.twig') }}#}
+{#    {% for message in app.flashes('mercuryseries_flashy_notification') %}#}
+{#        <script id="flashy-template" type="text/template">#}
+{#            <div class="flashy flashy--{{ message.type }}">#}
+{#                <i class="material-icons">speaker_notes</i>#}
+{#                <a class="flashy__body" href="#" target="_blank"></a>#}
+{#            </div>#}
+{#        </script>#}
 
-        <script>
-            flashy("{{ message.message }}", "{{ message.link }}");
-        </script>
-    {% endfor %}
+{#        <script>#}
+{#            flashy("{{ message.message }}", "{{ message.link }}");#}
+{#        </script>#}
+{#    {% endfor %}#}
     <!-- //Meta tag Keywords -->
     {% block css%}
         <!-- Start Styles. Move the 'style' tags and everything between them to between the 'head' tags -->

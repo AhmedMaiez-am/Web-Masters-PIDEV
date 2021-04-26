@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Contes;
 use App\Entity\Inventairecontes;
-use MercurySeries\FlashyBundle\FlashyNotifier;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,7 +18,7 @@ class ListeContesController extends AbstractController
      * @param Contes $contes
      * @return RedirectResponse
      */
-    public function ajouter(Contes $contes, FlashyNotifier $flashy)
+    public function ajouter(Contes $contes)
     {
         $lstContes1 = new Inventairecontes();
         $lstContes1->setTitrec($contes->getTitre());

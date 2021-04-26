@@ -44,17 +44,17 @@
                     </thead>
                     <tbody>
                     {% if lstCours is defined %}
-                    {% for cours in lstCours %}
-                        <tr>
-                            <td>{{ cours.nom }}</td>
-                            <td>{{ cours.type }}</td>
-                            <td>{{ cours.description }}</td>
-                            <td>{{ cours.prix }}</td>
-                            <td>
-                                <a href="{{ path ('ajouterCours',{'idc':cours.idc}) }}">Ajouter</a>
-                            </td>
-                        </tr>
-                    {% endfor %}
+                        {% for cours in lstCours %}
+                            <tr>
+                                <td>{{ cours.nom }}</td>
+                                <td>{{ cours.type }}</td>
+                                <td>{{ cours.description }}</td>
+                                <td>{{ cours.prix }}</td>
+                                <td>
+                                    <a href="{{ path ('ajouterCours',{'idc':cours.idc}) }}">Ajouter</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
                     {% else %}
                         <tr>
                             <td>Aucun cours n'a été trouvé !</td>

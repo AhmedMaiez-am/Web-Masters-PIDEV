@@ -5,8 +5,6 @@ namespace App\Controller;
 use App\Entity\Cours;
 use App\Entity\Inventairecours;
 use App\Entity\Parents;
-use App\Form\FormParents;
-use MercurySeries\FlashyBundle\FlashyNotifier;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -21,11 +19,10 @@ class ListeCoursController extends AbstractController
     /**
      * @Route("/ajoutCours/{idc}", name="ajouterCours")
      * @param Cours $cours
-     * @param FlashyNotifier $flashy
      * @param Request $request1
      * @return RedirectResponse
      */
-    public function ajouter(Cours $cours, FlashyNotifier $flashy , Request $request1): RedirectResponse
+    public function ajouter(Cours $cours, Request $request1): RedirectResponse
     {
         if ($cours->getPrix()=="Gratuit") {
             $lstC = new Inventairecours();

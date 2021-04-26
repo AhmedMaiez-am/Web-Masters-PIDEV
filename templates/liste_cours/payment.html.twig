@@ -34,16 +34,16 @@
                 <p class="mt-3 text-li text-center" id="join">Veuillez insérer votre nom de procéder au paiement du cours !</p>
 
                 <form method="post" action="{{ path ('payer') }}">
-                <input id="nom" class="form-control" type="text" name="nom" placeholder="Nom du parent..." aria-label="Nom">
-                <input type="submit" class="form-control btn" value="Confirmer">
+                    <input id="nom" class="form-control" type="text" name="nom" placeholder="Nom du parent..." aria-label="Nom">
+                    <input type="submit" class="form-control btn" value="Confirmer">
                 </form>
 
 
 
 
                 {% if lstP is defined %}
-                {% for p in lstP %}
-                {% endfor %}
+                    {% for p in lstP %}
+                    {% endfor %}
                 {% endif %}
 
             </div>

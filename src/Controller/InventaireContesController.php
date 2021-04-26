@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Inventairecontes;
 use App\Repository\InventaireContesRepository;
-use MercurySeries\FlashyBundle\FlashyNotifier;
 use ProxyManager\Exception\ExceptionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -32,7 +31,7 @@ class InventaireContesController extends AbstractController
      * @param $idcontesc
      * @return RedirectResponse;
      */
-    public function SupprimerConte($idcontesc , FlashyNotifier $flashy)
+    public function SupprimerConte($idcontesc)
     {
         $em = $this->getDoctrine()->getManager();
         $c = $this->getDoctrine()

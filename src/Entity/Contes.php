@@ -105,11 +105,9 @@ class Contes
     {
         $this->contes = $contes;
     }
-
     public function __toString()
     {
         return $this->titre . '(' . $this->auteur . ')';
     }
-
 
 }

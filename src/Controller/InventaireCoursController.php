@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Inventairecours;
 use App\Repository\InventaireCoursRepository;
-use MercurySeries\FlashyBundle\FlashyNotifier;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,6 +15,7 @@ use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 class InventaireCoursController extends AbstractController
 {
+
     /**
      * @Route("/invCours", name="inventaire_cours")
      */
@@ -42,7 +42,7 @@ class InventaireCoursController extends AbstractController
      * @param $idcc
      * @return RedirectResponse;
      */
-    public function SupprimerCours($idcc , FlashyNotifier $flashy)
+    public function SupprimerCours($idcc)
     {
         $em = $this->getDoctrine()->getManager();
         $c = $this->getDoctrine()

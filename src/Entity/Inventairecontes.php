@@ -82,6 +82,9 @@ class Inventairecontes
     {
         $this->auteurc = $auteurc;
     }
-
+    public function show(): string
+    {
+        return 'Auteur du conte :'. $this->auteurc . ', titre du conte : ' . $this->titrec ;
+    }
 
 }

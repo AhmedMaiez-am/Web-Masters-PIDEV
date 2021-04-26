@@ -106,5 +106,10 @@ class Inventairecours
         $this->descriptioncc = $descriptioncc;
     }
 
+    public function show(): string
+    {
+        return 'Nom du cours : '. $this->nomc . ', type du cours : ' . $this->typecc . ', description du cours : ' . $this->descriptioncc;
+    }
+
 
 }

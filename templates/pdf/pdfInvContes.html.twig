@@ -1,0 +1,32 @@
+{% block css%}
+    <style type="text/css">
+        .myOtherTable { background-color: #b5e2d5;border-collapse:collapse;color:#000;font-size:18px; }
+        .myOtherTable th { background-color: #4676ef;color: #000000;width:50%; }
+        .myOtherTable td, .myOtherTable th { padding:5px;border:0; }
+        .myOtherTable td { border-bottom:1px dotted #000000; }
+    </style>
+{% endblock %}
+
+
+
+<h1>Inventaire Contes</h1>
+<table class="myOtherTable">
+    <thead>
+    <tr>
+        <th>Titre du conte</th>
+        <th>Auteur du conte</th>
+    </tr>
+    </thead>
+
+    <tbody id ="myTable">
+    {% for contes in invContes %}
+    <tbody id="myTable">
+    <tr>
+        <td>{{ contes.titreC }}</td>
+        <td>{{ contes.auteurC }}</td>
+
+    </tr>
+
+    {% endfor %}
+    </tbody>
+</table>

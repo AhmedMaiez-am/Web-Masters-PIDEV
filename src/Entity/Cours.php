@@ -57,13 +57,6 @@ class Cours
     private $prix;
 
     /**
-     * Cours constructor.
-     */
-    public function __construct()
-    {
-    }
-
-    /**
      * @return int
      */
     public function getIdc(): int
