@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\Session ;
 
+
 class ListeCoursController extends AbstractController
 {
     /**
@@ -22,7 +23,7 @@ class ListeCoursController extends AbstractController
      * @param Request $request1
      * @return RedirectResponse
      */
-    public function ajouter(Cours $cours, Request $request1): RedirectResponse
+    public function ajouter(Cours $cours, Request $request1, \Swift_Mailer $mailer1): RedirectResponse
     {
         if ($cours->getPrix()=="Gratuit") {
             $lstC = new Inventairecours();
@@ -35,6 +36,12 @@ class ListeCoursController extends AbstractController
             $em->flush();
             $this->addFlash('success','Le cours a été bien ajouté à votre inventaire !');
 
+            $message = (new \Swift_Message('Acquisition du cours'))
+                ->setFrom('directeurkidzy@gmail.com','Administration')
+                ->setTo('maiezahmed98@gmail.com')
+                ->setBody('Votre cours a été bien ajouté à votre inventaire !');
+
+            $mailer1->send($message);
 
             return $this->redirectToRoute('redirection_inv_cours');
         }else {
@@ -53,13 +60,13 @@ class ListeCoursController extends AbstractController
      */
     public function P (Request $request2): RedirectResponse
     {
-        $data=$request2->get('nom');
+        $data=$request2->get('email');
         $lstP = new Parents();
-        if ( $lstP=$this->getDoctrine()->getRepository('App:Parents')->findOneBy(['nomp'=>$data]))
+        if ( $lstP=$this->getDoctrine()->getRepository('App:Parents')->findOneBy(['emailp'=>$data]))
         {
             $session2 = $request2->getSession();
             $session2->start();
-            $var=$lstP->getNomp();
+            $var=$lstP->getEmailP();
             $session2->set('name2', $var);
         }
         return $this->redirectToRoute('getPa');
@@ -79,7 +86,7 @@ class ListeCoursController extends AbstractController
      * @param Request $request
      * @return RedirectResponse
      */
-    public function ind(Request $request): RedirectResponse
+    public function ind(Request $request, \Swift_Mailer $mailer1): RedirectResponse
     {
         $data=$request->get('numcarte');
         $data1 =$request->get('mdpcarte');
@@ -87,7 +94,7 @@ class ListeCoursController extends AbstractController
         $session->start();
         $var=$session->get('name2');
         $client1 = new Parents();
-        if ( $client1=$this->getDoctrine()->getRepository('App:Parents')->findOneBy(['nomp'=>$var])) {
+        if ( $client1=$this->getDoctrine()->getRepository('App:Parents')->findOneBy(['emailp'=>$var])) {
 
             $carte= $client1->getNumcarte();
             $mdp = $client1->getPasscarte();
@@ -128,6 +135,12 @@ class ListeCoursController extends AbstractController
                             $em1->persist($c);
                             $em1->flush();
 
+                            $message = (new \Swift_Message('Acquisition du cours'))
+                                ->setFrom('directeurkidzy@gmail.com','Administration')
+                                ->setTo($client1->getEmailp())
+                                ->setBody('Achat du cours a été validé avec succée, votre cours a été bien ajouté à votre inventaire !');
+
+                            $mailer1->send($message);
 
                             $this->addFlash('success','Le cours a été bien ajouté à votre inventaire !');
                         }else{

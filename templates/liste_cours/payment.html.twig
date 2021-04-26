@@ -31,10 +31,10 @@
         <div class="container">
             <div class="style-banner mx-auto">
                 <h3 class="text-wh font-weight-bold text-center"><span>Paiement des cours</span></h3>
-                <p class="mt-3 text-li text-center" id="join">Veuillez insérer votre nom de procéder au paiement du cours !</p>
+                <p class="mt-3 text-li text-center" id="join">Veuillez insérer votre adresse Email afin de procéder au paiement du cours !</p>
 
                 <form method="post" action="{{ path ('payer') }}">
-                    <input id="nom" class="form-control" type="text" name="nom" placeholder="Nom du parent..." aria-label="Nom">
+                    <input id="email" class="form-control" type="text" name="email" placeholder="Email du parent..." aria-label="Email">
                     <input type="submit" class="form-control btn" value="Confirmer">
                 </form>
 
