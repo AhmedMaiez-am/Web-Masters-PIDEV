@@ -39,6 +39,7 @@ class QRcodeCoursController extends AbstractController
             ->size(300)
             ->margin(10)
             ->roundBlockSizeMode(new RoundBlockSizeModeMargin())
+            ->labelText($b->getNomc())
             ->build();
 
         // Directly output the QR code
