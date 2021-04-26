@@ -1,0 +1,20 @@
+{% extends 'Temp/TemplSms.html.twig' %}
+
+
+
+{% block body %}
+
+{{ form_start(form) }}
+<div>
+        {{ form_errors(form.telp) }}
+        {{ form_label(form.telp,"N° tel") }}
+        {{ form_widget(form.telp) }}
+
+</div>
+<div>
+    <button type="submit" class="btn btn-success">envoyer</button>
+    <button onClick="window.history.back();"  class="btn-dark">cancel</button>
+</div>
+
+    {{ form_end(form) }}
+{% endblock %}

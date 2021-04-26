@@ -1,0 +1,14 @@
+{% extends 'Temp/TemplMail.html.twig' %}
+
+{% block title %}Mail{% endblock %}
+
+{% block body %}
+
+    <div>
+{{ form(MailForm) }}
+
+
+        <button  type="submit" onClick="window.history.back();" class="btn-dark">cancel</button>
+    </div>
+
+{% endblock %}
