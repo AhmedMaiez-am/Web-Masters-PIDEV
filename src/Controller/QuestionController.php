@@ -2,8 +2,11 @@
 
 namespace App\Controller;
 
+
 use App\Entity\Questions;
 use App\Entity\Quiz;
+use App\Entity\Quizresult;
+use App\Entity\Student;
 use App\Form\QuestionType;
 use App\Form\QuizType;
 use App\Repository\QuestionRep;
@@ -15,6 +18,8 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 
 class QuestionController extends AbstractController
 {
@@ -182,5 +187,34 @@ class QuestionController extends AbstractController
 
         return $this->render("question/index.html.twig",
             ['lstQuestion'=>$lstQuestion]);
+    }
+
+
+    /**
+     * @Route("/pdfq",name="pdfq",methods={"GET"})
+     */
+    public function pdf(QuestionRep $repo):Response{
+        $pdfOptions = new Options();
+        $pdfOptions->set('defaultFont', 'Arial');
+
+        
+        $dompdf = new Dompdf($pdfOptions);
+        $lstQuestion=$repo->findAll();
+        
+        $html=$this->renderView('question/pdfq.html.twig',[ 'lstQuestion'=>$lstQuestion ]);
+
+       
+        $dompdf->loadHtml($html);
+
+        $dompdf->setPaper('A4', 'portrait');
+
+       
+        $dompdf->render();
+
+       
+        $dompdf->stream("mypdf.pdf", [
+            "Attachment" => true
+        ]);
+
     }
 }

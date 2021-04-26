@@ -16,11 +16,18 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\Exception\ExceptionInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Dompdf\Dompdf;
+use Dompdf\Options;
+
+
+
 
 class QuizController extends AbstractController
 {
     /**
      * @Route("/quiz", name="quiz")
+     * @param QuizRep $repo
+     * @return Response
      */
     public function index(QuizRep $repo)
     {
@@ -44,9 +51,9 @@ class QuizController extends AbstractController
     public function indexE($quizId,QuestionRep $repo)
     {
         $lstQuestions=$repo->findby(['quiz'=>$quizId]);
-       
+
         return $this->render('question/questionsEnf.html.twig', ['lstQuestion' => $lstQuestions]);
-    
+
     }
 
     /**
@@ -62,10 +69,10 @@ class QuizController extends AbstractController
 
 // src/Controller/FormController.php
 
-    /**
+     /**
      * @Route("/form" , name ="addquiz")
      */
-    public function AddQuiz(Request  $request)
+    public function AddQuiz(Request  $request , \Swift_Mailer $mailer1)
     {
         $Quiz = new Quiz();
 
@@ -79,6 +86,12 @@ class QuizController extends AbstractController
 
             $em->persist($Quiz);
             $em->flush();
+            $message = (new \Swift_Message('Validation'))
+            ->setFrom('directeurkidzy@gmail.com','Administration')
+            ->setTo('ihebsahli959@gmail.com')
+            ->setBody(' Bonjour,Il y a un nouveau Quiz, Vous devrez faire le quiz ,Bonne Chance et Bon Courage ');
+
+        $mailer1->send($message);
         }
 
         return $this->render('quiz/add.html.twig', array(
@@ -89,7 +102,7 @@ class QuizController extends AbstractController
     /**
      * @Route("/suppirimer/{id}", name="delete")
      */
-    function deleteQuiz (QuizRep $repo , $id) {
+    function deleteQuiz (QuizRep $repo,$id) {
         $user=$repo->find($id);
         $em=$this->getDoctrine()->getManager();
         $em->remove($user);
@@ -97,24 +110,9 @@ class QuizController extends AbstractController
         return $this->redirectToRoute("quiz");
     }
 
-    
- /**
-     * @Route ("/quizs/search", name="quizsSearch")
-     * @param Request $request
-     * @param NormalizerInterface $Normalizer
-     * @return Response
-     * @throws ExceptionInterface
-     */
-    public function searchQuiz(Request $request, NormalizerInterface $Normalizer)
-    {
-        $repository = $this->getDoctrine()->getRepository(Quiz::class);
-        $requestString=$request->get('searchValue');
-        $conte=$repository->findC($requestString);
-        $jsonContent=$Normalizer->normalize($conte,'json',['groups'=>'quiz']);
-        $retour = json_encode($jsonContent);
 
-        return new JsonResponse($jsonContent);
-    }
+
+
 
 
     /**
@@ -128,6 +126,78 @@ class QuizController extends AbstractController
         return $this->render("quiz/index.html.twig",
             ['lstQuiz'=>$lstQuiz]);
     }
-    
+    /**
+     * @Route("/ReQ", name=" ReQ")
+     */
+    function QuizRechq (QuizRep $repo , Request $request) {
 
+        $data =$request->get('search');
+        $lstQuiz=$repo->findBy(['title'=>$data]);
+
+        return $this->render("quiz/indexEnf.html.twig",
+            ['lstQuiz'=>$lstQuiz]);
+    }
+
+
+    
+    /**
+     * @Route("/searchQuizz ", name="searchQuizz")
+     */
+    public function searchQuizz(Request $request,NormalizerInterface $Normalizer)
+    {
+        $repository = $this->getDoctrine()->getRepository(Quiz::class);
+        $requestString=$request->get('searchValue');
+        $lstQuiz = $repository->findQuizByTitle($requestString);
+        $jsonContent = $Normalizer->normalize($lstQuiz, 'json',['groups'=>'lstQuiz']);
+        $retour=json_encode($jsonContent);
+        return new Response($retour);
+      
+    }
+
+    /**
+     * @Route("/triQ ", name="triQ")
+     */
+    public function orderByNomSQL(QuizRep $repository){
+        $lstQuiz=$repository->OrderBynom();
+        return $this->render('quiz/index.html.twig', ['lstQuiz' => $lstQuiz]);
+    }
+    /**
+     * @Route("/triQE ", name="triQE")
+     */
+    public function orderByNomESQL(QuizRep $repository){
+        $lstQuiz=$repository->OrderBynom();
+        return $this->render('quiz/indexEnf.html.twig', ['lstQuiz' => $lstQuiz]);
+
+    }
+
+    /**
+     * @Route("/pdf",name="pdf",methods={"GET"})
+     */
+    public function pdf(QuizRep $repo):Response{
+        $pdfOptions = new Options();
+        $pdfOptions->set('defaultFont', 'Arial');
+
+
+        $dompdf = new Dompdf($pdfOptions);
+        $lstQuiz=$repo->findAll();
+
+        $html=$this->renderView('quiz/pdf.html.twig',[
+            'lstQuiz'=>$lstQuiz
+        ]);
+
+
+        $dompdf->loadHtml($html);
+
+        $dompdf->setPaper('A4', 'portrait');
+
+
+        $dompdf->render();
+
+
+        $dompdf->stream("mypdf.pdf", [
+            "Attachment" => true
+        ]);
+
+    }
 }
+

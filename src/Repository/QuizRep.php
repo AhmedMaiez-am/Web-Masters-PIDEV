@@ -51,11 +51,24 @@ class QuizRep extends ServiceEntityRepository
         ;
     }
     */
-    public function findC($cr){
-        return $this->createQueryBuilder('quiz')
-            ->where('quiz.quizId LIKE :quiz')
-            ->setParameter('quiz', '%'.$cr.'%')
+    public function findQuizByTitle($Title){
+        return $this->createQueryBuilder('Quiz')
+            ->where('Quiz.Title LIKE :Title')
+            ->setParameter('Title', '%'.$Title.'%')
             ->getQuery()
             ->getResult();
     }
+
+    public function OrderBynom(){
+        $em=$this->getEntityManager();
+        $query=$em->createQuery('select q from App\Entity\Quiz q order by q.title ASC');
+        return $query->getResult();
+    }
+    public function OrderBynomE(){
+        $em=$this->getEntityManager();
+        $query=$em->createQuery('select q from App\Entity\Quiz q order by q.title ASC');
+        return $query->getResult();
+    }
+
+
 }

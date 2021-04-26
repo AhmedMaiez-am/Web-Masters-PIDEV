@@ -25,8 +25,8 @@ class QuizType extends AbstractType
             ->add('isamericain', ChoiceType::class ,[
                 'choices' => [
                     'Main Statuses' => [
-                        'Yes' => 'isAmericain',
-                        'No' => 'isNotAmericain',
+                        'Yes' =>1,
+                        'No' => 0,
                     ],
 
                 ],

@@ -1,0 +1,30 @@
+<html>
+<table class="myOtherTable">
+    <thead>
+    <tr>
+        <th>Nom du quiz</th>
+        <th>Type</th>
+
+
+    </tr>
+    </thead>
+    <tbody id ="myTable">
+    {% for quiz in lstQuiz %}
+    <tbody id ="myTable">
+
+    <tr>
+        <td>{{ quiz.title }}</td>
+        <td>{{ quiz.isamericain }}</td>
+
+
+
+
+    </tr>
+    {% else %}
+        <tr>
+            <td> Quiz introuvables !</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+</html>

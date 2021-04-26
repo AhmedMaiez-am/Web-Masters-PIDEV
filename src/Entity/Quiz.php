@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Respository\QuizRep;
 use  Symfony\Component\Validator\Constraints as Assert;
@@ -33,11 +35,21 @@ class Quiz
     private $title;
 
     /**
-     * @var string
+     * @var int
      *
-     * @ORM\Column(name="isamericain", type="string", length=255, nullable=false)
+     * @ORM\Column(name="isamericain", type="integer", nullable=true)
      */
     private $isamericain;
+
+//    /**
+//     * @ORM\OneToMany(targetEntity=Quizresult::class, mappedBy="quizId", orphanRemoval=true)
+//     */
+//    private $quizresults;
+//
+//    public function __construct()
+//    {
+//        $this->quizresults = new ArrayCollection();
+//    }
 
     /**
      * @return int
@@ -72,20 +84,52 @@ class Quiz
     }
 
     /**
-     * @return string
+     * @return int
      */
-    public function getIsamericain(): ?string
+    public function getIsamericain(): ?int
     {
         return $this->isamericain;
     }
 
     /**
-     * @param string $isamericain
+     * @param int $isamericain
      */
-    public function setIsamericain(string $isamericain): void
+    public function setIsamericain(int $isamericain): void
     {
         $this->isamericain = $isamericain;
     }
+
+
+
+//    /**
+//     * @return Collection|Quizresult[]
+//     */
+//    public function getQuizresults(): Collection
+//    {
+//        return $this->quizresults;
+//    }
+//
+//    public function addQuizresult(Quizresult $quizresult): self
+//    {
+//        if (!$this->quizresults->contains($quizresult)) {
+//            $this->quizresults[] = $quizresult;
+//            $quizresult->setQuizId($this);
+//        }
+//
+//        return $this;
+//    }
+//
+//    public function removeQuizresult(Quizresult $quizresult): self
+//    {
+//        if ($this->quizresults->removeElement($quizresult)) {
+//            // set the owning side to null (unless already changed)
+//            if ($quizresult->getQuizId() === $this) {
+//                $quizresult->setQuizId(null);
+//            }
+//        }
+//
+//        return $this;
+//    }
 
 
 }
