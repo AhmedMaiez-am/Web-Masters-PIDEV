@@ -9,6 +9,8 @@ use App\Repository\EnfantRepository;
 use App\Repository\ParentsRepository;
 use App\Repository\RecompenseRepository;
 use App\Repository\RecuperationRepository;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -154,5 +156,38 @@ public function orederByNom(RecuperationRepository $repository){
          return $this->render('recuperation_recompense/listRecuperation.html.twig',
          ['Recuperations'=>$Recuperations]);
 }
+
+    /**
+     * @param RecuperationRepository $repository
+     * @return Response
+     * @Route("/pdf",name="pdf",methods={"GET"})
+     */
+public function pdf(RecuperationRepository $repository):Response{
+    $pdfOptions = new Options();
+    $pdfOptions->set('defaultFont', 'Arial');
+
+    // Instantiate Dompdf with our options
+    $dompdf = new Dompdf($pdfOptions);
+    $Recuperations=$repository->findAll();
+    // Retrieve the HTML generated in our twig file
+    $html=$this->renderView('recuperation_recompense/pdf.html.twig',[
+        'Recuperations'=>$Recuperations
+    ]);
+
+    // Load HTML to Dompdf
+    $dompdf->loadHtml($html);
+// (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
+    $dompdf->setPaper('A4', 'portrait');
+
+    // Render the HTML as PDF
+    $dompdf->render();
+
+    // Output the generated PDF to Browser (force download)
+    $dompdf->stream("mypdf.pdf", [
+        "Attachment" => true
+    ]);
+
+}
+
 
 }

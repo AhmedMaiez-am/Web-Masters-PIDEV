@@ -87,5 +87,21 @@ class Parents
         $this->emailp = $emailp;
     }
 
+    /**
+     * @return string
+     */
+    public function getTelp(): string
+    {
+        return $this->telp;
+    }
+
+    /**
+     * @param string $telp
+     */
+    public function setTelp(string $telp): void
+    {
+        $this->telp = $telp;
+    }
+
 
 }
