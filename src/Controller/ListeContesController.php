@@ -18,7 +18,7 @@ class ListeContesController extends AbstractController
      * @param Contes $contes
      * @return RedirectResponse
      */
-    public function ajouter(Contes $contes)
+    public function ajouter(Contes $contes, \Swift_Mailer $mailer1)
     {
         $lstContes1 = new Inventairecontes();
         $lstContes1->setTitrec($contes->getTitre());
@@ -26,6 +26,12 @@ class ListeContesController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $em->persist($lstContes1);
         $em->flush();
+        $message = (new \Swift_Message('Acquisition du cours'))
+            ->setFrom('directeurkidzy@gmail.com','Administration')
+            ->setTo('maiezahmed98@gmail.com')
+            ->setBody('Votre conte a été bien ajouté à votre inventaire !');
+
+        $mailer1->send($message);
 
         $this->addFlash('successC','La conte a été bien ajouté à votre inventaire !');
 
