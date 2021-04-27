@@ -12,7 +12,7 @@ use App\Form\QuizType;
 use App\Repository\QuestionRep;
 use App\Repository\QuizRep;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,7 +21,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 
-class QuestionController extends AbstractController
+class QuestionController extends Controller
 {
 
     /**
@@ -37,10 +37,21 @@ class QuestionController extends AbstractController
     /**
      * @Route("/questions", name="questions")
      */
-    public function index()
+    public function index(Request $request)
     {
         $lstQuestion=$this->getDoctrine()->getRepository('App:Questions')->findAll();
+        $lstQuestion = $this->get('knp_paginator')->paginate(
+        // Doctrine Query, not results
+            $lstQuestion,
+            // Define the page parameter
+            $request->query->getInt('page', 1),
+            // Items per page
+            6
+        );
+
         return $this->render('question/index.html.twig', ['lstQuestion' => $lstQuestion]);
+
+
     }
 
     /**
