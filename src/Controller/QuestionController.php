@@ -143,26 +143,12 @@ class QuestionController extends Controller
      * @param Quiz $quiz
      * @return Response
      */
-    public function getQuestion(Request $request, Quiz $quiz)
+    public function getQuestion(Request $request, Quiz $quiz): Response
     {
         $questions = $this->em->getRepository(Questions::class)->findBy(['quiz' => $quiz]);
-        /** get random quiz  */
 
-        $index = rand(0, count($questions) - 1);
-        /** @var Questions $question */
-        $question = $questions[$index];
-
-        if ($request->isXmlHttpRequest()){
-            return $this->json([
-                'success' => true,
-                'html' => $this->renderView('question/questionsEnf.html.twig', [
-                    'question' => $question,
-                    'quiz' => $quiz
-                ])
-            ]);
-        }
         return $this->render('question/questionsEnf.html.twig',[
-            'question' => $question,
+            'questions' => $questions,
             'quiz' => $quiz
         ]);
     }
@@ -174,18 +160,44 @@ class QuestionController extends Controller
      */
     public function validateQuestion(Request $request)
     {
-        if ($request->isXmlHttpRequest()){
-            $questionId = $request->request->get('question');
-            $user_response = $request->request->get('response');
+            $student = $this->em->getRepository(Student::class)->find(1);
             /** @var Questions $question */
+        $responses = [];
+        $score = 0;
+        $valid = 0;
+        $invalid = 0;
+        foreach ($request->request as $questionId => $user_response) {
             $question = $this->em->getRepository(Questions::class)->find((int)$questionId);
             $isTrue = $question->getAnswer() === $user_response;
+            $isTrue ? $valid++ : $invalid++;
+
+            if ($isTrue) {
+                $score++;
+            }elseif($question->getQuiz()->getIsamericain() == "1") {
+                $score--;
+            }
+
+            $responses[$questionId] =  $isTrue;
+        }
+
+        $quizResult = new Quizresult();
+        $quizResult->setQuizId($question->getQuiz());
+        $quizResult->setScore($score);
+        $quizResult->setRightAnswer($valid);
+        $quizResult->setStudentId($student);
+        $quizResult->setTimestamp(new \DateTime());
+
+        $this->em->persist($quizResult);
+        $this->em->flush();
 
             return $this->json([
                 'success' => true,
-                'isTrue' => $isTrue,
+                'responses' => $responses,
+                'valid' => $valid,
+                'invalid' => $invalid,
+                'score' => $score,
+                
             ]);
-        }
     }
 
     /**

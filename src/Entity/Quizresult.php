@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Quizresult
  *
- * @ORM\Table(name="quizresult", indexes={@ORM\Index(name="test", columns={"quiz_id"}), @ORM\Index(name="test1", columns={"student_id"})})
+// * @ORM\Table(name="quizresult", indexes={@ORM\Index(name="test", columns={"quiz_id"}), @ORM\Index(name="test1", columns={"student_id"})})
  * @ORM\Entity
  */
 class Quizresult
@@ -23,9 +23,9 @@ class Quizresult
 
     /**
      * @ORM\ManyToOne(targetEntity="Quiz")
-     * @ORM\JoinColumn(name="$quizId" ,referencedColumnName="$quizId")
+     * @ORM\JoinColumn(name="quiz_id" ,referencedColumnName="quizId")
      */
-    private $quizId;
+    private $quiz_id;
 
     /**
      * @var int
@@ -50,7 +50,7 @@ class Quizresult
 
     /**
      * @ORM\ManyToOne(targetEntity="Student")
-     * @ORM\JoinColumn(name="$student_id" ,referencedColumnName="id")
+     * @ORM\JoinColumn(name="student_id" ,referencedColumnName="id")
      */
     private $student_id;
 
@@ -75,15 +75,15 @@ class Quizresult
      */
     public function getQuizId()
     {
-        return $this->quizId;
+        return $this->quiz_id;
     }
 
     /**
-     * @param mixed $quizId
+     * @param $quiz
      */
-    public function setQuizId($quizId): void
+    public function setQuizId($quiz): void
     {
-        $this->quizId = $quizId;
+        $this->quiz_id = $quiz;
     }
 
     /**
