@@ -73,6 +73,13 @@ class Cours
      */
     private $prix;
 
+    /**
+     * @var int
+     * @ORM\Column(name="rate", type="integer", nullable=true)
+     */
+    private $rate;
+
+
     public function getIdc(): ?int
     {
         return $this->idc;
@@ -137,6 +144,25 @@ class Cours
 
         return $this;
     }
+
+    /**
+     * @return int
+     */
+    public function getRate()
+    {
+        return $this->rate;
+    }
+
+    /**
+     * @param int $rate
+     */
+    public function setRate(int $rate): void
+    {
+        $this->rate = $rate;
+    }
+
+
+
 
 
 }

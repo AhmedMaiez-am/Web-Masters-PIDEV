@@ -55,5 +55,27 @@ class CoursRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+    public function filterByPriceType($prix,$type,$rate){
+        $query= $this->createQueryBuilder('c')
+           ->where('c.type = :type')
+            ->setParameter('type', $type)
+            ->orderBy('c.rate',$rate);
 
+        if($prix=='asc'){
+            $query
+                ->addSelect('ABS(c.prix) AS HIDDEN prix')
+                ->orderBy('prix');
+
+        }
+
+        if($prix=='dsc'){
+            $query
+                ->addSelect('-ABS(c.prix) AS HIDDEN prix')
+                ->orderBy('prix');
+
+        }
+        return $query
+            ->getQuery()
+            ->getResult();
+    }
 }

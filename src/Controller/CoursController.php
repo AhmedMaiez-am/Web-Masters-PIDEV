@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controller;
+use App\Form\FilterType;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use App\Entity\Cours;
@@ -20,17 +21,33 @@ use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 class CoursController extends AbstractController
 {
     /**
-     * @Route("/", name="cours_index", methods={"GET"})
+     * @Route("/", name="cours_index", methods={"GET","POST"})
      */
-    public function index(): Response
+    public function index(Request $request): Response
     {
         $cours = $this->getDoctrine()
             ->getRepository(Cours::class)
             ->findAll();
+        $form = $this->createForm(FilterType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+$cours=$this->getDoctrine()->getRepository(Cours::class)->filterByPriceType($request->get('filter')['prix'],$request->get('filter')['type'],$request->get('filter')['rate']);
+            return $this->render('cours/index.html.twig', [
+                'cours' => $cours,
+                'form' => $form->createView(),
+
+            ]);
+//dump($request->get('filter')['type']);
+//die;
+}
 
         return $this->render('cours/index.html.twig', [
             'cours' => $cours,
+            'form' => $form->createView(),
+
         ]);
+
     }
 
     /**
@@ -196,7 +213,7 @@ class CoursController extends AbstractController
         $sheet->setCellValue('B1', 'type!');
         $sheet->setCellValue('C1', 'description');
         $sheet->setCellValue('D1', 'prix');
-        $sheet->setTitle("My First Worksheet");
+        $sheet->setTitle("Mes cours");
         $rowCount=2;
         foreach ($cours as $cour) {
             $sheet->setCellValue('A'.$rowCount, $cour->getNom());
@@ -218,4 +235,17 @@ class CoursController extends AbstractController
         // Return the excel file as an attachment
         return $this->file($temp_file, $fileName, ResponseHeaderBag::DISPOSITION_INLINE);
     }
+
+    /**
+     * @Route("/rate/{idc}", name="cours_rate", methods={"POST"})
+     */
+public function rate (Request $request, Cours $cour)
+{
+    $cour->setRate(intval($request->get('ratedIndex'))+1);
+    $entityManager = $this->getDoctrine()->getManager();
+    $entityManager->persist($cour);
+    $entityManager->flush();
+    return new Response('success');
+}
+
 }

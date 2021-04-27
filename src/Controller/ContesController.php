@@ -195,7 +195,7 @@ class ContesController extends AbstractController
         $sheet = $spreadsheet->getActiveSheet();
         $sheet->setCellValue('A1', 'nom');
         $sheet->setCellValue('B1', 'auteur');
-        $sheet->setTitle("My First Worksheet");
+        $sheet->setTitle("Mes contes");
         $rowCount=2;
         foreach ($contes as $con) {
             $sheet->setCellValue('A'.$rowCount, $con->getTitre());

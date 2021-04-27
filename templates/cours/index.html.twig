@@ -6,15 +6,36 @@
         <div class="container">
             <div class="style-banner mx-auto">-->
     <div class="container">
-                <!-- form -->
-                <div class="home-form-w3ls mt-5">
-                    <form action="#" method="GET">
+        <center>
+        <h1><FONT color="green">les Cours</FONT></h1>
+    {{ form_start(form) }}
+    <div class="row">
+        <div class="col">
+            {{ form_row(form.type) }}
+        </div>
+        <div class="col" id="some-custom-id">
+            {{ form_row(form.prix) }}
+        </div>
+        <div class="col" id="some-custom-id">
+            {{ form_row(form.rate) }}
+        </div>
+
+        <button class="btn btn-primary btn-lg active" role="button" aria-pressed="true" type="submit"> trier</button>
+    </div>
+    {{ form_end(form) }}
+        </center>
+        <form action="#" method="GET">
                         <div class="row">
-                            <h1><FONT color="green">les Cours</FONT></h1>
+
                                 <div>
                                 <!--<button type="submit" class="btn btn-success" onclick="location.href='code.php'">export</button>-->
                                      <a href="{{ path('export') }}"  class="btn btn-primary btn-lg active" role="button" aria-pressed="true">exporter les cours </a></button>
-                                </div>
+                                    <!-- form -->
+                                    <div class="home-form-w3ls mt-5">
+                                      <center>
+
+                                                                         </center>
+                                    </div>
                             <input type="text" id="search" class="form-control" placeholder="Search">
 
 
@@ -30,6 +51,8 @@
                                     <th><h4><FONT color="green">Description</FONT></h4></th>
                                     <!--<th><h4><FONT color="green">Cours</FONT></h4></th>-->
                                     <th><h4><FONT color="green">Prix</FONT></h4></th>
+                                    <th><h4><FONT color="green">rate</FONT></h4></th>
+
                                     <th><h4><FONT color="green">actions</FONT></h4></th>
                                 </tr>
                                 </thead>
@@ -42,6 +65,12 @@
                                         <td><FONT color="black">{{ cour.description }}</FONT></td>
                                         <!--<td><FONT color="white">{{ cour.cours }}</FONT></td></td-->
                                         <td><FONT color="black">{{ cour.prix }}</FONT></td>
+                                        <td>
+                                            {% if cour.rate is not null %}
+                                            <FONT color="black">{{ cour.rate }}</FONT>
+                                        {%endif%}
+                                        </td>
+
                                         <td>
                                             <a href="{{ path('cours_show', {'idc': cour.idc})}}"  class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Consulter</a>
                                             <a href="{{ path('cours_edit', {'idc': cour.idc}) }}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">edit</a>
@@ -65,7 +94,7 @@
 
                         </div>
 
-
+                        </div>
                     </form>
                 </div>
                 <!-- //form -->
@@ -118,7 +147,6 @@
             });
         });
     </script>
-
 {% endblock %}
 
 
