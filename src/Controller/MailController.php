@@ -30,6 +30,7 @@ class MailController extends AbstractController
                 ->attach($this->renderView(
                     'mail/contact.html.twig', compact('mail')
                 ))
+
             ;
             $mailer->send($email);
             $this->addFlash('message',"votre message a été bien envoyé");

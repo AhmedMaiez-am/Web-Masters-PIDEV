@@ -14,6 +14,7 @@ return [
         '/_profiler/phpinfo' => [[['_route' => '_profiler_phpinfo', '_controller' => 'web_profiler.controller.profiler::phpinfoAction'], null, null, null, false, false, null]],
         '/_profiler/open' => [[['_route' => '_profiler_open_file', '_controller' => 'web_profiler.controller.profiler::openAction'], null, null, null, false, false, null]],
         '/afficheRecup' => [[['_route' => 'afficheRecup', '_controller' => 'App\\Controller\\FrontRecuperationController::listeRecup'], null, null, null, false, false, null]],
+        '/email' => [[['_route' => 'app_mail_sendemail', '_controller' => 'App\\Controller\\MailController::sendEmail'], null, null, null, false, false, null]],
         '/listrecompense' => [[['_route' => 'listrecompense', '_controller' => 'App\\Controller\\RecompenseController::list'], null, null, null, false, false, null]],
         '/ajoutrecompense' => [[['_route' => 'ajoutrecompense', '_controller' => 'App\\Controller\\RecompenseController::add'], null, null, null, false, false, null]],
         '/searchRec' => [[['_route' => 'searchRec', '_controller' => 'App\\Controller\\RecompenseController::searchRec'], null, null, null, false, false, null]],
@@ -28,6 +29,8 @@ return [
         '/search' => [[['_route' => 'search', '_controller' => 'App\\Controller\\RecuperationRecompenseController::search'], null, null, null, false, false, null]],
         '/Recuperation/tri' => [[['_route' => 'app_recuperationrecompense_orderbymailsql', '_controller' => 'App\\Controller\\RecuperationRecompenseController::orderByMailSQL'], null, null, null, false, false, null]],
         '/trinom' => [[['_route' => 'tri', '_controller' => 'App\\Controller\\RecuperationRecompenseController::orederByNom'], null, null, null, false, false, null]],
+        '/pdf' => [[['_route' => 'pdf', '_controller' => 'App\\Controller\\RecuperationRecompenseController::pdf'], null, ['GET' => 0], null, false, false, null]],
+        '/sms' => [[['_route' => 'sms', '_controller' => 'App\\Controller\\SmsController::sms'], null, null, null, false, false, null]],
     ],
     [ // $regexpList
         0 => '{^(?'

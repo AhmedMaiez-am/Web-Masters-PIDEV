@@ -16,6 +16,7 @@ return [
     '_profiler_exception' => [['token'], ['_controller' => 'web_profiler.controller.exception_panel::body'], [], [['text', '/exception'], ['variable', '/', '[^/]++', 'token'], ['text', '/_profiler']], [], []],
     '_profiler_exception_css' => [['token'], ['_controller' => 'web_profiler.controller.exception_panel::stylesheet'], [], [['text', '/exception.css'], ['variable', '/', '[^/]++', 'token'], ['text', '/_profiler']], [], []],
     'afficheRecup' => [[], ['_controller' => 'App\\Controller\\FrontRecuperationController::listeRecup'], [], [['text', '/afficheRecup']], [], []],
+    'app_mail_sendemail' => [[], ['_controller' => 'App\\Controller\\MailController::sendEmail'], [], [['text', '/email']], [], []],
     'listrecompense' => [[], ['_controller' => 'App\\Controller\\RecompenseController::list'], [], [['text', '/listrecompense']], [], []],
     'ajoutrecompense' => [[], ['_controller' => 'App\\Controller\\RecompenseController::add'], [], [['text', '/ajoutrecompense']], [], []],
     'modifierRecompense' => [['id'], ['_controller' => 'App\\Controller\\RecompenseController::update'], [], [['variable', '/', '[^/]++', 'id'], ['text', '/modifierRecompense']], [], []],
@@ -33,4 +34,6 @@ return [
     'search' => [[], ['_controller' => 'App\\Controller\\RecuperationRecompenseController::search'], [], [['text', '/search']], [], []],
     'app_recuperationrecompense_orderbymailsql' => [[], ['_controller' => 'App\\Controller\\RecuperationRecompenseController::orderByMailSQL'], [], [['text', '/Recuperation/tri']], [], []],
     'tri' => [[], ['_controller' => 'App\\Controller\\RecuperationRecompenseController::orederByNom'], [], [['text', '/trinom']], [], []],
+    'pdf' => [[], ['_controller' => 'App\\Controller\\RecuperationRecompenseController::pdf'], [], [['text', '/pdf']], [], []],
+    'sms' => [[], ['_controller' => 'App\\Controller\\SmsController::sms'], [], [['text', '/sms']], [], []],
 ];
