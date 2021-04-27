@@ -94,14 +94,18 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             <div class="modal-body my-5 pt-4">
                 <h3 class="title-w3 mb-5 text-center text-wh font-weight-bold">Login Now</h3>
                 <div class="login-wrap">
-                    <input type="text" name="mail" class="form-control" placeholder="Mail">
+                    <input type="text"  name="mail" class="form-control" placeholder="Mail">
                     <br>
                     <input type="password" name="mdp" class="form-control" placeholder="Password">
                     <br>
                     <input class="btn btn-theme btn-block" type="submit" value="Se connecter">
+                    <br>
+                    <li><a href="{{ path('mailler')}}">Mot de passe oublié</a></li>
+
                 </div>
             </div>
         </form>
+
         <!-- //login -->
     </div>
 </div>

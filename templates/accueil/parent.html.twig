@@ -1,5 +1,8 @@
 {% extends 'base.html.twig' %}
+{% block stylesheets %}
+    <link rel="stylesheet"  href="{{ asset('bundles/mercuryseriesflashy/css/flashy.css') }}">
 
+{% endblock %}
 
 {% block body %}
 
@@ -51,37 +54,25 @@
                            <td> <a href={{ path ('Bloquer',{'id' : c.idp}) }}> Bloquer </a></td>
                            <td> <a href={{ path ('DBloquer',{'id' : c.idp}) }}> Débloquer </a></td>
         </tr>
+        <tr>
+            <td colspan="13" align="center">
+                <a href={{ path ('imprimerRes') }}> Imprimer </a>
+            </td>
+        </tr>
                        {% endfor %}
         </tbody>
 
                   </table>
 </div>
-    <script>
-        $(document).ready(function(){
-            $('#search').keyup(function(){
-                search_table($(this).val());
-            });
-            function search_table(value){
-                $('#sa tbody').each(function(){
-                    var found = 'false';
-                    $(this).each(function(){
-                        if($(this).text().toLowerCase().indexOf(value.toLowerCase()) >= 0)
-                        {
-                            found = 'true';
-                        }
-                    });
-                    if(found == 'true')
-                    {
-                        $(this).show();
-                    }
-                    else
-                    {
-                        $(this).hide();
-                    }
-                });
-            }
-        });
-    </script>
+<!-- Flashy depends on jQuery -->
+
+
+
 </body>
+    <script src="//code.jquery.com/jquery.js"></script>
+    <!-- Load Flashy default JavaScript -->
+    <script src="{{ asset ('bundles/mercuryseriesflashy/js/flashy.js') }}"></script>
+    <!-- Include Flashy default partial -->
+    {{ include ('@MercurySeriesFlashy/flashy.html.twig') }}
             <!-- //form -->
 {% endblock %}

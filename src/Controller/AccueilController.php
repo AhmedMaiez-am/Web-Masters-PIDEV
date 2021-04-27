@@ -16,6 +16,7 @@ use App\Repository\DirecteurRep;
 use App\Repository\EnfantRep;
 use App\Repository\ParentRep;
 use App\Repository\TuteurRep;
+use App\Repository\ValidationRep;
 use App\Security\DirecteurAuthenticator;
 use Doctrine\ORM\Repository\RepositoryFactory;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -34,11 +35,22 @@ use Symfony\Component\HttpFoundation\Session\Session ;
 use Symfony\UX\Chartjs\Builder\ChartBuilderInterface;
 use Symfony\UX\Chartjs\Model\Chart;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Dompdf\Dompdf;
+use Dompdf\Options;
+use \Twilio\Rest\Client;
+use MercurySeries\FlashyBundle\FlashyNotifier;
+use BotMan\BotMan\BotMan;
+
 
 
 
 class AccueilController extends AbstractController
-{
+{ private $twilio;
+
+    public function __construct(Client $twilio) {
+        $this->twilio = $twilio;
+
+    }
     /**
      * @Route("/accueil", name="accueil7")
      */
@@ -82,7 +94,11 @@ class AccueilController extends AbstractController
         if ($Form ->isSubmitted() && $Form->isValid() ) {
             $em =$this->getDoctrine()->getManager();
             $em->flush();
-            return $this->redirectToRoute("afficher");
+
+            $user=$rep->findAll();
+
+            return $this->render("accueil/parent.html.twig",
+                ['user'=>$user]);
 
         }
         return $this->render('accueil/update.html.twig',[
@@ -93,7 +109,7 @@ class AccueilController extends AbstractController
     /**
      * @Route("/demande", name="dem")
      */
-    public function addDemande (Request $request)
+    public function addDemande (Request $request , FlashyNotifier $flashy )
     {
         $Maitresse = new Maitresse();
         $Form =$this->createForm(DemandeType :: class , $Maitresse);
@@ -124,6 +140,7 @@ class AccueilController extends AbstractController
             $em =$this->getDoctrine()->getManager();
             $em->persist($Maitresse);
             $em->flush();
+            $flashy->success('SUCCUESS');
 
         }
         return $this->render('accueil/index.html.twig',[
@@ -158,14 +175,17 @@ class AccueilController extends AbstractController
         $em=$this->getDoctrine()->getManager();
         $em->remove($user);
         $em->flush();
-                return $this->redirectToRoute("aff");
+        $user=$repo->findAll();
+
+        return $this->render("accueil/Demande.html.twig",
+            ['user'=>$user]);
     }
     /**
      * @Route("/ajoutdemande/{id}", name="ajouterTuteur")
      * @param Maitresse $demande
      * @return RedirectResponse | Response
      */
-    public function addValidation (Maitresse $demande , Request $request )
+    public function addValidation (Maitresse $demande , Request $request , \Swift_Mailer $mailer1)
     {
         $Mai = new Validation();
         $Mai->setLoginm($demande->getEmailmaitresse());
@@ -176,7 +196,16 @@ class AccueilController extends AbstractController
         $em->remove($demande);
         $em->flush();
 
-        return $this->redirectToRoute("aff");
+        $message = (new \Swift_Message('Validation'))
+            ->setFrom('directeurkidzy@gmail.com','Administration')
+            ->setTo($Mai->getLoginm())
+            ->setBody('Votre Demande a été validé avec success.
+Merci pour votre confiance.');
+
+        $mailer1->send($message);
+
+        return $this->render("accueil/Demande.html.twig",
+            ['user'=>$demande]);
 
     }
     /**
@@ -189,22 +218,7 @@ class AccueilController extends AbstractController
         return $this->render("accueil/parent.html.twig",
             ['user'=>$user]);
     }
-    /**
-     * @Route ("/afficheParent/search", name="searchInv")
-     * @param Request $request
-     * @param NormalizerInterface $Normalizer
-     * @return Response
-     * @throws ExceptionInterface
-     */
-    public function searchParents(Request $request, NormalizerInterface $Normalizer)
-    {
-        $repository = $this->getDoctrine()->getRepository(Parents::class);
-        $requestString=$request->get('searchValue');
-        $parents=$repository->nom($requestString);
-        $jsonContent=$Normalizer->normalize($parents,'json',['groups'=>'parents']);
-        $retour = json_encode($jsonContent);
-        return new JsonResponse($jsonContent);
-    }
+
 
 
     /**
@@ -218,17 +232,21 @@ class AccueilController extends AbstractController
             ['user'=>$user]);
     }
     /**
-     * @Route("/suppi/{id1}", name="dp")
+     * @Route("/suppi/{id1}/", name="dp")
      */
     function deleteParent (ParentRep $repo , $id1) {
         $user=$repo->find($id1);
         $em=$this->getDoctrine()->getManager();
         $em->remove($user);
         $em->flush();
-        return $this->redirectToRoute("afficher");
+        $user=$repo->findAll();
+
+        return $this->render("accueil/parent.html.twig",
+            ['user'=>$user]);
+
     }
     /**
-     * @Route("/affEnfant", name="Enfant")
+     * @Route("/affEnfant", name="EnfantA")
      */
     function afficheEnf (EnfantRep $repo){
 
@@ -245,7 +263,10 @@ class AccueilController extends AbstractController
         $em=$this->getDoctrine()->getManager();
         $em->remove($user);
         $em->flush();
-        return $this->redirectToRoute("Enfant");
+        $user=$repo->findAll();
+
+        return $this->render("registration/listeEnfant.html.twig",
+            ['user'=>$user]);
     }
     /**
      * @Route("/updateEnf/{iden}", name="upenfant")
@@ -271,7 +292,10 @@ class AccueilController extends AbstractController
             $Di->setImage($fileName);
             $em =$this->getDoctrine()->getManager();
             $em->flush();
-            return $this->redirectToRoute("Enfant");
+            $user=$repo->findAll();
+
+            return $this->render("registration/listeEnfant.html.twig",
+                ['user'=>$user]);
 
         }
         return $this->render('registration/updateEnfant.html.twig',[
@@ -417,13 +441,16 @@ class AccueilController extends AbstractController
     /**
      * @Route ("/Bloquer/{id}", name="Bloquer")
      */
-    public function Bloquer (ParentRep $repository, Request $request,$id)
+    public function Bloquer (ParentRep $repository, Request $request,$id ,FlashyNotifier $flashy )
     {
         $user=$repository->find($id);
         $user->setBlock('oui');
         $em =$this->getDoctrine()->getManager();
         $em->flush();
-        return $this->redirectToRoute("afficher");
+        $user=$repository->findAll();
+        $flashy->success('bloqué!');
+        return $this->render("accueil/parent.html.twig",
+            ['user'=>$user]);
     }
     /**
      * @Route ("/DBloquer/{id}", name="DBloquer")
@@ -434,7 +461,10 @@ class AccueilController extends AbstractController
         $user->setBlock('non');
         $em =$this->getDoctrine()->getManager();
         $em->flush();
-        return $this->redirectToRoute("afficher");
+        $user=$repository->findAll();
+
+        return $this->render("accueil/parent.html.twig",
+            ['user'=>$user]);
     }
     /**
      * @Route ("/connexionTuteur", name="pageConnexionTuteur")
@@ -557,20 +587,106 @@ class AccueilController extends AbstractController
         $data1 =$request->get('mdpcarte');
         $pr =$request->get('montant');
         (int)$pt = $user->getPortefeuille();
-
+        $num = $user->getTelp();
         if ($mdp == $data1 && $carte==$data) {
             $newPt = (int)$pt-(int)$pr;
 
             $user->setPortefeuille($newPt);
             $em1 = $this->getDoctrine()->getManager();
             $em1->flush($user);
-            return $this->redirectToRoute('accueil7');
+            $message = $this->twilio->messages->create(
+                $num , // Send text to this number
+                array(
+                    'from' => '+15124003293', // My Twilio phone number
+                    'body' => 'Hello from Awesome Massages. Thank your for being KIND '  . ' KIDZY.'
+                )
+            );
+            $this->addFlash('success', $message);
+
+            return $this->render("accueil/accueilParent.html.twig",
+                ['user'=>$user]);
         }else {
             $this->addFlash('payInvalide','Votre crédit du portefeuille est insuffisant !');
         }
 
         return $this->render("accueil/Dons.html.twig",
             ['user'=>$user]);
+    }
+    /**
+     * @Route("/imprimerRes", name="imprimerRes")
+     */
+    function ImprimerRes(ParentRep $repo, Request $request){
+
+        // Configure Dompdf according to your needs
+        $pdfOptions = new Options();
+        $pdfOptions->set('defaultFont', 'Arial');
+
+        // Instantiate Dompdf with our options
+        $dompdf = new Dompdf($pdfOptions);
+
+
+        $user=$repo->findAll();
+
+
+        // Retrieve the HTML generated in our twig file
+        $html = $this->renderView("accueil/PDF.html.twig",
+            ['user'=>$user]);
+
+        // Load HTML to Dompdf
+        $dompdf->loadHtml($html);
+
+        // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
+        $dompdf->setPaper('A4', 'portrait');
+
+        // Render the HTML as PDF
+        $dompdf->render();
+
+        // Output the generated PDF to Browser (force download)
+        $dompdf->stream("mypdf.pdf", [
+            "Attachment" => false
+        ]);
+
+
+    }
+    /**
+     * @Route("/event/sms",name="sendSms")
+     */
+    public function sendSMS()
+    {
+
+        $message = $this->twilio->messages->create(
+            '+21653227764', // Send text to this number
+            array(
+                'from' => '+15124003293', // My Twilio phone number
+                'body' => 'Hello from Awesome Massages. A reminder that your massage appointment is for today at '  . ' for any questions.'
+            )
+        );
+        $this->addFlash('success', $message);
+
+
+        return $this->redirectToRoute('accueil7');
+    }
+    /**
+     * @Route("/chatbot", name="chatbot")
+     */
+    function chatbotAction(Request $request)
+    {
+        // get a BotMan instance from Symfony's service container
+        $botman = $this->container->get('gas_botman.botman');
+
+        //your logic here, for e.g the following statements
+        $botman->hears('(hello|hi|hey)', function (BotMan $bot) {
+            $bot->reply('Hello');
+        });
+
+        $botman->fallback(function (BotMan $bot) {
+            $bot->typesAndWaits(2);
+            $bot->reply("Sorry I dd not understand your request");
+        });
+
+        $botman->listen();
+
+        return new Response();
     }
 }
 

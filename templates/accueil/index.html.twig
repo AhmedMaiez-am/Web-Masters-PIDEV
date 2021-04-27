@@ -31,6 +31,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <!-- Style-CSS -->
     <link href="temp/css/Tuteur.css" rel='stylesheet' type='text/css' />
     <link href="temp/css/font-awesome.min.css" rel="stylesheet">
+
+    <link rel="stylesheet"  href="{{ asset('bundles/mercuryseriesflashy/css/flashy.css') }}">
+
+
+
     <!-- Font-Awesome-Icons-CSS -->
     <!-- //Custom-Files -->
 
@@ -295,5 +300,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!-- //move top icon -->
 
 </body>
-
+<script src="//code.jquery.com/jquery.js"></script>
+<!-- Load Flashy default JavaScript -->
+<script src="{{ asset ('bundles/mercuryseriesflashy/js/flashy.js') }}"></script>
+<!-- Include Flashy default partial -->
+{{ include ('@MercurySeriesFlashy/flashy.html.twig') }}
 </html>

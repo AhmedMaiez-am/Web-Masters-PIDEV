@@ -92,7 +92,7 @@ class Validation
     /**
      * @param string $passwordm
      */
-    public function setPasswordm(string $passwordm): void
+    public function setPasswordm(string $passwordm)
     {
         $this->passwordm = $passwordm;
     }
@@ -105,10 +105,8 @@ class Validation
         return $this->codem;
     }
 
-    /**
-     * @param string|null $codem
-     */
-    public function setCodem(?string $codem): void
+
+    public function setCodem($codem)
     {
         $this->codem = $codem;
     }

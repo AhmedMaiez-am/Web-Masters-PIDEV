@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Enfant;
+use Gregwar\CaptchaBundle\Type\CaptchaType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -30,9 +31,10 @@ class EnfantType extends AbstractType
             ->add('age' )
 
             ->add('password')
+            ->add( 'captcha',CaptchaType::class );
 
 
-        ;
+
     }
 
     public function configureOptions(OptionsResolver $resolver)

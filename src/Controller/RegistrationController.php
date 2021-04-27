@@ -95,7 +95,8 @@ class RegistrationController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->persist($Mait);
             $em->flush() ;
-            return $this->redirectToRoute("pageConnexionEnfant");
+            return $this->render("accueil/loginEnfant.html.twig",
+                ['user'=>'pageConnexionAdmin']);
         }
         return $this->render('registration/Enfant.html.twig',[
             'form' =>$Form->createView(),
