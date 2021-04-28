@@ -1,0 +1,32 @@
+{% block css%}
+<style type="text/css">
+    .myOtherTable { background-color: #b5e2d5;border-collapse:collapse;color:#000;font-size:18px; }
+    .myOtherTable th { background-color: #46efc8;color: #000000;width:50%; }
+    .myOtherTable td, .myOtherTable th { padding:5px;border:0; }
+    .myOtherTable td { border-bottom:1px dotted #000000; }
+</style>
+{% endblock %}
+
+
+
+<h1>Inventaire Cours</h1>
+<table class="myOtherTable">
+    <thead>
+    <tr>
+        <th style="width: 40px">Nom du cours</th>
+        <th >Type du cours</th>
+        <th>Description du cours</th>
+    </tr>
+    </thead>
+
+    <tbody id ="myTable">
+    {% for cours in lstCoursInv %}
+    <tbody id ="myTable">
+    <tr>
+        <td>{{ cours.nomc }}</td>
+        <td>{{ cours.typecc }}</td>
+        <td>{{ cours.descriptioncc }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>

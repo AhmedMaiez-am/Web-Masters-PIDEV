@@ -1,0 +1,29 @@
+{% extends 'Temp/TemplAfficheTous.html.twig' %}
+{% block body %}
+    <div>
+
+
+        <table border="1">
+
+            <tr>
+                <th scope="row">nomRec</th>
+                <th scope="row">nbr Point</th>
+
+
+            </tr>
+            {% for Recompense in Recompenses %}
+                <tr>
+                    <td> {{ Recompense.nomrec }}</td>
+                    <td> {{ Recompense.nbrPoint }}</td>
+
+
+                    </td>
+
+                </tr>
+
+            {% endfor %}
+
+        </table>
+
+    </div>
+{% endblock %}

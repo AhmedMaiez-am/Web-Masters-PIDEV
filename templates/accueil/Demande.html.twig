@@ -1,0 +1,37 @@
+{% extends 'baseGhadaBack.html.twig' %}
+
+
+{% block body %}
+
+
+    <br> <br> <br>
+    <h1 align="center"> La Liste Des demandes </h1>
+    <table bgcolor="#deb887" , border="3" , align="center" ,  style="width:80%"  >
+
+        <tr>
+            <th> NOM  </th>
+            <th> PRENOM  </th>
+            <th> Email  </th>
+            <th> Etat  </th>
+            <th> Path  </th>
+            <th> CV  </th>
+            <th> Refuser </th>
+            <th> Valider  </th>
+        </tr>
+        <tr {% for c in user %}>
+
+            <td>{{ c.nomm }}</td>
+            <td>{{ c.prenomm }}</td>
+            <td>{{ c.emailmaitresse }}</td>
+            <td>{{ c.etat }}</td>
+            <td><img src="{{ asset('uploads/images/' ~ c.path) }}"WIDTH=70
+                     HEIGHT=70></td>
+            <td> <a href="{{ asset('uploads/pdf/' ~ c.cv) }}"> View le CV (PDF) </a> </td>
+            <td> <a href={{ path ('d',{'id' : c.idm}) }}> Refuser </a></td>
+            <td> <a href={{ path ('ajouterTuteur',{'id' : c.idm}) }}> Valider </a></td>
+        </tr {% endfor %}>
+
+    </table>
+
+
+{% endblock %}

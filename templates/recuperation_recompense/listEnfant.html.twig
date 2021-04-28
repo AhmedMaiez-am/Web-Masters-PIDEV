@@ -1,0 +1,32 @@
+{% extends 'Temp/TemplAfficheTous.html.twig' %}
+
+{% block enfant %}
+    <div>
+        <table border="1">
+
+            <tr>
+                <th scope="row">nom enfant</th>
+                <th scope="row">prenom enfant</th>
+                <th scope="row">nbr Point</th>
+                <th scope="row">id parent</th>
+
+
+            </tr>
+            {% for Enfant in Enfants %}
+                <tr>
+                    <td> {{ Enfant.nomenfant }}</td>
+                    <td>{{ Enfant.prenomenfant }}</td>
+                    <td> {{ Enfant.nbrPoint }}</td>
+                    <td>{{ Enfant.idparent }}
+
+
+                    </td>
+
+                </tr>
+
+            {% endfor %}
+
+
+        </table>
+    </div>
+{% endblock %}

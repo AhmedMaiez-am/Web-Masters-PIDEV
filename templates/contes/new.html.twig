@@ -1,0 +1,18 @@
+{% extends 'baseAzizBack.html.twig' %}
+
+{% block title %}New Contes{% endblock %}
+
+{% block body %}
+    <!--<div class="main-w3pvt mian-content-wthree text-center" id="home">
+        <div class="container">
+            <div class="style-banner mx-auto">-->
+
+    <h1>Create new Contes</h1>
+
+    {{ include('contes/_form.html.twig') }}
+    <a href="{{ path('contes_index') }}"><button>back to list</button></a>
+    </div>
+    </div>
+    </div>
+
+{% endblock %}

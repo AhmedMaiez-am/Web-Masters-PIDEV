@@ -1,0 +1,27 @@
+<h1 align="center">Liste des Recompenses</h1>
+
+<table  class="table table-condensed" bgcolor="#ffe4c4" align="center">
+
+    <tr>
+        <th scope="row">nomRec</th>
+        <th scope="row">nbr Point</th>
+        <th scope="row"> nomEnfant</th>
+        <th scope="row"> emailParent</th>
+
+    </tr>
+
+    {% for Recuperation in Recuperations %}
+
+        <tr>
+            <td> {{ Recuperation.nomrec }}</td>
+            <td> {{ Recuperation.nbrPoint }}</td>
+            <td>{{ Recuperation.nomEnf }}</td>
+            <td>{{ Recuperation.emailP }}</td>
+
+
+
+        </tr>
+
+    {% endfor %}
+
+</table>

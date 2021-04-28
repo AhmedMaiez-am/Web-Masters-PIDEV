@@ -1,0 +1,90 @@
+{% extends 'baseGhadaBack.html.twig' %}
+
+
+{% block body %}
+    <div class="inner-banner-w3ls py-5" id="home">
+        <div class="container py-xl-5 py-lg-3">
+            <!-- register  -->
+            <div class="modal-body mt-md-2 mt-5">
+                <h3 class="title-w3 mb-5 text-center text-wh font-weight-bold">Update Now</h3>
+                <form action="#" method="post">
+                    {{form_start(f,{'attr':{'novalidate' : 'novalidate'}})}}
+                    <div class="form-group">
+                        {{ form_label(f.emailp, 'EMAIL :', {'label_attr': {'class': 'col-2 col-form-label'}}) }}
+                        <div class="col-10">
+                            {{ form_widget(f.emailp, {'attr': {'class': 'form-control m-input'}},{'attr':{'novalidate' : 'novalidate'}}) }}
+                            {{ form_errors(f.emailp) }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(f.nomp, 'NOM :', {'label_attr': {'class': 'col-2 col-form-label'}}) }}
+                        <div class="col-10">
+                            {{ form_widget(f.nomp, {'attr': {'class': 'form-control m-input'}},{'attr':{'novalidate' : 'novalidate'}}) }}
+                            {{ form_errors(f.nomp) }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(f.prenomp, 'PRENOM :', {'label_attr': {'class': 'col-2 col-form-label'}}) }}
+                        <div class="col-10">
+                            {{ form_widget(f.prenomp, {'attr': {'class': 'form-control m-input'}},{'attr':{'novalidate' : 'novalidate'}}) }}
+                            {{ form_errors(f.prenomp) }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(f.telp , 'TELEPHONE:', {'label_attr': {'class': 'col-2 col-form-label'}}) }}
+                        <div class="col-10">
+                            {{ form_widget(f.telp, {'attr': {'class': 'form-control m-input'}},{'attr':{'novalidate' : 'novalidate'}}) }}
+                            {{ form_errors(f.telp) }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(f.passwordp, 'Password:', {'label_attr': {'class': 'col-2 col-form-label'}}) }}
+                        <div class="col-10">
+                            {{ form_widget(f.passwordp, {'attr': {'class': 'form-control m-input'}},{'attr':{'novalidate' : 'novalidate'}}) }}
+                            {{ form_errors(f.passwordp) }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(f.numcarte,'La Carte :', {'label_attr': {'class': 'col-2 col-form-label'}}) }}
+                        <div class="col-10">
+                            {{ form_widget(f.numcarte, {'attr': {'class': 'form-control m-input'}},{'attr':{'novalidate' : 'novalidate'}}) }}
+                            {{ form_errors(f.numcarte) }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(f.passcarte , 'CodeCarte: ', {'label_attr': {'class': 'col-2 col-form-label'}}) }}
+                        <div class="col-10">
+                            {{ form_widget(f.passcarte , {'attr': {'class': 'form-control m-input'}},{'attr':{'novalidate' : 'novalidate'}}) }}
+                            {{ form_errors(f.passcarte ) }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(f.portefeuille , 'Montant :', {'label_attr': {'class': 'col-2 col-form-label'}}) }}
+                        <div class="col-10">
+                            {{ form_widget(f.portefeuille , {'attr': {'class': 'form-control m-input'}},{'attr':{'novalidate' : 'novalidate'}}) }}
+                            {{ form_errors(f.portefeuille) }}
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-group m-form__group row">
+                        <div>
+                            <style type="text/css">
+                                .btn_taille_egale{
+                                    width:300px;
+                                    height:40px;
+
+                                }
+                            </style>
+                            <p style="text-align: center;"><button type="submit" class="btn_taille_egale" style="background-color: #ace3cc"  >
+                                    Modifier            </button></p>
+
+                        </div>
+                    </div>
+                    {{ form_end(f) }}
+
+                </form>
+            </div>
+            <!-- //register -->
+        </div>
+    </div>
+{% endblock %}

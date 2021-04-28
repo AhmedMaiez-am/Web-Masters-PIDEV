@@ -1,0 +1,35 @@
+<table bgcolor="#deb887" , border="3" , align="center" ,  style="width:80%"  >
+    <thead>
+    <tr>
+        <th> Email  </th>
+        <th> Nom </th>
+        <th> Prenom  </th>
+        <th> Telephone  </th>
+        <th> password  </th>
+        <th> numcarte  </th>
+        <th> portefeuille  </th>
+        <th> Code </th>
+        <th> Block </th>
+
+    </tr>
+    </thead>
+
+    <tbody id ="myTable">
+    {% for c in user %}
+    <tbody id ="myTable">
+    <tr>
+        <td>{{ c.emailp }}</td>
+        <td>{{ c.nomp }}</td>
+        <td>{{ c.prenomp }}</td>
+        <td>{{ c.telp }}</td>
+        <td>{{ c.passwordp}}</td>
+        <td>{{ c.numcarte }}</td>
+        <td>{{ c.portefeuille }}</td>
+        <td>{{ c.codep }}</td>
+        <td>{{ c.block}}</td>
+
+    </tr>
+    {% endfor %}
+    </tbody>
+
+</table>

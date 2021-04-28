@@ -1,0 +1,34 @@
+{% extends 'Temp/TemplAfficheRecom.html.twig' %}
+
+{% block body %}
+    <td>
+<form method="post" action="{{ path('searchRec') }}" >
+
+    <input type="Text" name ='search' class="form-control" placeholder="Search">
+    <input type="submit" class="btn-dark"  Value="rechercher">
+
+    <table border="1">
+
+        <tr>
+            <th scope="row">nomRec</th>
+            <th scope="row">nbr Point</th>
+            <th scope="row">actions</th>
+
+        </tr>
+        {% for Recompense in Recompenses %}
+            <tr>
+                <td> {{ Recompense.nomrec }}</td>
+                <td> {{ Recompense.nbrPoint }}</td>
+                <td><a href="/ajoutrecompense" class="btn btn-success">ajouter</a>
+                    <a href="/supprimerRecompense/{{Recompense.idrec}}" class="btn btn-danger"
+                       onclick="return confirm('Etes-vous sûr de supprimer cet article?');">delete</a>
+
+
+                    <a href="/modifierRecompense/{{ Recompense.idrec }}" class="btn btn-dark">modifier</a>
+                </td>
+
+            </tr>
+
+        {% endfor %}
+    </table>
+{% endblock %}

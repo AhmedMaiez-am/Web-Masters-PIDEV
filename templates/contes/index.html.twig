@@ -1,0 +1,110 @@
+{% extends 'baseAzizBack.html.twig' %}
+
+{% block title %}Contes index{% endblock %}
+
+{% block body %}
+    <div class="main-w3pvt mian-content-wthree text-center" id="home">
+        <div class="container">
+            <!-- <div class="style-banner mx-auto">-->
+            <!-- form -->
+            <div class="home-form-w3ls mt-5">
+                <form action="#" method="post">
+                    <div class="row">
+
+                        <h1><FONT color="green"> les Contes </FONT></h1>
+
+
+                        <input type="text" id="search" class="form-control" placeholder="Search">
+                        <a href="{{ path('exporte') }}"  class="btn btn-primary btn-lg active" role="button" aria-pressed="true">exporter les contes </a>
+
+                        <table class="table table-bordered" id="t" >
+                            <!--<table class="myOtherTable">-->
+                            <thead>
+                            <tr>
+                                <!--<th>Idconte</th>-->
+                                <th><h4> <FONT color="green">Titre</FONT></h4></th>
+                                <th><h4> <FONT color="green">Auteur</FONT></h4></th>
+                                <!--<th><h4> <FONT color="green">Contes</FONT></h4></th>-->
+                                <th><h4> <FONT color="green">actions</FONT></h4></th>
+                            </tr>
+                            </thead>
+                            <!--<tbody>-->
+                            <tbody id="all">
+                            {% for conte in contes %}
+                                <tr>
+                                    <!-- <td>{{ conte.idconte }}</td>-->
+                                    <td><FONT color="black">{{ conte.titre }}</FONT></td>
+                                    <td><FONT color="black">{{ conte.auteur }}</FONT></td>
+                                    <!-- <td><FONT color="white">{{ conte.contes }}</FONT></td>-->
+                                    <td>
+                                        <a href="{{ path('contes_show', {'idconte': conte.idconte}) }}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true"><h4>consulter</h4></a>
+                                        <a href="{{ path('contes_edit', {'idconte': conte.idconte}) }}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true"><h4>modifier</h4></a>
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="5">no records found</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                            <tbody id="search">
+                            </tbody>
+                        </table>
+                        <a href="{{ path('contes_new') }}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">ajouter</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    <!-- //banner -->
+    <script src="{{ asset('https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js')}}">
+    </script>
+    <script>
+        $( document ).ready(function() {
+            $("#search").keyup(function(e){
+                /* La variable value va prendre la valeur insérer dans le champ de texte
+                afin d’effectuer la recherche */
+                var value = $(this).val();
+                /* Ajax est lancé lors du remplissage du champ texte dont l’id est
+                « search » pour faire la recherche */
+                $.ajax({
+                    /* l’url est une chaine de caractères contenant l’adresse où la requête est
+                    envoyée */
+                    url : "{{ path('searchStudent') }}",
+                    /* La méthode utilisée pour transférer les données est GET */
+                    type : 'GET',
+                    /*Ici search value va prendre la chaine entrée par un utilisateur dans la
+                    zone de recherche et sera placée après l’url */
+                    data: {
+                        'searchValue' : value
+                    },
+                    /*Cette fonction permet de vider le contenu du tableau pour recevoir le
+                    nouveau contenu*/
+                    success : function(re){
+                        if(re){
+                            $('#t tbody#search').empty();
+                            $.each(JSON.parse(re), function(i,obj) {
+                                $('#t tbody#all').hide();
+                                $('#t tbody#search').append('<tr><td>'+obj.idconte+'</td> <td>'+obj.titre+'</td> <td> '+obj.auteur +'  <td>' +
+                                    '<a href="/contes/'+obj.idconte+'">consulter</a> </br>' +
+                                    '<a href="/contes/'+obj.idconte+"/edit/"+'">modifier</a></td> </tr>')
+                            });
+                        }
+                        else
+                        {
+                            $('#t tbody#all').show();
+                            $('#t tbody#search').empty();
+                            $('#t tbody#search').fadeIn('fast');
+                        }
+                    },
+                });
+                return false;
+            });
+        });
+    </script>
+{% endblock %}
+{% block javascripts %}
+{% endblock%}

@@ -1,0 +1,19 @@
+{% extends '/Temp/TemplAjout.html.twig' %}
+{%  block body %}
+    {{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
+    <div>
+        {{ form_start (form) }}
+        {{ form_errors(form.nomrec) }}
+        {{ form_label(form.nomrec,"Nom recompense") }}
+        {{ form_widget(form.nomrec) }}
+    </div>
+
+    <div>
+        {{ form_errors(form.nbrPoint) }}
+        {{ form_label(form.nbrPoint,'Nombre de point') }}
+        {{ form_widget(form.nbrPoint) }}
+
+    </div>
+    <button type="submit" class="btn btn-success">ajouter</button>
+    {{ form_end(form) }}
+{% endblock %}
