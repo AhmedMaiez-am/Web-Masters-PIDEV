@@ -215,4 +215,15 @@ class ContesController extends AbstractController
         // Return the excel file as an attachment
         return $this->file($temp_file, $fileName, ResponseHeaderBag::DISPOSITION_INLINE);
     }
+    /**
+     * @Route("/rate/{idconte}", name="contes_rate", methods={"POST"})
+     */
+    public function rate (Request $request, Contes $contes)
+    {
+        $contes->setRate(intval($request->get('ratedIndex'))+1);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($contes);
+        $entityManager->flush();
+        return new Response('success');
+    }
 }

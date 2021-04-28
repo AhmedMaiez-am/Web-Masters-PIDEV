@@ -57,6 +57,12 @@ class Contes
      */
     private $contes;
 
+    /**
+     * @var int
+     * @ORM\Column(name="rate", type="integer", nullable=true)
+     */
+    private $rate;
+
     public function getIdconte(): ?int
     {
         return $this->idconte;
@@ -96,6 +102,21 @@ class Contes
         $this->contes = $contes;
 
         return $this;
+    }
+    /**
+     * @return int
+     */
+    public function getRate()
+    {
+        return $this->rate;
+    }
+
+    /**
+     * @param int $rate
+     */
+    public function setRate(int $rate): void
+    {
+        $this->rate = $rate;
     }
 
 

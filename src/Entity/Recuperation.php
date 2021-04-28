@@ -46,10 +46,10 @@ class Recuperation
      * minMessage="le nom de l'enfant doit contenir au minimum {{ 2 }} caracteres",
      * maxMessage="le nom de l'enfant doit contenir au plus {{ 10 }} caracteres"
      * )
-     * @ORM\Column(name="nomEnf", type="string", length=255, nullable=false)
+     * @ORM\Column(name="nomEnfant", type="string", length=255, nullable=false)
      * @Groups("Recuperation:read")
      */
-    private $nomenf="";
+    private $nomEnfant="";
 
     /**
      * @var string
@@ -113,7 +113,7 @@ class Recuperation
      */
     public function getNomenf(): string
     {
-        return $this->nomenf;
+        return $this->nomEnfant;
     }
 
     /**
@@ -121,7 +121,7 @@ class Recuperation
      */
     public function setNomenf(string $nomenf): void
     {
-        $this->nomenf = $nomenf;
+        $this->nomEnfant = $nomenf;
     }
 
     /**
@@ -154,6 +154,22 @@ class Recuperation
     public function setNbrPoint(int $nbrPoint): void
     {
         $this->nbrPoint = $nbrPoint;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNomEnfant(): string
+    {
+        return $this->nomEnfant;
+    }
+
+    /**
+     * @param string $nomEnfant
+     */
+    public function setNomEnfant(string $nomEnfant): void
+    {
+        $this->nomEnfant = $nomEnfant;
     }
 
 

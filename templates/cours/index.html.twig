@@ -130,7 +130,7 @@
                             $('#t tbody#search').empty();
                             $.each(JSON.parse(re), function(i,obj) {
                                 $('#t tbody#all').hide();
-                                $('#t tbody#search').append('<tr><td>'+obj.idc+'</td> <td>'+obj.nom+'</td> <td> '+obj.type +' </td> <td> '+obj.description+' </td><td> '+obj.prix+' </td> <td>' +
+                                $('#t tbody#search').append('<tr><td>'+obj.nom+'</td> <td> '+obj.type +' </td> <td> '+obj.description+' </td><td> '+obj.prix+' </td> <td>' +
                                     '<a href="/cours/'+obj.idc+'">consulter</a> </br>' +
                                     '<a href="/cours/'+obj.idc+"/edit/"+'">modifier</a></td> </tr>')
                             });

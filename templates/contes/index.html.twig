@@ -88,7 +88,7 @@
                             $('#t tbody#search').empty();
                             $.each(JSON.parse(re), function(i,obj) {
                                 $('#t tbody#all').hide();
-                                $('#t tbody#search').append('<tr><td>'+obj.idconte+'</td> <td>'+obj.titre+'</td> <td> '+obj.auteur +'  <td>' +
+                                $('#t tbody#search').append('<tr><td>'+obj.titre+'</td> <td> '+obj.auteur +'  <td>' +
                                     '<a href="/contes/'+obj.idconte+'">consulter</a> </br>' +
                                     '<a href="/contes/'+obj.idconte+"/edit/"+'">modifier</a></td> </tr>')
                             });
