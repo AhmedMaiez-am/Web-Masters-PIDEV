@@ -23,7 +23,7 @@ class Reclamation
      * @ORM\Column(type="integer")
      *  @Groups("reclamations:read")
      */
-    private $id;
+    private $idr;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -72,10 +72,20 @@ class Reclamation
      */
     protected $slug;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $etat;
 
-    public function getId(): ?int
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $type;
+
+
+    public function getIdr(): ?int
     {
-        return $this->id;
+        return $this->idr;
     }
 
     public function getNom(): ?string
@@ -158,6 +168,30 @@ class Reclamation
     public function setSlug(string $slug): self
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function getEtat(): ?string
+    {
+        return $this->etat;
+    }
+
+    public function setEtat(string $etat): self
+    {
+        $this->etat = $etat;
+
+        return $this;
+    }
+
+    public function getType(): ?string
+    {
+        return $this->type;
+    }
+
+    public function setType(string $type): self
+    {
+        $this->type = $type;
 
         return $this;
     }

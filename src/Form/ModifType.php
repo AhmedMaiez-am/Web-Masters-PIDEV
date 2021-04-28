@@ -9,7 +9,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
-class ReclamationType extends AbstractType
+class ModifType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -19,15 +19,22 @@ class ReclamationType extends AbstractType
             ->add('prenom')
             ->add('mail')
             ->add('reclamation')
-        ->add('type', ChoiceType::class, [
-            'choices'  => [
-                'Cours' => "Cours",
-                'Enseignant' => "Enseignant",
-                'Enfant' => "Enfant",
-                'Contes' => "Contes",
-                'Autres' => "Reclamation spécifique lire la description",
-            ],
-        ]);
+            ->add('etat', ChoiceType::class, [
+                'choices'  => [
+                    'En Attente' => "En Attente",
+                    'En Cours de Traitement' => "En Cours de Traitement",
+                    'Déja traité' => "Déja traité",
+                ],
+            ])
+            ->add('type', ChoiceType::class, [
+                'choices'  => [
+                    'Cours' => "Cours",
+                    'Enseignant' => "Enseignant",
+                    'Enfant' => "Enfant",
+                    'Contes' => "Contes",
+                    'Autres' => "Reclamation spécifique lire la description",
+                ],
+            ]);
         ;
 
 

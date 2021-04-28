@@ -37,6 +37,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <link href="//fonts.googleapis.com/css?family=Lora:400,400i,700,700i&amp;subset=cyrillic,cyrillic-ext,latin-ext,vietnamese"
           rel="stylesheet">
     <link href="//fonts.googleapis.com/css?family=Dosis:200,300,400,500,600,700,800&amp;subset=latin-ext" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <!-- //Web-Fonts -->
 </head>
 
@@ -127,14 +128,14 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                         </td>
                         <td>
                             <button type="button" class="btn_apt btn">
-                                <a href="{{ path('modifierconseil',{'id':conseil.id}) }}">
+                                <a href="{{ path('modifierconseil',{'idc':conseil.idc}) }}">
                                     Modifier
                                 </a>
                             </button>
                         </td>
                         <td>
                             <button type="button" class="btn_apt btn">
-                                <a href="{{ path('supprimerconseil',{'id':conseil.id}) }}">
+                                <a href="{{ path('supprimerconseil',{'idc':conseil.idc}) }}">
                                     Supprimer
                                 </a>
                             </button>
@@ -275,6 +276,20 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <script src="/js/bootstrap.min.js"></script>
 <script src="/js/main.js"></script>
 
+<script type="text/javascript">
+    {%   block javascript  %}
+    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+    (function(){
+        var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+        s1.async=true;
+        s1.src='https://embed.tawk.to/60815e085eb20e09cf3586d1/1f3sleklj';
+        s1.charset='UTF-8';
+        s1.setAttribute('crossorigin','*');
+        s0.parentNode.insertBefore(s1,s0);
+    })();
+
+</script>
+{% endblock %}
 </body>
 
 </html>

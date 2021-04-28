@@ -392,8 +392,12 @@
                         <th><a href="{{ path('triparprenom') }}">Prenom</a></th>
                         <th>E-mail</th>
                         <th>Reclamation</th>
+                        <th>Type</th>
+                        <th>Etat</th>
                         <th>Modifier</th>
                         <th>Supprimer</th>
+                        <th>Mail</th>
+
                         <tbody id="all">
                         {% for rec in reclamation %}
 
@@ -412,19 +416,31 @@
                                 <td>
                                     {{ rec.reclamation }}
                                 </td>
-
+                                <td>
+                                    {{ rec.type }}
+                                </td>
+                                <td>
+                                    {{ rec.etat }}
+                                </td>
 
                                 <td>
                                     <button type="button" class="btn_apt btn">
-                                        <a href="{{ path('modifierback',{'id':rec.id}) }}">
+                                        <a href="{{ path('modifierback',{'idr':rec.idr}) }}">
                                             Modifier
                                         </a>
                                     </button>
                                 </td>
                                 <td>
                                     <button type="button" class="btn_apt btn">
-                                        <a href="{{ path('supprimerback',{'id':rec.id}) }}">
+                                        <a href="{{ path('supprimerback',{'idr':rec.idr}) }}">
                                             Supprimer
+                                        </a>
+                                    </button>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn_apt btn">
+                                        <a href="{{ path('EmailRecl',{'idr':rec.idr}) }}">
+                                            Mail
                                         </a>
                                     </button>
                                 </td>

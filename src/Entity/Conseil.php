@@ -16,7 +16,7 @@ class Conseil
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private $idc;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -40,9 +40,9 @@ class Conseil
 
 
 
-    public function getId(): ?int
+    public function getIdc(): ?int
     {
-        return $this->id;
+        return $this->idc;
     }
 
     public function getNom(): ?string

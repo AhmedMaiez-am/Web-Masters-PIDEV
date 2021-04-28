@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Reclamation;
+use App\Form\ModifType;
 use App\Form\search;
 use App\Form\ReclamationType;
 use App\Form\SearchReclType;
@@ -15,6 +16,9 @@ use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 use Knp\Component\Pager\PaginatorInterface;
+use Snipe\BanBuilder\CensorWords;
+
+
 
 class ReclamationController extends AbstractController
 {
@@ -42,11 +46,11 @@ class ReclamationController extends AbstractController
     }
 
     /**
-     * @Route ("modifier/{id}", name="modifier")
+     * @Route ("modifier/{idr}", name="modifier")
      */
-    function modifier(ReclamationRepository $repository,Request $request,$id)
+    function modifier(ReclamationRepository $repository,Request $request,$idr)
     {
-        $reclamation = $repository->find($id);
+        $reclamation = $repository->find($idr);
         $form = $this->createForm(ReclamationType::class, $reclamation);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -68,8 +72,15 @@ class ReclamationController extends AbstractController
 
         $form = $this->createForm(ReclamationType::class, $reclamation);//Récupération du formulaire dans le contrôleur:
         $form->handleRequest($request);
+        $reclamation->setEtat("En attente");
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();//recupuration entity manager
+
+            $reclamation1 = $form->get('reclamation')->getData();
+            $censor = new CensorWords;
+            $censor->setDictionary('BadWords','fr');
+            $rec = $censor->censorString($reclamation1);
+            $reclamation->setReclamation($rec['clean']);
             $em->persist($reclamation);//l'ajout de l'objet cree
             $em->flush();
             return $this->redirectToRoute('afficher');//redirecter la pagee la page dafichage
@@ -80,11 +91,11 @@ class ReclamationController extends AbstractController
     }
 
 /**
- * @Route("/supprimerreclfront/{id}", name="supprimerfront")
+ * @Route("/supprimerreclfront/{idr}", name="supprimerfront")
  */
-public function supprimerfront ($id)
+public function supprimerfront ($idr)
 {
-    $reclamation=$this->getDoctrine()->getRepository(Reclamation::class)->find($id);
+    $reclamation=$this->getDoctrine()->getRepository(Reclamation::class)->find($idr);
     $em=$this->getDoctrine()->getManager();
     $em->remove($reclamation);//suprrimer lobjet dans le parametre
     $em->flush();
@@ -113,16 +124,36 @@ public function supprimerfront ($id)
 
 
     /**
-     * @Route ("modifierback/{id}", name="modifierback")
+     * @Route ("modifierback/{idr}", name="modifierback")
      */
-    function modifierr(ReclamationRepository $repository,Request $request,$id)
+    function modifierr(ReclamationRepository $repository,Request $request,$idr,\Swift_Mailer $mailer)
     {
-        $reclamation = $repository->find($id);
-        $form = $this->createForm(ReclamationType::class, $reclamation);
+        $reclamation = $repository->find($idr);
+        $form = $this->createForm(ModifType::class, $reclamation);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->flush();
+
+            $mail = $form->get('mail')->getData();
+
+            // On crée le message
+            $message = (new \Swift_Message('RECLAMATION_EN_COURS'))
+                // On attribue l'expéditeur
+                ->setFrom('travelbios@gmail.com')
+                // On attribue le destinataire
+
+                ->setTo($mail)
+                // On crée le texte avec la vue
+                ->setBody(
+                    $this->renderView(
+                        'mail/afficherec.html.twig', compact('reclamation')
+                    ),
+                    'text/html'
+                )
+            ;
+            $mailer->send($message);
+
             return $this->redirectToRoute('afficherback');
         }
         return $this->render('reclamation/modifierback.html.twig', [
@@ -139,6 +170,7 @@ public function supprimerfront ($id)
 
         $form = $this->createForm(ReclamationType::class, $reclamation);//Récupération du formulaire dans le contrôleur:
         $form->handleRequest($request);
+        $reclamation->setEtat("En attente");
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();//recupuration entity manager
             $em->persist($reclamation);//l'ajout de l'objet cree
@@ -151,11 +183,11 @@ public function supprimerfront ($id)
     }
 
     /**
-     * @Route("/supprimerreclback/{id}", name="supprimerback")
+     * @Route("/supprimerreclback/{idr}", name="supprimerback")
      */
-    public function supprimerback($id)
+    public function supprimerback($idr)
     {
-        $reclamation=$this->getDoctrine()->getRepository(Reclamation::class)->find($id);
+        $reclamation=$this->getDoctrine()->getRepository(Reclamation::class)->find($idr);
         $em=$this->getDoctrine()->getManager();
         $em->remove($reclamation);//suprrimer lobjet dans le parametre
         $em->flush();
@@ -227,7 +259,6 @@ public function supprimerfront ($id)
             "Attachment" => true
         ]);
     }
-
 
 
 

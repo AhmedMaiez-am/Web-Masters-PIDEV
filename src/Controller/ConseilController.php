@@ -41,11 +41,11 @@ class ConseilController extends AbstractController
     }
 
     /**
-     * @Route ("modifierconseil/{id}", name="modifierconseil")
+     * @Route ("modifierconseil/{idc}", name="modifierconseil")
      */
-    function modifier(ConseilRepository $repository,Request $request,$id)
+    function modifier(ConseilRepository $repository,Request $request,$idc)
     {
-        $conseil = $repository->find($id);
+        $conseil = $repository->find($idc);
         $form = $this->createForm(ConseilType::class, $conseil);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -79,11 +79,11 @@ class ConseilController extends AbstractController
     }
 
     /**
-     * @Route("/supprimerconseil/{id}", name="supprimerconseil")
+     * @Route("/supprimerconseil/{idc}", name="supprimerconseil")
      */
-    public function supprimerfront ($id)
+    public function supprimerfront ($idc)
     {
-        $conseil=$this->getDoctrine()->getRepository(Conseil::class)->find($id);
+        $conseil=$this->getDoctrine()->getRepository(Conseil::class)->find($idc);
         $em=$this->getDoctrine()->getManager();
         $em->remove($conseil);//suprrimer lobjet dans le parametre
         $em->flush();
@@ -107,11 +107,11 @@ class ConseilController extends AbstractController
     }
 
     /**
-     * @Route ("modifierconseilback/{id}", name="modifierconseilback")
+     * @Route ("modifierconseilback/{idc}", name="modifierconseilback")
      */
-    function modifierc(ConseilRepository $repository,Request $request,$id)
+    function modifierc(ConseilRepository $repository,Request $request,$idc)
     {
-        $conseil = $repository->find($id);
+        $conseil = $repository->find($idc);
         $form = $this->createForm(ConseilType::class, $conseil);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -145,11 +145,11 @@ class ConseilController extends AbstractController
     }
 
     /**
-     * @Route("/supprimerconseilback/{id}", name="supprimerconseilback")
+     * @Route("/supprimerconseilback/{idc}", name="supprimerconseilback")
      */
-    public function supprimerback ($id)
+    public function supprimerback ($idc)
     {
-        $conseil=$this->getDoctrine()->getRepository(Conseil::class)->find($id);
+        $conseil=$this->getDoctrine()->getRepository(Conseil::class)->find($idc);
         $em=$this->getDoctrine()->getManager();
         $em->remove($conseil);//suprrimer lobjet dans le parametre
         $em->flush();
