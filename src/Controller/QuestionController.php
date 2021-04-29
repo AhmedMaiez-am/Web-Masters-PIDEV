@@ -11,7 +11,9 @@ use App\Form\QuestionType;
 use App\Form\QuizType;
 use App\Repository\QuestionRep;
 use App\Repository\QuizRep;
+use App\Repository\QuizresultsRep;
 use Doctrine\ORM\EntityManagerInterface;
+use Ob\HighchartsBundle\Highcharts\Highchart;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -20,7 +22,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Dompdf\Dompdf;
 use Dompdf\Options;
-
+use CMEN\GoogleChartsBundle\GoogleCharts\Charts\PieChart;
 class QuestionController extends Controller
 {
 
@@ -39,7 +41,7 @@ class QuestionController extends Controller
      */
     public function index(Request $request)
     {
-        $lstQuestion=$this->getDoctrine()->getRepository('App:Questions')->findAll();
+        $lstQuestion = $this->getDoctrine()->getRepository('App:Questions')->findAll();
         $lstQuestion = $this->get('knp_paginator')->paginate(
         // Doctrine Query, not results
             $lstQuestion,
@@ -57,12 +59,12 @@ class QuestionController extends Controller
     /**
      * @Route("/question", name="question")
      */
-    public function AddQuestion (Request $request)
+    public function AddQuestion(Request $request)
     {
-       $Questions = new Questions();
+        $Questions = new Questions();
 
         $form = $this->createForm(QuestionType::class, $Questions);
-        
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -91,12 +93,14 @@ class QuestionController extends Controller
 
 
     }
+
     /**
      * @Route("/suppi/{idq}", name="dd")
      */
-    function deleteQuestion (QuestionRep $repo , $idq) {
-        $user=$repo->find($idq);
-        $em=$this->getDoctrine()->getManager();
+    function deleteQuestion(QuestionRep $repo, $idq)
+    {
+        $user = $repo->find($idq);
+        $em = $this->getDoctrine()->getManager();
         $em->remove($user);
         $em->flush();
         return $this->redirectToRoute("questions");
@@ -105,14 +109,14 @@ class QuestionController extends Controller
     /**
      * @Route("/updateQuestion/{idq}", name="upquestion")
      */
-    public function UpdateQuestion(QuestionRep  $rep , Request $request , $idq)
+    public function UpdateQuestion(QuestionRep $rep, Request $request, $idq)
     {
         $Di = $rep->find($idq);
-        $Form =$this->createForm(QuestionType:: class , $Di);
-     
+        $Form = $this->createForm(QuestionType:: class, $Di);
+
         $Form->handleRequest($request);
 
-        if ($Form ->isSubmitted() && $Form->isValid() ) {
+        if ($Form->isSubmitted() && $Form->isValid()) {
 
             $data = $Form->getData();
             if ($data->getAnswer() === "answer1") {
@@ -127,13 +131,13 @@ class QuestionController extends Controller
             if ($data->getAnswer() === "answer4") {
                 $Di->setAnswer($Di->getOption4());
             }
-            $em =$this->getDoctrine()->getManager();
+            $em = $this->getDoctrine()->getManager();
             $em->flush();
             return $this->redirectToRoute("questions");
 
         }
-        return $this->render('question/updateQuestion.html.twig',[
-            'form' =>$Form->createView(),
+        return $this->render('question/updateQuestion.html.twig', [
+            'form' => $Form->createView(),
         ]);
     }
 
@@ -147,7 +151,7 @@ class QuestionController extends Controller
     {
         $questions = $this->em->getRepository(Questions::class)->findBy(['quiz' => $quiz]);
 
-        return $this->render('question/questionsEnf.html.twig',[
+        return $this->render('question/questionsEnf.html.twig', [
             'questions' => $questions,
             'quiz' => $quiz
         ]);
@@ -160,8 +164,8 @@ class QuestionController extends Controller
      */
     public function validateQuestion(Request $request)
     {
-            $student = $this->em->getRepository(Student::class)->find(1);
-            /** @var Questions $question */
+        $student = $this->em->getRepository(Student::class)->find(1);
+        /** @var Questions $question */
         $responses = [];
         $score = 0;
         $valid = 0;
@@ -173,11 +177,11 @@ class QuestionController extends Controller
 
             if ($isTrue) {
                 $score++;
-            }elseif($question->getQuiz()->getIsamericain() == "1") {
+            } elseif ($question->getQuiz()->getIsamericain() == "1") {
                 $score--;
             }
 
-            $responses[$questionId] =  $isTrue;
+            $responses[$questionId] = $isTrue;
         }
 
         $quizResult = new Quizresult();
@@ -190,54 +194,59 @@ class QuestionController extends Controller
         $this->em->persist($quizResult);
         $this->em->flush();
 
-            return $this->json([
-                'success' => true,
-                'responses' => $responses,
-                'valid' => $valid,
-                'invalid' => $invalid,
-                'score' => $score,
-                
-            ]);
+        return $this->json([
+            'success' => true,
+            'responses' => $responses,
+            'valid' => $valid,
+            'invalid' => $invalid,
+            'score' => $score,
+
+        ]);
     }
 
     /**
      * @Route("/RechhQ", name="rechQ")
      */
-    function QuestionRech (QuestionRep $repo , Request $request) {
+    function QuestionRech(QuestionRep $repo, Request $request)
+    {
 
-        $data =$request->get('search');
-        $lstQuestion=$repo->findBy(['question'=>$data]);
+        $data = $request->get('search');
+        $lstQuestion = $repo->findBy(['question' => $data]);
 
         return $this->render("question/index.html.twig",
-            ['lstQuestion'=>$lstQuestion]);
+            ['lstQuestion' => $lstQuestion]);
     }
 
 
     /**
      * @Route("/pdfq",name="pdfq",methods={"GET"})
      */
-    public function pdf(QuestionRep $repo):Response{
+    public function pdf(QuestionRep $repo): Response
+    {
         $pdfOptions = new Options();
         $pdfOptions->set('defaultFont', 'Arial');
 
-        
-        $dompdf = new Dompdf($pdfOptions);
-        $lstQuestion=$repo->findAll();
-        
-        $html=$this->renderView('question/pdfq.html.twig',[ 'lstQuestion'=>$lstQuestion ]);
 
-       
+        $dompdf = new Dompdf($pdfOptions);
+        $lstQuestion = $repo->findAll();
+
+        $html = $this->renderView('question/pdfq.html.twig', ['lstQuestion' => $lstQuestion]);
+
+
         $dompdf->loadHtml($html);
 
         $dompdf->setPaper('A4', 'portrait');
 
-       
+
         $dompdf->render();
 
-       
+
         $dompdf->stream("mypdf.pdf", [
             "Attachment" => true
         ]);
 
     }
+
+
+
 }

@@ -8,6 +8,7 @@ use App\Form\QuizType;
 use App\Repository\QuizRep;
 use App\Repository\QuestionRep;
 use Doctrine\DBAL\Types\IntegerType;
+use Ob\HighchartsBundle\Highcharts\Highchart;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,8 +19,6 @@ use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Dompdf\Dompdf;
 use Dompdf\Options;
-
-
 
 
 class QuizController extends AbstractController
@@ -63,9 +62,9 @@ class QuizController extends AbstractController
     public function indexT($quizId,QuestionRep $repo)
     {
         $lstQuestions=$repo->findby(['quiz'=>$quizId]);
-       
+
         return $this->render('question/questionsT.html.twig', ['lstQuestion' => $lstQuestions]);
-    
+
     }
 
 // src/Controller/FormController.php
@@ -79,7 +78,7 @@ class QuizController extends AbstractController
 
 
         $form = $this->createForm(QuizType::class, $Quiz);
-        
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -99,6 +98,8 @@ class QuizController extends AbstractController
             'form' => $form->createView(),
         ));
     }
+
+
 
     /**
      * @Route("/suppirimer/{id}", name="delete")
@@ -140,7 +141,7 @@ class QuizController extends AbstractController
     }
 
 
-    
+
     /**
      * @Route("/searchQuizz ", name="searchQuizz")
      */
@@ -152,7 +153,7 @@ class QuizController extends AbstractController
         $jsonContent = $Normalizer->normalize($lstQuiz, 'json',['groups'=>'lstQuiz']);
         $retour=json_encode($jsonContent);
         return new Response($retour);
-      
+
     }
 
     /**
@@ -200,5 +201,45 @@ class QuizController extends AbstractController
         ]);
 
     }
+
+//    /**
+//     * @Route("/affichbackoffre", name="affichbackoffre")
+//     */
+//    public function affichbackoffre(QuizRep $repo): Response
+//
+//
+//    {
+//        $ob = new Highchart();
+//        $ob->chart->renderTo('linechart');
+//        $ob->title->text('statistique des quizs ');
+//        $ob->plotOptions->pie(array(
+//            'allowPointSelect'  => true,
+//            'cursor'    => 'pointer',
+//            'dataLabels'    => array('enabled' => false),
+//            'showInLegend'  => true
+//        ));
+//        $offre=$repo->stat1();
+//        $data =array();
+//        foreach ($offre as $values)
+//        {
+//            $a =array($values['quizid'],intval($values['nbdep']));
+//            array_push($data,$a);
+//        }
+//
+//        $ob->series(array(array('type' => 'pie','name' => 'Browser share', 'data' => $data)));
+//
+//
+//
+//
+//
+//        return $this->render('question/StatEnf.html.twig', array(
+//            'chart' => $ob
+//        ));
+//
+//    }
+
+
+
+
 }
 

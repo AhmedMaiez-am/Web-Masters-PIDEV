@@ -2,6 +2,7 @@
 {% extends 'baseEnf.html.twig' %}
 {% block body %}
 <div class="container-fluid pt-5">
+    <div class="ee">
     <form name="form" method="post" action="{{ path('validateQuestion') }}">
     {% for question in questions %}
         <div class="question" id="question-{{ loop.index }}"
@@ -11,9 +12,10 @@
     <div id="validation">
     </div>
     <button type="submit" id="submit-form" class="btn btn-primary btn-lg btn-block" >Valider</button>
+{#    <a href="{{ path('stat') }}" id="submit" class="btn btn-light btn-lg btn-block" >Voir Statistiques</a>#}
     <br>
     </form>
-
+</div>
     <script
             src="https://code.jquery.com/jquery-3.4.1.min.js"
             integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
@@ -45,7 +47,7 @@
                             document.getElementById(divId).style.display = "block"
                         }
 
-                        alert("Nombre de question valide :" + data.valid +"\nNombre de score invalide : " + data.invalid
+                        alert("Nombre des réponses correctes :" + data.valid +"\nNombre des réponses incorrectes : " + data.invalid
                         + "\nScore finale :  "+ data.score
                         )
                     }
