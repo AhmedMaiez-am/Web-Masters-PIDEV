@@ -54,23 +54,23 @@ class Reclamation
      */
     private $reclamation;
 
-    /**
-     * @Gedmo\Timestampable(on="create")
-     * @ORM\Column(type="datetime")
-     */
-    private $createdAt;
-
-    /**
-     * @Gedmo\Timestampable(on="update")
-     * @ORM\Column(type="datetime")
-     */
-    private $updatedAt;
-
-    /**
-     * @Gedmo\Slug(fields={"nom"}, updatable=false)
-     * @ORM\Column(length=255, unique=true)
-     */
-    protected $slug;
+//    /**
+//     * @Gedmo\Timestampable(on="create")
+//     * @ORM\Column(type="datetime")
+//     */
+//    private $createdAt;
+//
+//    /**
+//     * @Gedmo\Timestampable(on="update")
+//     * @ORM\Column(type="datetime")
+//     */
+//    private $updatedAt;
+//
+//    /**
+//     * @Gedmo\Slug(fields={"nom"}, updatable=false)
+//     * @ORM\Column(length=255, unique=true)
+//     */
+//    protected $slug;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -112,14 +112,14 @@ class Reclamation
         return $this;
     }
 
-    public function getMail(): ?string
+    public function getEmail(): ?string
     {
         return $this->email;
     }
 
-    public function setMail(string $mail): self
+    public function setEmail(string $email): self
     {
-        $this->email = $mail;
+        $this->email = $email;
 
         return $this;
     }
@@ -136,41 +136,41 @@ class Reclamation
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
-    {
-        return $this->createdAt;
-    }
-
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    public function getUpdatedAt(): ?\DateTimeInterface
-    {
-        return $this->updatedAt;
-    }
-
-    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
-
-    public function getSlug(): ?string
-    {
-        return $this->slug;
-    }
-
-    public function setSlug(string $slug): self
-    {
-        $this->slug = $slug;
-
-        return $this;
-    }
+//    public function getCreatedAt(): ?\DateTimeInterface
+//    {
+//        return $this->createdAt;
+//    }
+//
+//    public function setCreatedAt(\DateTimeInterface $createdAt): self
+//    {
+//        $this->createdAt = $createdAt;
+//
+//        return $this;
+//    }
+//
+//    public function getUpdatedAt(): ?\DateTimeInterface
+//    {
+//        return $this->updatedAt;
+//    }
+//
+//    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
+//    {
+//        $this->updatedAt = $updatedAt;
+//
+//        return $this;
+//    }
+//
+//    public function getSlug(): ?string
+//    {
+//        return $this->slug;
+//    }
+//
+//    public function setSlug(string $slug): self
+//    {
+//        $this->slug = $slug;
+//
+//        return $this;
+//    }
 
     public function getEtat(): ?string
     {

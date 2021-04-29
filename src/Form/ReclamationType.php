@@ -17,7 +17,7 @@ class ReclamationType extends AbstractType
 
             ->add('nom')
             ->add('prenom')
-            ->add('mail')
+            ->add('email')
             ->add('reclamation')
             ->add('type', ChoiceType::class, [
                 'choices'  => [

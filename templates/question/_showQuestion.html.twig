@@ -1,0 +1,31 @@
+
+<link href="Front/css/alert.css" rel='stylesheet' type='text/css' />
+<br><br>
+<div class="alert alert-success" id="alert-success-{{ question.questionId }}" role="alert" style="display: none">
+    <strong> BRAAAAAVO</strong> , la réponse est correcte :D
+</div>
+<div class="alert alert-danger" role="alert" id="alert-danger-{{ question.questionId }}" style="display: none" >
+    <strong> OOOOPS</strong> la réponse est fause :(
+</div>
+
+<h4 class="pt-5">{{ question.question }}</h4>
+<hr>
+<div class="form-group">
+    <div class="option-input radio">
+        <input type="radio" class="form-control" checked name="{{ question.questionId }}" id="option1-{{ question.questionId }}" value="{{ question.option1 }}"  >
+        <label for="label-option-1">{{ question.option1 }}</label>
+
+        <input type="radio" class="form-control" name="{{ question.questionId }}" id="option2-{{ question.questionId }}" value="{{ question.option2 }}" >
+        <label for="label-option-2">{{ question.option2 }}</label>
+
+        <input type="radio" class="form-control" name="{{ question.questionId }}" id="option3-{{ question.questionId }}" value="{{ question.option3 }}" >
+        <label for="label-option-3">{{ question.option3 }}</label>
+
+        <input type="radio" class="form-control" name="{{ question.questionId }}" id="option4-{{ question.questionId }}" value="{{ question.option4 }}" >
+        <label for="label-option-4">{{ question.option4 }}</label>
+        {#            <input name="[{{ question.questionId }}]question-{{ question.questionId }}" id="question" value="{{ question.questionId }}" type="hidden">#}
+    </div>
+    {#            <a class="btn btn-secondary btn-lg btn-block"  id="next-question" href="{{ path('getQuestion', {'quiz' : quiz.quizId}) }}">Autre question</a>#}
+</div>
+
+

@@ -1,0 +1,73 @@
+
+{% extends 'baseEnf.html.twig' %}
+{% block body %}
+    <div class="container-fluid pt-5">
+        <div class="ee">
+            <form name="form" method="post" action="{{ path('validateQuestion') }}">
+                {% for question in questions %}
+                <div class="question" id="question-{{ loop.index }}"
+            {% include 'question/_showQuestion.html.twig' with {'question': question, 'quiz' : quiz} %}
+        </div>
+        {% endfor %}
+        <div id="validation">
+        </div>
+        <button type="submit" id="submit-form" class="btn btn-primary btn-lg btn-block" >Valider</button>
+        {#    <a href="{{ path('stat') }}" id="submit" class="btn btn-light btn-lg btn-block" >Voir Statistiques</a>#}
+        <br>
+        </form>
+    </div>
+    <script
+            src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+            crossorigin="anonymous"></script>
+    <script>
+
+        $("#submit-form").on('click',function (e) {
+            e.preventDefault()
+
+            let alerts = $('[id^="alert"]').find().prevObject
+            let i = 0
+            for ( i=0 ; i <= alerts.length ; i++) {
+                console.log(alerts[i])
+                $(alerts[i]).css("display", "none")
+            }
+            let form = $('form')
+            console.log('ok')
+            $.ajax({
+                url: '/question_validate',
+                method: 'POST',
+                data: form.serialize(),
+                success: function (data) {
+                    if (data.success) {
+                        let responses = data.responses
+                        for (const [key, value] of Object.entries(responses)) {
+                            let questionId = key
+                            let alertType = value ? "success" : "danger"
+                            let divId = "alert-" + alertType + "-" + questionId
+                            document.getElementById(divId).style.display = "block"
+                        }
+
+                        alert("Nombre des réponses correctes :" + data.valid +"\nNombre des réponses incorrectes : " + data.invalid
+                            + "\nScore finale :  "+ data.score
+                        )
+                    }
+                }
+            })
+        })
+        $("#next-question").on('click',function (e) {
+            e.preventDefault()
+            console.log('here')
+            var url = document.getElementById('next-question').getAttribute("href")
+            $.ajax({
+                url : url,
+                method: 'POST',
+                success: function (data) {
+                    if (data.success) {
+                        $("div.container-fluid").replaceWith(data.html)
+                    }
+                }
+            })
+
+        })
+    </script>
+{% endblock %}

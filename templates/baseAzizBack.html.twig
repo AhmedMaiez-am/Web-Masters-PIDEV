@@ -312,7 +312,7 @@
         </div>
         <div class="top-menu">
             <ul class="nav pull-right top-menu">
-                <li><a class="logout" href="login.html">Logout</a></li>
+                <li><a class="logout" href="{{ path('espace_inventaire') }}">Espace Inventaire</a></li>
             </ul>
         </div>
     </header>
@@ -326,6 +326,34 @@
                 <h5 class="centered">Sam Soffes</h5>
                 <li><a href="{{ path('cours_index') }}">listes  des cours</a></li>
                 <li><a href="{{ path('contes_index') }}">listes des contes</a></li>
+                <li><a href="{{ path('recuperation_recompense') }}">Espace Récompenses</a></li>
+
+
+                <li><label for="drop-2" class="toggle toogle-2">Pages <span class="fa fa-angle-down"
+                                                                            aria-hidden="true"></span>
+                    </label>
+                    <a href="#">Quiz <span class="fa fa-angle-down" aria-hidden="true"></span></a>
+
+                    <ul>
+                        <li><a href="{{ path('addquiz') }}">Ajouter Quiz</a></li>
+                        <li><a href="{{ path ('quiz')}}">Liste des Quizs</a></li>
+
+                    </ul>
+                </li>
+
+                <li>
+                    <!-- First Tier Drop Down -->
+                    <label for="drop-2" class="toggle toogle-2">Pages <span class="fa fa-angle-down"
+                                                                            aria-hidden="true"></span>
+                    </label>
+                    <a href="#">Question <span class="fa fa-angle-down" aria-hidden="true"></span></a>
+
+                    <ul>
+                        <li><a href="{{ path('question') }}">Ajouter Question</a></li>
+                        <li><a href="{{ path('questions') }}">Liste des Questions</a></li>
+
+                    </ul>
+                </li>
                 <!--  <li class="mt">
                       <a class="active" href="index.html">
                           <i class="fa fa-dashboard"></i>

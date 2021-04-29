@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -62,6 +64,46 @@ class Student
      * @ORM\Column(name="password", type="string", length=255, nullable=false)
      */
     private $password;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Quizresult::class, mappedBy="student_id")
+     */
+    private $quizId;
+
+    public function __construct()
+    {
+        $this->quizId = new ArrayCollection();
+    }
+
+    /**
+     * @return Collection|Quizresult[]
+     */
+    public function getQuizResults(): Collection
+    {
+        return $this->quizId;
+    }
+
+    public function addQuizResult(Quizresult $QuizResult): self
+    {
+        if (!$this->QuizResult->contains($QuizResult)) {
+            $this->QuizResult[] = $QuizResult;
+            $QuizResult->setStudentId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeQuizResult(Quizresult $QuizResult): self
+    {
+        if ($this->QuizResult->removeElement($QuizResult)) {
+            // set the owning side to null (unless already changed)
+            if ($QuizResult->getStudentId() === $this) {
+                $QuizResult->setStudentId(null);
+            }
+        }
+
+        return $this;
+    }
 
     public function getId(): ?int
     {
@@ -136,6 +178,36 @@ class Student
     public function setPassword(string $password): self
     {
         $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Quizresult[]
+     */
+    public function getQuizId(): Collection
+    {
+        return $this->quizId;
+    }
+
+    public function addQuizId(Quizresult $quizId): self
+    {
+        if (!$this->quizId->contains($quizId)) {
+            $this->quizId[] = $quizId;
+            $quizId->setStudentId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeQuizId(Quizresult $quizId): self
+    {
+        if ($this->quizId->removeElement($quizId)) {
+            // set the owning side to null (unless already changed)
+            if ($quizId->getStudentId() === $this) {
+                $quizId->setStudentId(null);
+            }
+        }
 
         return $this;
     }

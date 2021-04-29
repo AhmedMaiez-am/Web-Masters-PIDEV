@@ -81,6 +81,30 @@ class Conseil
         return $this;
     }
 
+    public function getNomc(): ?string
+    {
+        return $this->nomc;
+    }
+
+    public function setNomc(string $nomc): self
+    {
+        $this->nomc = $nomc;
+
+        return $this;
+    }
+
+    public function getPrenomc(): ?string
+    {
+        return $this->prenomc;
+    }
+
+    public function setPrenomc(string $prenomc): self
+    {
+        $this->prenomc = $prenomc;
+
+        return $this;
+    }
+
 
 
 }

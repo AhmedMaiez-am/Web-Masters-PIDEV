@@ -49,7 +49,8 @@
         "twig/extra-bundle": "^2.12|^3.0",
         "twig/twig": "^2.12|^3.0",
         "twilio/sdk": "^6.22",
-        "vangrg/profanity-bundle": "^1.1"
+        "vangrg/profanity-bundle": "^1.1",
+        "snipe/banbuilder": "dev-master"
     },
     "require-dev": {
         "symfony/browser-kit": "^4.4",

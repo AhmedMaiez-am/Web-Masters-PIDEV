@@ -17,7 +17,7 @@ class ModifType extends AbstractType
 
             ->add('nom')
             ->add('prenom')
-            ->add('mail')
+            ->add('email')
             ->add('reclamation')
             ->add('etat', ChoiceType::class, [
                 'choices'  => [

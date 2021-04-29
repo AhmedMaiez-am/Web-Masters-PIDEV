@@ -187,4 +187,24 @@ class ConseilController extends AbstractController
             "Attachment" => true
         ]);
     }
+    /**
+     * @Route("/triparprenom", name="triparprenom")
+     */
+
+    public function Triprenom(ConseilRepository $repo)
+    {
+        $donnees=$repo->listOrderByPren();
+        return $this->render("conseil/afficherconback.html.twig",['conseil'=>$donnees]);
+
+    }
+    /**
+     * @Route("/triparnom", name="triparnom")
+     */
+
+    public function TriNom(ConseilRepository $repo)
+    {
+        $donnees=$repo->listOrderByName();
+        return $this->render("conseil/afficherconback.html.twig",['conseil'=>$donnees]);
+
+    }
 }

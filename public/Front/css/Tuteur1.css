@@ -1,0 +1,11 @@
+.mian-content-wthree {
+    background: url(../images/bg1.jpg) no-repeat center;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    -ms-background-size: cover;
+    min-height: 50vw;
+    position: relative;
+    z-index: 1;
+}

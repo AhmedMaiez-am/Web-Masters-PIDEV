@@ -135,19 +135,19 @@ class ReclamationController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->flush();
 
-            $mail = $form->get('mail')->getData();
+            $mail = $form->get('email')->getData();
 
             // On crée le message
-            $message = (new \Swift_Message('RECLAMATION_EN_COURS'))
+            $message = (new \Swift_Message('[ Vos attentes sont notre propriété ]'))
                 // On attribue l'expéditeur
-                ->setFrom('travelbios@gmail.com')
+                ->setFrom('directeurkidzy@gmail.com')
                 // On attribue le destinataire
 
                 ->setTo($mail)
                 // On crée le texte avec la vue
                 ->setBody(
                     $this->renderView(
-                        'mail/afficherec.html.twig', compact('reclamation')
+                        'mail_controller1/afficherec.html.twig', compact('reclamation')
                     ),
                     'text/html'
                 )
@@ -207,26 +207,26 @@ class ReclamationController extends AbstractController
             "reclamation"=>$reclamations
         ]);
     }
-    /**
-     * @Route("/triparprenom", name="triparprenom")
-     */
-
-    public function Triprenom(ReclamationRepository $repo)
-    {
-        $donnees=$repo->listOrderByPren();
-        return $this->render("reclamation/afficherec.html.twig",['reclamation'=>$donnees]);
-
-    }
-    /**
-     * @Route("/triparnom", name="triparnom")
-     */
-
-    public function TriNom(ReclamationRepository $repo)
-    {
-        $donnees=$repo->listOrderByName();
-        return $this->render("reclamation/afficherec.html.twig",['reclamation'=>$donnees]);
-
-    }
+//    /**
+//     * @Route("/triparprenom", name="triparprenom")
+//     */
+//
+//    public function Triprenom(ReclamationRepository $repo)
+//    {
+//        $donnees=$repo->listOrderByPren();
+//        return $this->render("reclamation/afficherec.html.twig",['reclamation'=>$donnees]);
+//
+//    }
+//    /**
+//     * @Route("/triparnom", name="triparnom")
+//     */
+//
+//    public function TriNom(ReclamationRepository $repo)
+//    {
+//        $donnees=$repo->listOrderByName();
+//        return $this->render("reclamation/afficherec.html.twig",['reclamation'=>$donnees]);
+//
+//    }
 
     /**
      * @route ("/recpdf", name="/recpdf")

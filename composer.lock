@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ce83d6286aab32d7c24d0b843e9918ea",
+    "content-hash": "d362ec3064c8b31e01edab5f97d004ce",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -1769,16 +1769,16 @@
         },
         {
             "name": "endroid/qr-code",
-            "version": "4.1.2",
+            "version": "4.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/endroid/qr-code.git",
-                "reference": "9ed4de3c62fdee12a6bf2a63549da27bd0b1436f"
+                "reference": "35141df51e11f4a13bc74d33737b6bfbeb456159"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/endroid/qr-code/zipball/9ed4de3c62fdee12a6bf2a63549da27bd0b1436f",
-                "reference": "9ed4de3c62fdee12a6bf2a63549da27bd0b1436f",
+                "url": "https://api.github.com/repos/endroid/qr-code/zipball/35141df51e11f4a13bc74d33737b6bfbeb456159",
+                "reference": "35141df51e11f4a13bc74d33737b6bfbeb456159",
                 "shasum": ""
             },
             "require": {
@@ -1829,7 +1829,7 @@
             ],
             "support": {
                 "issues": "https://github.com/endroid/qr-code/issues",
-                "source": "https://github.com/endroid/qr-code/tree/4.1.2"
+                "source": "https://github.com/endroid/qr-code/tree/4.1.3"
             },
             "funding": [
                 {
@@ -1837,7 +1837,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-04-19T21:54:50+00:00"
+            "time": "2021-04-26T21:00:37+00:00"
         },
         {
             "name": "endroid/qr-code-bundle",
@@ -4024,6 +4024,59 @@
                 "source": "https://github.com/sensiolabs/SensioFrameworkExtraBundle/tree/v5.6.1"
             },
             "time": "2020-08-25T19:10:18+00:00"
+        },
+        {
+            "name": "snipe/banbuilder",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/snipe/banbuilder.git",
+                "reference": "621d6d857400983d0fd6cd291f105a835a317748"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/snipe/banbuilder/zipball/621d6d857400983d0fd6cd291f105a835a317748",
+                "reference": "621d6d857400983d0fd6cd291f105a835a317748",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^5.7.0"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Snipe\\BanBuilder\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "AGPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "snipe",
+                    "email": "snipe@snipe.net",
+                    "role": "Creator & Developer"
+                }
+            ],
+            "description": "Library to easily handle profanity filtering in PHP projects.",
+            "homepage": "http://banbuilder.com",
+            "keywords": [
+                "filter",
+                "language",
+                "profanity",
+                "strings",
+                "swear"
+            ],
+            "support": {
+                "issues": "https://github.com/snipe/banbuilder/issues",
+                "source": "https://github.com/snipe/banbuilder/tree/2.3.0"
+            },
+            "time": "2018-08-30T22:45:56+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -10105,7 +10158,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "snipe/banbuilder": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

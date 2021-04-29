@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+
+{% block css %}
+    {{ parent() }}
+{% endblock %}
+{% block body %}
+    <div class="main-w3pvt mian-content-wthree text-center" id="listQuiz">
+        <div class="container">
+            <div class="style-banner mx-auto">
+                <h3 class="text-wh font-weight-bold"><span>Ajouter Votre Quiz</span></h3>
+                <p class="mt-3 text-li" id="join">Ajouter des quizs dans notre site</p>
+
+                {% form_theme form 'bootstrap_4_layout.html.twig' %}
+                {{ form_start(form) }}
+                {{ form_errors(form.title) }}
+                {{ form_widget(form.title,{'attr':{'type':'text','class':'form-control','placeholder':'Title...'}}) }}
+                <br> <br> <br>
+                {{ form_widget(form.isamericain,{'attr':{'type':'textarea','class':'form-control','placeholder':'isamericain?...'}}) }}
+                <br> <br> <br>
+
+
+
+                <button type="submit" class="btn btn-primary btn-lg btn-block "> Ajouter Quiz  </button>
+
+
+
+                {{ form_end(form) }}
+
+
+            </div>
+        </div>
+    </div>
+    </div>
+
+{% endblock %}
+

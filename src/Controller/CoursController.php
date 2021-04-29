@@ -247,5 +247,12 @@ class CoursController extends AbstractController
         $entityManager->flush();
         return new Response('success');
     }
+    /**
+     * @Route("/listeCours", name="espace_inventaire")
+     */
+    public function redirectionC():Response
+    {
+        return $this->render('liste_cours/index.html.twig');
+    }
 
 }

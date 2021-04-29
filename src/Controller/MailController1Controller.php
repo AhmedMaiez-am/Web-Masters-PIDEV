@@ -29,7 +29,7 @@ class MailController1Controller extends AbstractController
     {
         $recl= $this->getDoctrine()->getRepository(Reclamation::class)->find($idr);
 
-        $message = (new \Swift_Message('bienvenue'))
+        $message = (new \Swift_Message('[ Reclamation en cours de traitement ]'))
             ->setFrom('travelbios@gmail.com')
             ->setTo('mehdi.benabdallah.1@esprit.tn')
             ->setBody("helloo world!!!"

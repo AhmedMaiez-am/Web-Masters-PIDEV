@@ -18,7 +18,18 @@ class ConseilRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Conseil::class);
     }
-
+    public function listOrderByName()
+    {
+        return $this->createQueryBuilder('r')
+            ->orderBy('r.nomc', 'ASC')
+            ->getQuery()->getResult();
+    }
+    public function listOrderByPren()
+    {
+        return $this->createQueryBuilder('r')
+            ->orderBy('r.prenomc', 'ASC')
+            ->getQuery()->getResult();
+    }
     // /**
     //  * @return Conseil[] Returns an array of Conseil objects
     //  */

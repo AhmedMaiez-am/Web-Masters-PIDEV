@@ -27,18 +27,18 @@ class ReclamationRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    public function listOrderByName()
-    {
-        return $this->createQueryBuilder('r')
-            ->orderBy('r.nom', 'ASC')
-            ->getQuery()->getResult();
-    }
-    public function listOrderByPren()
-    {
-        return $this->createQueryBuilder('r')
-            ->orderBy('r.prenom', 'ASC')
-            ->getQuery()->getResult();
-    }
+//    public function listOrderByName()
+//    {
+//        return $this->createQueryBuilder('r')
+//            ->orderBy('r.nom', 'ASC')
+//            ->getQuery()->getResult();
+//    }
+//    public function listOrderByPren()
+//    {
+//        return $this->createQueryBuilder('r')
+//            ->orderBy('r.prenom', 'ASC')
+//            ->getQuery()->getResult();
+//    }
     /**
      * @return void
      */

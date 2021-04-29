@@ -3,12 +3,13 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use  Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Constraints\NotBlank;
 /**
  * Questions
  *
  * @ORM\Table(name="questions", indexes={@ORM\Index(name="quiz", columns={"quiz"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\QuestionRep")
  */
 class Questions
 {
@@ -25,138 +26,184 @@ class Questions
      * @var string|null
      *
      * @ORM\Column(name="question", type="string", length=200, nullable=true, options={"default"="NULL"})
+     * @Assert\NotBlank(message="Ce champs est obligatoire")
+     * @Assert\Length(min="3", max="255",minMessage="Doit contenir {{ limit }} caractères",maxMessage="Doit contenir {{ limit }} caractères")
      */
-    private $question = 'NULL';
+    private $question ;
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="option1", type="string", length=200, nullable=true, options={"default"="NULL"})
+     * @Assert\NotBlank(message="Ce champs est obligatoire")
      */
-    private $option1 = 'NULL';
+    private $option1 ;
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="option2", type="string", length=200, nullable=true, options={"default"="NULL"})
+     * @Assert\NotBlank(message="Ce champs est obligatoire")
      */
-    private $option2 = 'NULL';
+    private $option2 ;
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="option3", type="string", length=200, nullable=true, options={"default"="NULL"})
+     * @Assert\NotBlank(message="Ce champs est obligatoire")
      */
-    private $option3 = 'NULL';
+    private $option3 ;
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="option4", type="string", length=200, nullable=true, options={"default"="NULL"})
+     * @Assert\NotBlank(message="Ce champs est obligatoire")
      */
-    private $option4 = 'NULL';
+    private $option4 ;
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="answer", type="string", length=200, nullable=true, options={"default"="NULL"})
+     * @Assert\NotBlank(message="Ce champs est obligatoire")
      */
-    private $answer = 'NULL';
+    private $answer ;
 
     /**
-     * @var int|null
-     *
-     * @ORM\Column(name="quiz", type="integer", nullable=true, options={"default"="NULL"})
+     * @ORM\ManyToOne(targetEntity="Quiz")
+     * @ORM\JoinColumn(name="quiz" ,referencedColumnName="quizId")
      */
-    private $quiz = NULL;
 
-    public function getQuestionid(): ?int
+    private $quiz;
+
+    /**
+     * @return int
+     */
+    public function getQuestionid(): int
     {
         return $this->questionid;
     }
 
+    /**
+     * @param int $questionid
+     */
+    public function setQuestionid(int $questionid): void
+    {
+        $this->questionid = $questionid;
+    }
+
+    /**
+     * @return string|null
+     */
     public function getQuestion(): ?string
     {
         return $this->question;
     }
 
-    public function setQuestion(?string $question): self
+    /**
+     * @param string|null $question
+     */
+    public function setQuestion(?string $question): void
     {
         $this->question = $question;
-
-        return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getOption1(): ?string
     {
         return $this->option1;
     }
 
-    public function setOption1(?string $option1): self
+    /**
+     * @param string|null $option1
+     */
+    public function setOption1(?string $option1): void
     {
         $this->option1 = $option1;
-
-        return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getOption2(): ?string
     {
         return $this->option2;
     }
 
-    public function setOption2(?string $option2): self
+    /**
+     * @param string|null $option2
+     */
+    public function setOption2(?string $option2): void
     {
         $this->option2 = $option2;
-
-        return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getOption3(): ?string
     {
         return $this->option3;
     }
 
-    public function setOption3(?string $option3): self
+    /**
+     * @param string|null $option3
+     */
+    public function setOption3(?string $option3): void
     {
         $this->option3 = $option3;
-
-        return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getOption4(): ?string
     {
         return $this->option4;
     }
 
-    public function setOption4(?string $option4): self
+    /**
+     * @param string|null $option4
+     */
+    public function setOption4(?string $option4): void
     {
         $this->option4 = $option4;
-
-        return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getAnswer(): ?string
     {
         return $this->answer;
     }
 
-    public function setAnswer(?string $answer): self
+    /**
+     * @param string|null $answer
+     */
+    public function setAnswer(?string $answer): void
     {
         $this->answer = $answer;
-
-        return $this;
     }
 
-    public function getQuiz(): ?int
+    /**
+     * @return Quiz|null
+     */
+    public function getQuiz(): ?Quiz
     {
         return $this->quiz;
     }
 
-    public function setQuiz(?int $quiz): self
+    /**
+     * @param Quiz|null $quiz
+     */
+    public function setQuiz(?Quiz $quiz): void
     {
         $this->quiz = $quiz;
-
-        return $this;
     }
 
 

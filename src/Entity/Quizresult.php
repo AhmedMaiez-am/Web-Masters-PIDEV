@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Quizresult
  *
- * @ORM\Table(name="quizresult", indexes={@ORM\Index(name="test1", columns={"student_id"}), @ORM\Index(name="test", columns={"quiz_id"})})
+// * @ORM\Table(name="quizresult", indexes={@ORM\Index(name="test", columns={"quiz_id"}), @ORM\Index(name="test1", columns={"student_id"})})
  * @ORM\Entity
  */
 class Quizresult
@@ -22,11 +22,10 @@ class Quizresult
     private $id;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="quiz_id", type="integer", nullable=false)
+     * @ORM\ManyToOne(targetEntity="Quiz")
+     * @ORM\JoinColumn(name="quiz_id" ,referencedColumnName="quizId")
      */
-    private $quizId;
+    private $quiz_id;
 
     /**
      * @var int
@@ -50,78 +49,105 @@ class Quizresult
     private $score;
 
     /**
-     * @var \Quizresult
-     *
-     * @ORM\ManyToOne(targetEntity="Quizresult")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="student_id", referencedColumnName="id")
-     * })
+     * @ORM\ManyToOne(targetEntity="Student")
+     * @ORM\JoinColumn(name="student_id" ,referencedColumnName="id")
      */
-    private $student;
+    private $student_id;
 
-    public function getId(): ?int
+    /**
+     * @return int
+     */
+    public function getId(): int
     {
         return $this->id;
     }
 
-    public function getQuizId(): ?int
+    /**
+     * @param int $id
+     */
+    public function setId(int $id): void
     {
-        return $this->quizId;
+        $this->id = $id;
     }
 
-    public function setQuizId(int $quizId): self
+    /**
+     * @return mixed
+     */
+    public function getQuizId()
     {
-        $this->quizId = $quizId;
-
-        return $this;
+        return $this->quiz_id;
     }
 
-    public function getRightAnswer(): ?int
+    /**
+     * @param $quiz
+     */
+    public function setQuizId($quiz): void
+    {
+        $this->quiz_id = $quiz;
+    }
+
+    /**
+     * @return int
+     */
+    public function getRightAnswer(): int
     {
         return $this->rightAnswer;
     }
 
-    public function setRightAnswer(int $rightAnswer): self
+    /**
+     * @param int $rightAnswer
+     */
+    public function setRightAnswer(int $rightAnswer): void
     {
         $this->rightAnswer = $rightAnswer;
-
-        return $this;
     }
 
-    public function getTimestamp(): ?\DateTimeInterface
+    /**
+     * @return \DateTime
+     */
+    public function getTimestamp()
     {
         return $this->timestamp;
     }
 
-    public function setTimestamp(\DateTimeInterface $timestamp): self
+    /**
+     * @param \DateTime $timestamp
+     */
+    public function setTimestamp($timestamp): void
     {
         $this->timestamp = $timestamp;
-
-        return $this;
     }
 
-    public function getScore(): ?int
+    /**
+     * @return int
+     */
+    public function getScore(): int
     {
         return $this->score;
     }
 
-    public function setScore(int $score): self
+    /**
+     * @param int $score
+     */
+    public function setScore(int $score): void
     {
         $this->score = $score;
-
-        return $this;
     }
 
-    public function getStudent(): ?self
+    /**
+     * @return mixed
+     */
+    public function getStudentId()
     {
-        return $this->student;
+        return $this->student_id;
     }
 
-    public function setStudent(?self $student): self
+    /**
+     * @param mixed $student_id
+     */
+    public function setStudentId($student_id): void
     {
-        $this->student = $student;
-
-        return $this;
+        $this->student_id = $student_id;
     }
 
 
