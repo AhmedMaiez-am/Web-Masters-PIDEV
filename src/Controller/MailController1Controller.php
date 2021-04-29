@@ -30,9 +30,12 @@ class MailController1Controller extends AbstractController
         $recl= $this->getDoctrine()->getRepository(Reclamation::class)->find($idr);
 
         $message = (new \Swift_Message('[ Reclamation en cours de traitement ]'))
-            ->setFrom('travelbios@gmail.com')
-            ->setTo('mehdi.benabdallah.1@esprit.tn')
-            ->setBody("helloo world!!!"
+            ->setFrom('directeurkidzy@gmail.com')
+            ->setTo($recl->getEmail())
+            ->setBody("Bonjour Mr/Mme , 
+Votre reclamation est en cours de traitement et sera traiter dans les plus brefs délais.
+Merci pour votre comphrension et si vous avez une autre demande ou un conseil ca sera avec grand plaisir.
+Cordialement."
 
             );
         $mailer->send($message);
