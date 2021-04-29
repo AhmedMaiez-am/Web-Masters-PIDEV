@@ -32,10 +32,10 @@ class MailController1Controller extends AbstractController
         $message = (new \Swift_Message('[ Reclamation en cours de traitement ]'))
             ->setFrom('directeurkidzy@gmail.com')
             ->setTo($recl->getEmail())
-            ->setBody("Bonjour Mr/Mme , 
-Votre reclamation est en cours de traitement et sera traiter dans les plus brefs délais.
-Merci pour votre comphrension et si vous avez une autre demande ou un conseil ca sera avec grand plaisir.
-Cordialement."
+            ->setBody("Bonjour Mr/Mme ,
+    Déja bienvenue dans notre site web , on espére qu'il vous plait et qu'il répond à tous nos besoins .
+    Merci pour votre comphrension et si vous avez une autre demande ou un conseil ca sera avec grand plaisir.
+    Cordialement."
 
             );
         $mailer->send($message);

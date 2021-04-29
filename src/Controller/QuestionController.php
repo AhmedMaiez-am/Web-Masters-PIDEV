@@ -246,6 +246,23 @@ class QuestionController extends Controller
         ]);
 
     }
+    /**
+     * @Route("/statQ", name="statQ")
+     */
+    public function statQ(Request $request){
+        $lst = $this->getDoctrine()->getRepository('App:Questions')->findAll();
+        $quiz=[];
+        $questionNbr=[];
+        foreach ($lst as $lstQuestions){
+            $quiz[]= $lstQuestions->getQuiz();
+            $questionNbr[]=$lstQuestions->getQuestion();
+
+        }
+        return $this->render('question/StatEnf.html.twig',
+            ['quiz'=> json_encode($quiz),
+                'questionNbr'=>json_encode($questionNbr)]);
+
+    }
 
 
 
