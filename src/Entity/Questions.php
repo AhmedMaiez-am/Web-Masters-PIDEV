@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 use  Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Constraints\NotBlank;
 /**
@@ -19,6 +20,7 @@ class Questions
      * @ORM\Column(name="questionID", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @Groups ("post:read")
      */
     private $questionid;
 
@@ -28,6 +30,7 @@ class Questions
      * @ORM\Column(name="question", type="string", length=200, nullable=true, options={"default"="NULL"})
      * @Assert\NotBlank(message="Ce champs est obligatoire")
      * @Assert\Length(min="3", max="255",minMessage="Doit contenir {{ limit }} caractères",maxMessage="Doit contenir {{ limit }} caractères")
+     *@Groups ("post:read")
      */
     private $question ;
 
@@ -36,6 +39,7 @@ class Questions
      *
      * @ORM\Column(name="option1", type="string", length=200, nullable=true, options={"default"="NULL"})
      * @Assert\NotBlank(message="Ce champs est obligatoire")
+     * @Groups ("post:read")
      */
     private $option1 ;
 
@@ -44,6 +48,7 @@ class Questions
      *
      * @ORM\Column(name="option2", type="string", length=200, nullable=true, options={"default"="NULL"})
      * @Assert\NotBlank(message="Ce champs est obligatoire")
+     * @Groups ("post:read")
      */
     private $option2 ;
 
@@ -52,6 +57,7 @@ class Questions
      *
      * @ORM\Column(name="option3", type="string", length=200, nullable=true, options={"default"="NULL"})
      * @Assert\NotBlank(message="Ce champs est obligatoire")
+     * @Groups ("post:read")
      */
     private $option3 ;
 
@@ -60,6 +66,7 @@ class Questions
      *
      * @ORM\Column(name="option4", type="string", length=200, nullable=true, options={"default"="NULL"})
      * @Assert\NotBlank(message="Ce champs est obligatoire")
+     * @Groups ("post:read")
      */
     private $option4 ;
 
@@ -68,12 +75,14 @@ class Questions
      *
      * @ORM\Column(name="answer", type="string", length=200, nullable=true, options={"default"="NULL"})
      * @Assert\NotBlank(message="Ce champs est obligatoire")
+     * @Groups ("post:read")
      */
     private $answer ;
 
     /**
      * @ORM\ManyToOne(targetEntity="Quiz")
      * @ORM\JoinColumn(name="quiz" ,referencedColumnName="quizId")
+
      */
 
     private $quiz;

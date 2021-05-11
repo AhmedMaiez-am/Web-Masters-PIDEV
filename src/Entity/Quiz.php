@@ -8,6 +8,8 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Respository\QuizRep;
 use  Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Serializer\Annotation\Groups;
+
 /**
  * Quiz
  *
@@ -22,6 +24,7 @@ class Quiz
      * @ORM\Column(name="quizId", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @Groups ("post:read")
      */
     private $quizid;
 
@@ -31,6 +34,7 @@ class Quiz
      * @ORM\Column(name="Title", type="string", length=255, nullable=false)
      * @Assert\NotBlank(message="Ce champs est obligatoire")
      * @Assert\Length(min="3", max="40",minMessage="Doit contenir {{ limit }} caractères",maxMessage="Doit contenir {{ limit }} caractères")
+     *  @Groups ("post:read")
      */
     private $title;
 
@@ -38,6 +42,7 @@ class Quiz
      * @var int
      *
      * @ORM\Column(name="isamericain", type="integer", nullable=true)
+     *  @Groups ("post:read")
      */
     private $isamericain;
 

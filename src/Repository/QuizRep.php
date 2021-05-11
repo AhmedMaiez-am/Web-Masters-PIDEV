@@ -74,7 +74,7 @@ class QuizRep extends ServiceEntityRepository
     public function stat1()
     {
         $query= $this->getEntityManager()
-            ->createQuery('select o.quizid,count(o.quizid) as nbdep from App\Entity\Quiz o group by o.quizid');
+            ->createQuery('select o.rightAnswer,count(o.rightAnswer)  from App\Entity\Quizresult o group by o.student_id');
         return $query->getResult();
     }
 

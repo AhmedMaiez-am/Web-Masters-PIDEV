@@ -54,20 +54,20 @@
                 }
             })
         })
-        $("#next-question").on('click',function (e) {
-            e.preventDefault()
-            console.log('here')
-            var url = document.getElementById('next-question').getAttribute("href")
-            $.ajax({
-                url : url,
-                method: 'POST',
-                success: function (data) {
-                    if (data.success) {
-                        $("div.container-fluid").replaceWith(data.html)
-                    }
-                }
-            })
-
-        })
+        // $("#next-question").on('click',function (e) {
+        //     e.preventDefault()
+        //     console.log('here')
+        //     var url = document.getElementById('next-question').getAttribute("href")
+        //     $.ajax({
+        //         url : url,
+        //         method: 'POST',
+        //         success: function (data) {
+        //             if (data.success) {
+        //                 $("div.container-fluid").replaceWith(data.html)
+        //             }
+        //         }
+        //     })
+        //
+        // })
     </script>
 {% endblock %}

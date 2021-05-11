@@ -23,6 +23,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 use CMEN\GoogleChartsBundle\GoogleCharts\Charts\PieChart;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+
 class QuestionController extends Controller
 {
 
@@ -34,6 +36,24 @@ class QuestionController extends Controller
     public function __construct(EntityManagerInterface $em)
     {
         $this->em = $em;
+    }
+
+    /**
+     * @Route("/statQ", name="statQ")
+     */
+    public function statQ(Request $request){
+        $lst = $this->getDoctrine()->getRepository('App:Questions')->findAll();
+        $quiz=[];
+        $questionNbr=[];
+        foreach ($lst as $lstQuestions){
+            $quiz[]= $lstQuestions->getQuiz();
+            $questionNbr[]=$lstQuestions->getQuestion();
+
+        }
+        return $this->render('question/StatEnf.html.twig',
+            ['quiz'=> json_encode($quiz),
+                'questionNbr'=>json_encode($questionNbr)]);
+
     }
 
     /**
@@ -55,6 +75,8 @@ class QuestionController extends Controller
 
 
     }
+
+
 
     /**
      * @Route("/question", name="question")
@@ -94,6 +116,8 @@ class QuestionController extends Controller
 
     }
 
+
+
     /**
      * @Route("/suppi/{idq}", name="dd")
      */
@@ -105,6 +129,8 @@ class QuestionController extends Controller
         $em->flush();
         return $this->redirectToRoute("questions");
     }
+
+
 
     /**
      * @Route("/updateQuestion/{idq}", name="upquestion")
@@ -135,6 +161,44 @@ class QuestionController extends Controller
             $em->flush();
             return $this->redirectToRoute("questions");
 
+        }
+        return $this->render('question/updateQuestion.html.twig', [
+            'form' => $Form->createView(),
+        ]);
+    }
+
+
+
+
+    /**
+     * @Route("/ModifierQuestion/{idq}", name="ModifierQuestion")
+     */
+    public function ModifierQuestion(QuestionRep $rep, Request $request, NormalizerInterface $normalizer,$idq)
+    {
+        $Di = $rep->find($idq);
+        $Form = $this->createForm(QuestionType:: class, $Di);
+
+        $Form->handleRequest($request);
+
+        if ($Form->isSubmitted() && $Form->isValid()) {
+
+            $data = $Form->getData();
+            if ($data->getAnswer() === "answer1") {
+                $Di->setAnswer($Di->getOption1());
+            }
+            if ($data->getAnswer() === "answer2") {
+                $Di->setAnswer($Di->getOption2());
+            }
+            if ($data->getAnswer() === "answer3") {
+                $Di->setAnswer($Di->getOption3());
+            }
+            if ($data->getAnswer() === "answer4") {
+                $Di->setAnswer($Di->getOption4());
+            }
+            $em = $this->getDoctrine()->getManager();
+            $em->flush();
+            $jsonContent= $normalizer->normalize($Di, 'json',['groups'=>'post:read']);
+            return new  Response("Question updated successfully".json_encode($jsonContent));
         }
         return $this->render('question/updateQuestion.html.twig', [
             'form' => $Form->createView(),

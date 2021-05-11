@@ -35,6 +35,9 @@ class QuizController extends AbstractController
         return $this->render('quiz/index.html.twig', ['lstQuiz' => $lstQuiz]);
     }
 
+
+
+
     /**
      * @Route("/quizE", name="quizE")
      */
@@ -44,6 +47,19 @@ class QuizController extends AbstractController
         return $this->render('quiz/indexEnf.html.twig', ['lstQuiz' => $lstQuiz]);
     }
 
+    /**
+     * @Route("/AllQuizEnf", name="AllQuizEnf")
+     */
+    public function AllQuizEnf(QuizRep $repo , NormalizerInterface $normalizer)
+    {
+        $lstQuiz=$repo->findAll();
+
+        $jsonContent = $normalizer ->normalize($lstQuiz,'json',['groups'=>'post:read']);
+
+        return $this->render('quiz/AllQuizEnfJSON.html.twig', ['data' => $jsonContent]);
+
+//        return  new Response(json_encode($jsonContent));
+    }
 
     /**
      * @Route("/quest/{quizId}", name="questionsbyquiz")
@@ -55,6 +71,8 @@ class QuizController extends AbstractController
         return $this->render('question/questionsEnf.html.twig', ['lstQuestion' => $lstQuestions]);
 
     }
+
+
 
     /**
      * @Route("/questT/{quizId}", name="questionsbyquizT")
@@ -101,6 +119,7 @@ class QuizController extends AbstractController
 
 
 
+
     /**
      * @Route("/suppirimer/{id}", name="delete")
      */
@@ -111,6 +130,7 @@ class QuizController extends AbstractController
         $em->flush();
         return $this->redirectToRoute("quiz");
     }
+
 
 
 
@@ -202,43 +222,40 @@ class QuizController extends AbstractController
 
     }
 
-//    /**
-//     * @Route("/affichbackoffre", name="affichbackoffre")
-//     */
-//    public function affichbackoffre(QuizRep $repo): Response
-//
-//
-//    {
-//        $ob = new Highchart();
-//        $ob->chart->renderTo('linechart');
-//        $ob->title->text('statistique des quizs ');
-//        $ob->plotOptions->pie(array(
-//            'allowPointSelect'  => true,
-//            'cursor'    => 'pointer',
-//            'dataLabels'    => array('enabled' => false),
-//            'showInLegend'  => true
-//        ));
-//        $offre=$repo->stat1();
-//        $data =array();
-//        foreach ($offre as $values)
-//        {
-//            $a =array($values['quizid'],intval($values['nbdep']));
-//            array_push($data,$a);
-//        }
-//
-//        $ob->series(array(array('type' => 'pie','name' => 'Browser share', 'data' => $data)));
-//
-//
-//
-//
-//
-//        return $this->render('question/StatEnf.html.twig', array(
-//            'chart' => $ob
-//        ));
-//
-//    }
 
 
+    /**
+     * @Route("/affichbackoffre", name="affichbackoffre")
+     */
+    public function affichbackoffre(QuizRep $repo): Response
+
+
+    {
+        $ob = new Highchart();
+        $ob->chart->renderTo('linechart');
+        $ob->title->text('statistique des offre ');
+        $ob->plotOptions->pie(array(
+            'allowPointSelect'  => true,
+            'cursor'    => 'pointer',
+            'dataLabels'    => array('enabled' => false),
+            'showInLegend'  => true
+        ));
+        $offre=$repo->stat1();
+        $data =array();
+        foreach ($offre as $values)
+        {
+            $a =array(intval($values['nbdep']));
+            array_push($data,$a);
+        }
+
+        $ob->series(array(array('type' => 'pie','name' => 'Browser share', 'data' => $data)));
+
+
+        return $this->render('question/StatEnf.html.twig', array(
+            'chart' => $ob
+        ));
+
+    }
 
 
 }

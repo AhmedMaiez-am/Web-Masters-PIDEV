@@ -1,14 +1,53 @@
-{% extends 'baseEnf.html.twig' %}
+{% extends 'base.html.twig' %}
 
 
 
-{%  block body %}
-    <div id="linechart" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
 
-    <script src="//code.highcharts.com/4.1.8/highcharts.js"></script>
-    <script src="//code.highcharts.com/4.1.8/modules/exporting.js"></script>
-    <script type="text/javascript">
-        {{ chart(chart) }}
-    </script>
+
+    {%  block body %}
+        <br> <br> <br>
+        <div class="text-center" ><strong>Statistiques des Quizs </strong></div>
+
+        <div class="container">
+
+            <canvas id="lstQuestion" width="400" height="100"></canvas>
+
+        </div>
+
+        {% block stylsheet %}
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css"
+                  integrity="sha512-/zs32ZEJh+/EO2N1b0PEdoA10JkdC3zJ8L5FTiQu82LR9S/rOQNfQN7U59U9BC12swNeRAz3HSzIL2vpp4fv3w=="
+                  crossorigin="anonymous" />
+        {% endblock %}
+        {% block javascript %}
+        <script src={{ asset('https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js')}}
+            integrity="sha512-s+xg36jbIujB2S2VKfpGmlC3T5V2TF3lY48DX7u2r9XzGzgPsa6wTpOQA7J9iffvdeBN0q9tKzRxVxw1JviZPg==" crossorigin="anonymous"))></script>
+    <script>
+
+let lstQuestion=document.querySelector("#lstQuestion");
+        let recGraph = new Chart(lstQuestion, {
+      type: 'pie',
+        data: {
+        labels: ["Math","Francais","English","Java","SGBD"],
+            datasets: [{
+                label: "Répartition ",
+                data: [4 , 4 , 2 , 3 , 3],
+                backgroundColor: ["indigo",'blue','green','yellow','red','black','pink'
+                ,'rgb((128, 0, 128))','rgb(110, 11, 20)','rgb(128, 0, 128)',
+                'rgb(152, 87, 23)','rgb(121, 248, 248)','rgb(0, 255, 0)','rgb(172, 30, 68)'],
+
+                        borderColor:['rgb(255, 255, 255)'],
+                        hoverBackgroundColor:['rgb(155, 155,155)']
+            }]
+        }
+
+    })
+
+
+</script>
+
+
+    {%  endblock %}
+<br><br>
 
 {%  endblock %}
