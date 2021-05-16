@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<resource majorVersion="1" minorVersion="11" useXmlUI="false">
+    <image name="back-logo.png"  />
+    <theme name="Theme">
+        <val key="@includeNativeBool" value="true" />
+        <val key="Button.align" value="4" />
+        <val key="Button.bgColor" value="ffffff" />
+        <border key="Button.border" type="round" roundBorderColor="16723285" opacity="255" strokeColor="0" strokeOpacity="255" strokeThickness="0.0" strokeMM="false" shadowSpread="10" shadowOpacity="0" shadowX="0.5" shadowY="0.5" shadowBlur="10.0" shadowMM="false" rectangle="true" />
+        <val key="Button.fgColor" value="ffffff" />
+        <font key="Button.font" type="system" face="0" style="0" size="0" />
+        <val key="Button.marUnit" value="2,2,2,2" />
+        <val key="Button.margin" value="2.0,2.0,2.0,2.0" />
+        <val key="Button.padUnit" value="2,2,2,2" />
+        <val key="Button.padding" value="2.0,2.0,2.0,2.0" />
+        <val key="Button.transparency" value="255" />
+        <val key="image.align" value="4" />
+        <val key="image.bgImage" value="back-logo.png" />
+        <val key="image.bgType" value="1" />
+    </theme>
+</resource>
