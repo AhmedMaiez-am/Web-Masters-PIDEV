@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<resource majorVersion="1" minorVersion="11" useXmlUI="false">
+    <image name="ad.jpg"  />
+    <image name="b.png"  />
+    <image name="cartoon.jpg"  />
+    <image name="logo.png"  />
+    <image name="parent.jpg"  />
+    <theme name="Theme">
+        <val key="@includeNativeBool" value="true" />
+        <val key="Button.bgImage" value="b.png" />
+        <val key="Button.bgType" value="1" />
+        <val key="Button.fgColor" value="0" />
+        <val key="Button.margin" value="20.0,20.0,100.0,100.0" />
+        <val key="margin" value="20.0,20.0,100.0,100.0" />
+    </theme>
+    <image name="tuteur.jpg"  />
+</resource>
