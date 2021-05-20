@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<resource majorVersion="1" minorVersion="11" useXmlUI="false">
+    <image name="730-451-news-84057074-1515151812.jpg"  />
+    <image name="abc.png"  />
+    <image name="activation-background.jpg"  />
+    <image name="ad.jpg"  />
+    <image name="annule.png"  />
+    <image name="bl.jpg"  />
+    <image name="btn1.png"  />
+    <image name="cartoon.jpg"  />
+    <image name="cite-culture-tunisie-02112106.jpg"  />
+    <image name="confirmation-background.jpg"  />
+    <image name="couv1.jpg"  />
+    <image name="couv3.jpg"  />
+    <image name="culture cit&#xe9;.png"  />
+    <image name="ddd.jpg"  />
+    <image name="dog.jpg"  />
+    <image name="download.jpg"  />
+    <image name="ee.jpg"  />
+    <image name="enf.jpg"  />
+    <image name="gradient-overlay.png"  />
+    <image name="hh.jpg"  />
+    <image name="hhh.jpg"  />
+    <image name="iheb2.png"  />
+    <image name="iheb3.png"  />
+    <image name="iheb5.png"  />
+    <image name="illustration-appel-video-tuteur-ligne_191217-124.jpg"  />
+    <image name="Image 1"  />
+    <image name="Image 2"  />
+    <image name="istockphoto-1054570732-170667a.jpg"  />
+    <image name="kidzy-parc-jeux.png"  />
+    <image name="kk.png"  />
+    <image name="login-background.jpg"  />
+    <image name="logo-site-kidzy-01-2.png"  />
+    <image name="logo.png"  />
+    <image name="lolo.jpg"  />
+    <image name="mehdi.jpg"  />
+    <image name="mra.png"  />
+    <image name="MultiButton.borderBottom_1.png" type="multi"  />
+    <image name="MultiButton.borderBottomL_1.png" type="multi"  />
+    <image name="MultiButton.borderBottomR_1.png" type="multi"  />
+    <image name="MultiButton.borderCenter_1.png" type="multi"  />
+    <image name="MultiButton.borderLeft_1.png" type="multi"  />
+    <image name="MultiButton.borderRight_1.png" type="multi"  />
+    <image name="MultiButton.borderTop_1.png" type="multi"  />
+    <image name="MultiButton.borderTopL_1.png" type="multi"  />
+    <image name="MultiButton.borderTopR_1.png" type="multi"  />
+    <image name="news-item-1.jpg"  />
+    <image name="news-item-2.jpg"  />
+    <image name="news-item-3.jpg"  />
+    <image name="news-item-4.jpg"  />
+    <image name="news-item.jpg"  />
+    <image name="parent.jpg"  />
+    <image name="parentpic.png"  />
+    <image name="parpic.png"  />
+    <image name="pp.jpg"  />
+    <image name="profile-background.jpg"  />
+    <image name="rech.jpg"  />
+    <image name="signin-background.jpg"  />
+    <image name="signup-background.jpg"  />
+    <image name="sssss.jpg"  />
+    <image name="stat.jpg"  />
+    <image name="text-field-underline.png"  />
+    <theme name="Theme">
+        <val key="@includeNativeBool" value="true" />
+        <val key="Button.bgImage" value="Image 1" />
+        <val key="Button.bgType" value="1" />
+        <val key="Button.fgColor" value="0" />
+        <val key="Button.margin" value="10.0,10.0,100.0,100.0" />
+        <val key="Form.bgImage" value="iheb5.png" />
+        <val key="Form.bgType" value="1" />
+        <val key="ModBtn.align" value="4" />
+        <val key="ModBtn.bgImage" value="istockphoto-1054570732-170667a.jpg" />
+        <val key="ModBtn.bgType" value="1" />
+        <val key="MultiLine1.fgColor" value="66cc" />
+        <val key="MultiLine2.fgColor" value="0" />
+        <val key="MultiLine3.fgColor" value="0" />
+        <val key="MultiLine4.fgColor" value="0" />
+        <val key="SideCommand.margin" value="100.0,0.0,0.0,0.0" />
+        <val key="SideNavigationPanel.bgImage" value="iheb2.png" />
+        <val key="SideNavigationPanel.bgType" value="1" />
+        <val key="Toolbar.bgImage" value="pp.jpg" />
+        <val key="Toolbar.bgType" value="1" />
+        <val key="addbtn.align" value="4" />
+        <val key="addbtn.bgImage" value="unnamed.jpg" />
+        <val key="addbtn.bgType" value="1" />
+        <font key="addbtn.font" type="ttf" face="0" style="0" size="0" name="native:ItalicLight" family="native:ItalicLight" sizeSettings="3" actualSize="3.0" />
+        <val key="addbtn.textDecoration" value="16" />
+        <val key="btnspp.align" value="4" />
+        <val key="btnspp.bgImage" value="btn1.png" />
+        <val key="btnspp.bgType" value="1" />
+        <val key="nono.align" value="4" />
+        <val key="nono.bgImage" value="Image 2" />
+        <val key="nono.bgType" value="1" />
+        <val key="suppbtn.align" value="4" />
+        <val key="suppbtn.bgImage" value="sssss.jpg" />
+        <val key="suppbtn.bgType" value="1" />
+        <val key="suppbtn.fgColor" value="f0f0f0" />
+        <font key="text.font" type="ttf" face="0" style="0" size="0" name="native:ItalicLight" family="native:ItalicLight" sizeSettings="3" actualSize="3.0" />
+        <val key="text.textDecoration" value="16" />
+        <val key="textV.align" value="4" />
+        <val key="textV.fgColor" value="9933" />
+        <font key="textV.font" type="system" face="0" style="1" size="0" />
+    </theme>
+    <image name="timeline-background.jpg"  />
+    <image name="tuteur.jpg"  />
+    <image name="unnamed.jpg"  />
+    <image name="user-picture.jpg"  />
+    <image name="user.png"  />
+    <image name="vvv.jpg"  />
+    <image name="welcome-background.jpg"  />
+    <image name="yellow.jpg"  />
+</resource>
