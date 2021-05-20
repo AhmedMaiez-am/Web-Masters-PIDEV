@@ -23,6 +23,7 @@ import com.codename1.ui.events.ActionEvent;
 import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.util.Resources;
+import java.util.ArrayList;
 
 /**
  *
@@ -31,20 +32,54 @@ import com.codename1.ui.util.Resources;
 public class AddQuestion extends Form {
 
     public AddQuestion(Resources theme) {
-        
-         Toolbar tb = getToolbar();
-            //  setUIID("lolo");
+
+        Toolbar tb = getToolbar();
+        //  setUIID("lolo");
         tb.addCommandToLeftBar("Back", null, new ActionListener() {
-          @Override
-                    public void actionPerformed(ActionEvent evt) {
-      new ProfileForm(theme).show();        
-}    } );
-        
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                new ProfileForm(theme).show();
+            }
+        });
+
         setTitle("Ajouter un Question");
         setLayout(BoxLayout.y());
-        
-         ComboBox G = new ComboBox("Quiz");
-         G.setUIID("FloatingActionButton");
+
+//        ComboBox<Quiz> Quiz = new ComboBox<Quiz>();
+//        ServiceQuiz ser = new ServiceQuiz();
+//        ArrayList<Quiz> listev = (ArrayList<Quiz>) ser.getListalls();
+//        for (Quiz s : listev) {
+//            Quiz.addItem(s);
+//        }
+        Quiz c = new Quiz();
+        ComboBox Quiz = new ComboBox();
+
+        Quiz.addItem("Math");
+        Quiz.addItem("Francais");
+        Quiz.addItem("English");
+        Quiz.addItem("SGBD");
+        Quiz.addItem("Java");
+
+        if (c.getTitle() == "Math") {
+            Quiz.setSelectCommandText("Math");
+
+        } else if (c.getTitle() == "Francais") {
+            Quiz.setSelectCommandText("Francais");
+
+        } else if (c.getTitle() == "Java") {
+            Quiz.setSelectCommandText("Java");
+
+        } else if (c.getTitle() == "SGBD") {
+            Quiz.setSelectCommandText("SGBD");
+
+        } else {
+            Quiz.setSelectCommandText("English");
+        }
+
+//        TextField Quiz = new TextField("", " Quiz ");
+//        Quiz.setUIID("FloatingActionButton");
+//         ComboBox G = new ComboBox("Quiz");
+//         G.setUIID("FloatingActionButton");
         TextField A = new TextField("", " Question ");
         A.setUIID("FloatingActionButton");
         TextField B = new TextField("", "1ére Choix");
@@ -55,48 +90,41 @@ public class AddQuestion extends Form {
         D.setUIID("FloatingActionButton");
         TextField E = new TextField("", "4éme Choix");
         E.setUIID("FloatingActionButton");
-        
-        TextField F = new TextField( "","La réponse");
+
+        TextField F = new TextField("", "La réponse");
         F.setUIID("FloatingActionButton");
 
         Button btnValiderQuestion = new Button("Ajouter");
-                btnValiderQuestion.setUIID("addbtn");
+        btnValiderQuestion.setUIID("addbtn");
 
-        
         btnValiderQuestion.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
-                if ((A.getText().length()==0 || B.getText().length()==0 || C.getText().length()==0 || D.getText().length()==0 ||  E.getText().length()==0 ||  F.getText().length()==0))
+                if ((A.getText().length() == 0 || B.getText().length() == 0 || C.getText().length() == 0 || D.getText().length() == 0 || E.getText().length() == 0 || F.getText().length() == 0)) {
                     Dialog.show("Alert", "il y a un chmap vide! ", new Command("OK"));
-                else if 
-                         ((A.getText().length()<3))
+                } else if ((A.getText().length() < 3)) {
                     Dialog.show("Alert", "Minimum 3 caractere! ", new Command("OK"));
-                else 
-                {
-                    try {
-                        Questions q = new Questions(A.getText(),B.getText(),C.getText(),D.getText(),E.getText(),F.getText());
-                        if( ServiceQuestion.getInstance().addQuestion(q))
-                            Dialog.show("Success","add accepted",new Command("OK"));
-                        else
-                            Dialog.show("ERROR", "Server error", new Command("OK"));
-                    } catch (NumberFormatException e) {
-                        Dialog.show("ERROR", "Status must be a number", new Command("OK"));
-                    }
-                    
-                }
-                    
-                }
-                
-                
-            
-        });
-        
-        addAll(G,A,B,C,D,E,F,btnValiderQuestion);
-        
-                
-    }
-    
+                } else {
 
-    
+                    Questions e = new Questions((Quiz.getSelectedIndex()),
+                            A.getText(), B.getText(),
+                            C.getText(), D.getText(),
+                            E.getText(), F.getText());
+                    if (ServiceQuestion.getInstance().addQuestion(e)) {
+                        Dialog.show("Success", "Ajouté accepted", new Command("OK"));
+                    } else {
+                        Dialog.show("Success", "Ajouté accepted", new Command("OK"));
+                    }
+                    new ProfileForm(theme).show();
+
+                }
+
+            }
+
+        });
+
+        addAll(Quiz, A, B, C, D, E, F, btnValiderQuestion);
+
+    }
 
 }

@@ -19,7 +19,7 @@
 
 package GUI;
 
-import Utils.LocalNotificationTest;
+
 import com.codename1.components.ToastBar;
 import com.codename1.notifications.LocalNotification;
 import com.codename1.ui.Command;
@@ -37,7 +37,7 @@ import com.codename1.ui.util.Resources;
 /**
  * Common code that can setup the side menu
  *
- * @author Shai Almog
+ * @author IHEB
  */
 public abstract class SideMenuBaseForm extends Form {
 

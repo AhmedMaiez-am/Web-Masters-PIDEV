@@ -5,6 +5,7 @@
  */
 package Services;
 
+import Entity.Questions;
 import Entity.Quiz;
 import Utils.Statics;
 import com.codename1.io.CharArrayReader;
@@ -26,9 +27,11 @@ import java.util.Map;
 public class ServiceQuiz {
 
     public ArrayList<Quiz> listall;
+  
     public ArrayList<Quiz> tasks;
+  
     public static ServiceQuiz instance = null;
-   public static boolean resultok=true;
+   public boolean resultOK;
     
     private ConnectionRequest req;
 
@@ -53,8 +56,8 @@ public class ServiceQuiz {
             List<Map<String, Object>> list = (List<Map<String, Object>>) tasksListJson.get("root");
             for (Map<String, Object> obj : list) {
                 Quiz t = new Quiz();
-//         float quizId = Float.parseFloat(obj.get("id").toString());
-//                t.setQuizId((int)quizId);
+         float quizid = Float.parseFloat(obj.get("quizid").toString());
+                t.setQuizId((int)quizid);
 
                 t.setTitle(obj.get("title").toString());
                 // t.setPrenomenfant(obj.get("prenomenfant").toString());
@@ -89,37 +92,48 @@ public class ServiceQuiz {
         NetworkManager.getInstance().addToQueueAndWait(con);
         return listall;
     }
+    
 
-//    public boolean supprimer(int quizId ) {
-//        
-//        String url = Statics.BASE_URL + "/SuppQuiz/" + quizId;
-//        req.setUrl(url);
-//        req.addResponseListener((event) -> {
-//            String str = new String(req.getResponseData());
-//            System.out.println(str);
-//           
-//
-//        });
-//        NetworkManager.getInstance().addToQueueAndWait(req);
-//        return true;
-//    }
 
-    public boolean addQuiz(Quiz t) {
-      MultipartRequest request = new MultipartRequest();
 
-        String url = Statics.BASE_URL + "/ADDQUIZZ/" + t.getTitle() + "/" + t.getIsamericain();
-        req.setUrl(url);
-        request.addResponseListener((ex) -> {
-            String str = new String(request.getResponseData());
+
+    
+    
+    public boolean addQuiz(Quiz e){
+        
+         String url = Statics.BASE_URL +"/ADDQUIZZ/new?title="+e.getTitle()+"&isamericain="+e.getIsamericain();
+         req.setUrl(url);
+        System.out.println(url);
+        req.addResponseListener((ex) -> {
+            String str = new String(req.getResponseData());
             System.out.println(str);
         });
-        NetworkManager.getInstance().addToQueueAndWait(request);
-        return true;
-
-    }
+        NetworkManager.getInstance().addToQueueAndWait(req);
+        return resultOK;
+     }
     
-    public  boolean supprimer(int quizId){
-    String url=Statics.BASE_URL+"/SuppQuiz/"+quizId;
+     
+//public boolean supprimerQuiz(int quizid)
+//    {
+//        String url = Statics.BASE_URL+"/SuppQuiz/"+quizid;
+//        req.setUrl(url);
+//        req.addResponseListener(new ActionListener<NetworkEvent>() {
+//            @Override
+//            public void actionPerformed(NetworkEvent evt) {
+//               resultOK = req.getResponseCode() == 200;
+//                req.removeResponseCodeListener(this);
+//            }
+//        });
+//        NetworkManager.getInstance().addToQueueAndWait(req);
+//        return resultOK;
+//    }
+    
+//    
+    
+//    
+    
+    public  boolean supprimerQuiz(String id){
+    String url=Statics.BASE_URL+"/SuppQuiz/"+id;
     req.setUrl(url);
     req.addResponseListener(new ActionListener<NetworkEvent>() {
         @Override
@@ -132,7 +146,8 @@ public class ServiceQuiz {
     
     NetworkManager.getInstance().addToQueueAndWait(req);
     
-    return resultok;
+    return resultOK;
 }
+    
 
 }

@@ -14,7 +14,7 @@ import com.codename1.ui.util.Resources;
 
 /**
  *
- * @author ons
+ * @author IHEB
  */
 public class HomeQuiz extends Form {
     

@@ -12,16 +12,16 @@ import java.util.Objects;
  * @author IHEB
  */
 public class Quiz {
-    
-    private int quizId;
+
+    private int quizid;
     private String Title;
-    private int  isamericain;
+    private int isamericain;
 
     public Quiz() {
     }
 
-    public Quiz(int quizId, String Title, int isamericain) {
-        this.quizId = quizId;
+    public Quiz(int quizid, String Title, int isamericain) {
+        this.quizid = quizid;
         this.Title = Title;
         this.isamericain = isamericain;
     }
@@ -31,14 +31,12 @@ public class Quiz {
         this.isamericain = isamericain;
     }
 
-    
-
     public int getQuizId() {
-        return quizId;
+        return quizid;
     }
 
-    public void setQuizId(int quizId) {
-        this.quizId = quizId;
+    public void setQuizId(int quizid) {
+        this.quizid = quizid;
     }
 
     public String getTitle() {
@@ -49,7 +47,6 @@ public class Quiz {
         this.Title = Title;
     }
 
-    
     public int getIsamericain() {
         return isamericain;
     }
@@ -58,53 +55,11 @@ public class Quiz {
         this.isamericain = isamericain;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 67 * hash + this.quizId;
-        hash = 67 * hash + Objects.hashCode(this.Title);
-        hash = 67 * hash + this.isamericain;
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Quiz other = (Quiz) obj;
-        if (this.quizId != other.quizId) {
-            return false;
-        }
-        if (this.isamericain != other.isamericain) {
-            return false;
-        }
-        if (!Objects.equals(this.Title, other.Title)) {
-            return false;
-        }
-        return true;
-    }
-    
     
 
     @Override
     public String toString() {
-        return "Quiz{" + "quizId=" + quizId + ", Title=" + Title + ", isamericain=" + isamericain + '}';
+        return "Quiz{" + "quizId=" + quizid + ", Title=" + Title + ", isamericain=" + isamericain + '}';
     }
 
-    
-
-    
-    
-
-   
-
-    
-    
 }

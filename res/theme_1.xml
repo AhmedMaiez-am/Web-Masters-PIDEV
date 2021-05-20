@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <resource majorVersion="1" minorVersion="11" useXmlUI="false">
+    <image name="55"  />
     <image name="730-451-news-84057074-1515151812.jpg"  />
     <image name="abc.png"  />
     <image name="add"  />
@@ -14,6 +15,10 @@
     <image name="gradient-overlay.png"  />
     <image name="Image 1"  />
     <image name="Image 2"  />
+    <image name="Image 3"  />
+    <image name="Image 4"  />
+    <image name="Image 5"  />
+    <image name="Image 6"  />
     <image name="log"  />
     <image name="login-background.jpg"  />
     <image name="lolo.jpg"  />
@@ -134,9 +139,9 @@
         <val key="MenuButton.padding" value="0.0,0.0,0.0,0.0" />
         <val key="MenuButton.transparency" value="0" />
         <val key="ModBtn.align" value="4" />
-        <val key="ModBtn.bgImage" value="Image 1" />
+        <val key="ModBtn.bgImage" value="55" />
         <val key="ModBtn.bgType" value="1" />
-        <val key="ModBtn.fgColor" value="ffffff" />
+        <val key="ModBtn.fgColor" value="0" />
         <font key="ModBtn.font" type="ttf" face="0" style="0" size="0" name="native:MainRegular" family="native:MainRegular" sizeSettings="3" actualSize="3.5" />
         <val key="ModBtn.marUnit" value="2,2,2,2" />
         <val key="ModBtn.margin" value="3.0,3.0,1.0,1.0" />
@@ -341,14 +346,17 @@
         <val key="addbtn.textDecoration" value="32" />
         <val key="lolo.bgImage" value="lolo.jpg" />
         <val key="lolo.bgType" value="1" />
-        <val key="nono.bgImage" value="paper.jpg" />
+        <val key="nono.align" value="4" />
+        <val key="nono.bgImage" value="Image 1" />
         <val key="nono.bgType" value="1" />
+        <font key="nono.font" type="system" face="0" style="2" size="0" />
+        <val key="nono.textDecoration" value="16" />
         <val key="press#transparency" value="0" />
         <val key="sel#transparency" value="0" />
         <val key="sup.bgImage" value="annule.png" />
         <val key="sup.bgType" value="1" />
         <val key="suppbtn.align" value="4" />
-        <val key="suppbtn.bgImage" value="sp" />
+        <val key="suppbtn.bgImage" value="Image 3" />
         <val key="suppbtn.bgType" value="1" />
         <val key="suppbtn.fgColor" value="ffffff" />
         <font key="suppbtn.font" type="system" face="0" style="0" size="16" />
@@ -357,8 +365,13 @@
         <val key="suppbtn.padUnit" value="2,2,2,2" />
         <val key="suppbtn.padding" value="2.0,2.0,2.0,2.0" />
         <val key="suppbtn.textDecoration" value="0" />
-        <val key="text.fgColor" value="9933ff" />
-        <font key="text.font" type="ttf" face="0" style="1" size="0" name="native:ItalicBold" family="native:ItalicBold" sizeSettings="2" actualSize="12.0" />
+        <val key="text.fgColor" value="0" />
+        <font key="text.font" type="ttf" face="0" style="0" size="0" name="native:ItalicLight" family="native:ItalicLight" sizeSettings="3" actualSize="3.5" />
+        <val key="text.textDecoration" value="16" />
+        <val key="textV.align" value="4" />
+        <val key="textV.fgColor" value="6600" />
+        <font key="textV.font" type="system" face="0" style="1" size="0" />
+        <val key="textV.textDecoration" value="16" />
         <val key="titre.align" value="4" />
         <val key="titre.fgColor" value="ff9933" />
         <font key="titre.font" type="ttf" face="0" style="1" size="16" name="native:MainBold" family="native:MainBold" sizeSettings="2" actualSize="12.0" />

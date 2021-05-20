@@ -36,7 +36,7 @@ import com.codename1.ui.util.Resources;
 /**
  * The Login form
  *
- * @author Shai Almog
+ * @author IHEB
  */
 public class LoginForm extends Form {
     public LoginForm(Resources theme) {

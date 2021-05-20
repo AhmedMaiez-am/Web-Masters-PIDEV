@@ -42,7 +42,7 @@ import com.codename1.ui.util.Resources;
 /**
  * A swipe tutorial for the application
  *
- * @author Shai Almog
+ * @author IHEB
  */
 public class WalkthruForm extends Form {
     public WalkthruForm(Resources res) {

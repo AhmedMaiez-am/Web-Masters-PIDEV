@@ -5,14 +5,18 @@
  */
 package Entity;
 
+import java.util.Objects;
+
 /**
  *
  * @author IHEB
  */
 public class Questions {
+
     
-     private Quiz quiz;
-    private Integer questionId;
+
+    private int quizid;
+    private int questionid;
     private String question;
     private String option1;
     private String option2;
@@ -20,24 +24,54 @@ public class Questions {
     private String option4;
     private String answer;
 
-    public Questions(String text, String text0, String text1, String text2, String text3, String text4) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Questions() {
     }
 
-    public Quiz getQuiz() {
-        return quiz;
+    public Questions(int quizid, int questionid, String question, String option1, String option2, String option3, String option4, String answer) {
+        this.quizid = quizid;
+        this.questionid = questionid;
+        this.question = question;
+        this.option1 = option1;
+        this.option2 = option2;
+        this.option3 = option3;
+        this.option4 = option4;
+        this.answer = answer;
     }
 
-    public void setQuiz(Quiz quiz) {
-        this.quiz = quiz;
+    public Questions(int quizid, String question, String option1, String option2, String option3, String option4, String answer) {
+        this.quizid = quizid;
+        this.question = question;
+        this.option1 = option1;
+        this.option2 = option2;
+        this.option3 = option3;
+        this.option4 = option4;
+        this.answer = answer;
     }
 
-    public Integer getQuestionId() {
-        return questionId;
+    
+
+    public Questions(String question, String option1, String option2, String option4, String answer) {
+        this.question = question;
+        this.option1 = option1;
+        this.option2 = option2;
+        this.option4 = option4;
+        this.answer = answer;
     }
 
-    public void setQuestionId(Integer questionId) {
-        this.questionId = questionId;
+    public int getQuizid() {
+        return quizid;
+    }
+
+    public void setQuizid(int quizid) {
+        this.quizid = quizid;
+    }
+
+    public int getQuestionid() {
+        return questionid;
+    }
+
+    public void setQuestionid(int questionid) {
+        this.questionid = questionid;
     }
 
     public String getQuestion() {
@@ -88,32 +122,10 @@ public class Questions {
         this.answer = answer;
     }
 
-    public Questions(Quiz quiz, Integer questionId, String question, String option1, String option2, String option3, String option4, String answer) {
-        this.quiz = quiz;
-        this.questionId = questionId;
-        this.question = question;
-        this.option1 = option1;
-        this.option2 = option2;
-        this.option3 = option3;
-        this.option4 = option4;
-        this.answer = answer;
-    }
-
-    public Questions(Quiz quiz, String question, String option1, String option2, String option3, String option4, String answer) {
-        this.quiz = quiz;
-        this.question = question;
-        this.option1 = option1;
-        this.option2 = option2;
-        this.option3 = option3;
-        this.option4 = option4;
-        this.answer = answer;
-    }
-
     @Override
     public String toString() {
-        return this.question;
+        return "Questions{" + "quizid=" + quizid + ", questionid=" + questionid + ", question=" + question + ", option1=" + option1 + ", option2=" + option2 + ", option3=" + option3 + ", option4=" + option4 + ", answer=" + answer + '}';
     }
 
-    public Questions() {
-    }
+    
 }
